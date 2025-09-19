@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection.PortableExecutable;
 using System.Text.Json.Serialization;
+using System.Diagnostics;
 
 namespace FIleManagerConsole
 {
@@ -190,6 +191,92 @@ namespace FIleManagerConsole
             } catch (Exception ex)
             {
                 Console.WriteLine($"Cancel the proecces with exeption: {ex}");
+            }
+        }
+
+        public static void Search()
+        {
+            Console.WriteLine(@"
+            What would you like to search
+            *.txt to match this to right side
+            *abc* to check if it exists in it
+            file* to see left side of file
+            ");
+
+            string? searchPattern;
+
+            do
+            {
+                searchPattern = Console.ReadLine();
+
+            } while (string.IsNullOrWhiteSpace(searchPattern));
+
+            var files = SafeEnumerateFiles(CurrentDirectory, searchPattern, SearchOption.AllDirectories);
+
+            var options = new ParallelOptions
+            {
+                MaxDegreeOfParallelism = 4
+            };
+
+            var sw = Stopwatch.StartNew();
+            Console.WriteLine("Search started you will not able to enter input");
+            Program.CanRun = false;
+
+            Parallel.ForEach(files, options, (file) =>
+            {
+                try
+                {
+                    Console.WriteLine(file);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    Console.WriteLine($"[Access Denied] {file}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[Error] {file} - {ex.Message}");
+                }
+
+            });
+
+            sw.Stop();
+            Console.WriteLine($"Search completed\n Elapsed Time: {sw.ElapsedMilliseconds} ms \n {sw.Elapsed.TotalSeconds:F2} seconds");
+            var i = Console.ReadLine();
+            Program.CanRun = true;
+
+            static IEnumerable<string> SafeEnumerateFiles(string path, string searchPattern, SearchOption option)
+            {
+                Queue<string> dirs = new Queue<string>();
+                dirs.Enqueue(path);
+
+                while (dirs.Count > 0)
+                {
+                    string currentDir = dirs.Dequeue();
+                    string[] subDirs = Array.Empty<string>();
+                    string[] files = Array.Empty<string>();
+
+                    try
+                    {
+                        files = Directory.GetFiles(currentDir, searchPattern);
+                    }
+                    catch (UnauthorizedAccessException) { }
+                    catch (Exception) { }
+
+                    foreach (var file in files)
+                        yield return file;
+
+                    if (option == SearchOption.AllDirectories)
+                    {
+                        try
+                        {
+                            subDirs = Directory.GetDirectories(currentDir);
+                            foreach (var subDir in subDirs)
+                                dirs.Enqueue(subDir);
+                        }
+                        catch (UnauthorizedAccessException) { }
+                        catch (Exception) { }
+                    }
+                }
             }
         }
 

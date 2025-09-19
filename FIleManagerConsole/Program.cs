@@ -12,9 +12,12 @@ namespace FIleManagerConsole
             {"..", FileSystem.GoBack},
             {"mkdir", FileSystem.CreatFolder },
             {"mkfile", FileSystem.CreateFile },
-            {"delE", FileSystem.DeleteEntry}
+            {"delE", FileSystem.DeleteEntry},
+            {"s", FileSystem.Search }
 
         };
+
+        public static bool CanRun = true;
         public static void Main()
         {
             Console.WriteLine("-- FILE MANAGER --");
@@ -22,6 +25,7 @@ namespace FIleManagerConsole
             FileSystem.UpdateLog();
 
             while (true) {
+                if (!CanRun) { continue; }
 
                 string? input = Console.ReadLine();
 
