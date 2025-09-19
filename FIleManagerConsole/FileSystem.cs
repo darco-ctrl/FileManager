@@ -13,19 +13,49 @@ namespace FIleManagerConsole
         {
             if (num > 0 && num <= LoadedEntries.Count())
             {
-                CurrentDirectory = LoadedEntries[num - 1];
-                UpdateLog();
-                
+                string new_dir = LoadedEntries[num - 1];
+
+                if (Directory.Exists(new_dir)) {
+                    CurrentDirectory = LoadedEntries[num - 1];
+
+                } else
+                {
+                    Console.WriteLine("That is not a folder");
+
+                }
+
+
             } else
             {
                 Console.WriteLine("Out of bound.");
-                UpdateLog();
+
             }
         }
 
         public static void CreatFolder()
         {
+            while (true) {
+                Console.WriteLine("'%c' to cancel\n Enter folder name: ");
+                string? new_folder_name = Console.ReadLine();
 
+                if (new_folder_name == null) { continue; }
+
+                if (new_folder_name == "%c")
+                {
+                    Console.WriteLine("Folder creation was canceled");
+                    return;
+
+                } else
+                {
+                    new_folder_name = Path.Combine(CurrentDirectory, new_folder_name);
+
+                    Directory.CreateDirectory(new_folder_name);
+                    CurrentDirectory = new_folder_name;
+
+                    Console.WriteLine($"Created new folder: {Path.GetDirectoryName(CurrentDirectory)}");
+                    return;
+                }
+            }
         }
 
         public static void GoBack()
@@ -35,7 +65,6 @@ namespace FIleManagerConsole
             if (parent != null)
             {
                 CurrentDirectory = parent;
-                UpdateLog();
 
             } else
             {

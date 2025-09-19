@@ -9,7 +9,8 @@ namespace FIleManagerConsole
     {
         private static Dictionary<string, Action> Commands = new Dictionary<string, Action>
         {
-            {"b", FileSystem.GoBack},
+            {"..", FileSystem.GoBack},
+            {"mkdir", FileSystem.CreatFolder }
            
         };
         public static void Main()
@@ -32,11 +33,14 @@ namespace FIleManagerConsole
                 } else if (Commands.ContainsKey(input))
                 {
                     Commands[input]();
+
                 } else
                 {
                     Console.WriteLine("Invalid input");
                     continue;
                 }
+
+                FileSystem.UpdateLog();
             }
         }
     }
