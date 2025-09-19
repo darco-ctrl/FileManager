@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection.PortableExecutable;
 using System.Text.Json.Serialization;
@@ -9,6 +10,7 @@ namespace FIleManagerConsole
     {
         public static string CurrentDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         private static List<String> LoadedEntries = new();
+    
         public static void GoToDir(int num)
         {
             if (num > 0 && num <= LoadedEntries.Count())
@@ -54,6 +56,40 @@ namespace FIleManagerConsole
 
                     Console.WriteLine($"Created new folder: {Path.GetDirectoryName(CurrentDirectory)}");
                     return;
+                }
+            }
+        }
+
+        public static void CreateFile() 
+        {
+            while (true)
+            {
+                Console.WriteLine("'%c' to cancel\n Enter folder name: ");
+                string? new_folder_name = Console.ReadLine();
+
+                if (new_folder_name == null) { continue; }
+
+                if (new_folder_name == "%c")
+                {
+                    Console.WriteLine("Folder creation was canceled");
+                    return;
+
+                }
+                else
+                {
+                    new_folder_name = Path.Combine(CurrentDirectory, new_folder_name);
+
+                    if (File.Exists(new_folder_name))
+                    {
+                        Console.WriteLine("a file with that name already exists");
+                    }
+                    else
+                    {
+                        File.Create(new_folder_name);
+
+                        Console.WriteLine($"Created new file: {Path.GetDirectoryName(new_folder_name)}");
+                        return;
+                    }
                 }
             }
         }

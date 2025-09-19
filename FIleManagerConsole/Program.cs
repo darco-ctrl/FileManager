@@ -10,8 +10,9 @@ namespace FIleManagerConsole
         private static Dictionary<string, Action> Commands = new Dictionary<string, Action>
         {
             {"..", FileSystem.GoBack},
-            {"mkdir", FileSystem.CreatFolder }
-           
+            {"mkdir", FileSystem.CreatFolder },
+            {"mkfile", FileSystem.CreateFile },
+
         };
         public static void Main()
         {
