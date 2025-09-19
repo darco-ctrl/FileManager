@@ -12,6 +12,7 @@ namespace FIleManagerConsole
             {"..", FileSystem.GoBack},
             {"mkdir", FileSystem.CreatFolder },
             {"mkfile", FileSystem.CreateFile },
+            {"delE", FileSystem.DeleteEntry}
 
         };
         public static void Main()

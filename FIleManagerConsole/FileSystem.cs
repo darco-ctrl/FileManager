@@ -94,6 +94,66 @@ namespace FIleManagerConsole
             }
         }
 
+        public static void DeleteEntry()
+        {
+
+            string? input = "";
+
+            do
+            {
+                Console.WriteLine("Which folder or file would you like to delete in this dir");
+                input = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(input));
+      
+
+            string entry_path = Path.Combine(CurrentDirectory, input);
+
+            Console.WriteLine($"Are you sure you want to delete y/n\n ->: {entry_path}");
+            string? yes_or_no;
+
+            while (true)
+            {
+                yes_or_no = Console.ReadLine();
+
+                if (yes_or_no == null)
+                {
+                    Console.WriteLine("No input recived");
+                }
+                else if (yes_or_no == "y")
+                {
+                    try
+                    {
+
+                        if (Directory.Exists(entry_path))
+                        {
+                            Directory.Delete(entry_path);
+                            Console.WriteLine($"Deleted dir, {input}");
+
+                        } else if (File.Exists(entry_path))
+                        {
+                            File.Delete(entry_path);
+                            Console.WriteLine($"Deleted file, {input}");
+                        } else
+                        {
+                            Console.WriteLine("Path not found");
+                        }
+                        return;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"deleting file failed exited with error: {ex}");
+                        return;
+                    }
+                }
+                else if (yes_or_no == "n")
+                {
+                    Console.WriteLine("Canceling. . .");
+                    return;
+                }
+            }
+        }
+
         public static void GoBack()
         {
             string? parent = Path.GetDirectoryName(CurrentDirectory);
