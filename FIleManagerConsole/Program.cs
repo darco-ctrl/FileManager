@@ -1,49 +1,41 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
 namespace FIleManagerConsole
 {
-    public class  Program
+    public static class Program
     {
+        private static Dictionary<string, Action> Commands = new Dictionary<string, Action>
+        {
+            {"b", FileSystem.GoBack},
+           
+        };
         public static void Main()
         {
-            
+            Console.WriteLine("-- FILE MANAGER --");
+
+            FileSystem.UpdateLog();
 
             while (true) {
 
-                Console.WriteLine("""
-                    What would you like to do?
-                    1. print all file in current dir
-                    """);
-
                 string? input = Console.ReadLine();
 
-                if (input == null) { continue; }
+                if (input == null) { Console.WriteLine("Input is empty"); continue;  }
 
-                try
+                
+                if (int.TryParse(input, out int n))
                 {
-                    int input_num = int.Parse(input);
+                    FileSystem.GoToDir(n);
 
-                    switch (input_num)
-                    {
-                        case 1:
-                            Console.WriteLine("Printing Dirs\n");
-                            FileSystem.PrintListOfFiles();
-                            break;
-                    }
-
-                } 
-                catch (FormatException ex)
+                } else if (Commands.ContainsKey(input))
                 {
-                    Console.WriteLine($"Given input is not an integer,\n please enter input from above,\n exited with: {ex}");
+                    Commands[input]();
+                } else
+                {
+                    Console.WriteLine("Invalid input");
                     continue;
-
-                } catch (Exception ex)
-                {
-                    Console.WriteLine($"Exited with exeption: {ex}");
-                    continue;
-
                 }
             }
         }
