@@ -13,7 +13,7 @@ namespace FIleManagerConsole
             {"mkdir", FileSystem.CreatFolder },
             {"mkfile", FileSystem.CreateFile },
             {"delE", FileSystem.DeleteEntry},
-            {"s", FileSystem.Search }
+            {"s", FileSystem.SearchM }
 
         };
 

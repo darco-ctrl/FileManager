@@ -194,6 +194,119 @@ namespace FIleManagerConsole
             }
         }
 
+        public static void SearchM()
+        {
+            Console.WriteLine("fd [PATTERN] [PATH] [OPTIONS]\n");
+            Console.WriteLine(@"
+What pattern would you like to search for:\n
+ '.' for all entries (eg: files, folder, symlinks)
+ 'f' for all files
+ 'd' for all dir
+ 'l' for all symlinks
+");
+
+            string? arguement;
+
+            while (true) {
+                arguement = Console.ReadLine();
+
+                if (arguement == null)
+                { continue; }
+                if (arguement == "e")
+                { return; }
+
+                if (arguement != "f" && arguement != "." && arguement != "d" && arguement != "l")
+                {
+                    Console.WriteLine("Invlaid input try again");
+                    continue;
+                }
+
+                if (arguement == ".")
+                {
+                    arguement = "";
+                    break;
+                }
+
+                arguement = "-t " + arguement;
+                break;
+            }
+
+            Console.WriteLine("waht do you wana search for");
+
+            while (true)
+            {
+                string? look_for = Console.ReadLine();
+                
+                if (!string.IsNullOrWhiteSpace(look_for))
+                {
+                    arguement += " " + look_for;
+                    break;
+                }
+            }
+
+            Console.WriteLine("where would you wana search in #@# to search current dir");
+
+            while (true)
+            {
+                string? path_to_search = Console.ReadLine();
+
+                if (path_to_search == "#@#")
+                {
+                    arguement += " " + CurrentDirectory;
+                    break;
+                }
+                
+                if (!string.IsNullOrWhiteSpace(path_to_search) && Path.Exists(path_to_search))
+                {
+                    arguement += " " + path_to_search;
+                    break;
+                }
+            }
+
+            Console.WriteLine("search for hidden file? y/n");
+
+            while (true)
+            {
+                string? search_for_hidden_file = Console.ReadLine();
+
+                if (search_for_hidden_file == "y")
+                {
+                    arguement += " -H";
+                    break;
+                }
+                else if (search_for_hidden_file == "n")
+                {
+                    break;
+                }
+
+            }
+
+            Console.WriteLine("run case sensitive search y/n");
+
+            while (true)
+            {
+                string? case_sensitive = Console.ReadLine();
+
+                if (case_sensitive == "y")
+                {
+                    arguement += " -s";
+                    break;
+
+                } else if (case_sensitive == "n") {
+                    arguement += " -i";
+                    break;
+                }
+            }
+
+            arguement += " -p";
+
+            Console.WriteLine($"arguement: {arguement}");
+            Console.ReadLine();
+            Console.WriteLine(Search.SearchFor(arguement));
+            Console.ReadLine();
+        }
+
+        /*
         public static void Search()
         {
             Console.WriteLine(@"
@@ -279,7 +392,8 @@ namespace FIleManagerConsole
                 }
             }
         }
-
+        */
+        
         public static void UpdateLog()
         {
             Console.Clear();
