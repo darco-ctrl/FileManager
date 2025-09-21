@@ -15,6 +15,14 @@ namespace FIleManagerConsole
 
             Program.CanRun = false;
 
+            /*
+             * info/data to start process 
+             * here is where i give argument
+             * and other stuff like RedirectStandardOuput
+             * to get output from fd
+             * 
+             * -- these descriptions are garbage bro am soo bad at explaining
+             */
             ProcessStartInfo psi = new ProcessStartInfo 
             {
                 FileName = @"C:\tools\fd.exe",
@@ -26,6 +34,14 @@ namespace FIleManagerConsole
                 
             };
 
+
+            /*
+             * this is the things starts the fd according to
+             * given arguement
+             * StandardOutput.ReadToEnd() and StandardError
+             * as it says after its done it reads to end
+             * to get output from fd
+             */
             using (Process? process = Process.Start(psi))
             {
                 if (process == null) { return "Couldnt start process"; }
