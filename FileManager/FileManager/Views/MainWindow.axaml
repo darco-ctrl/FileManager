@@ -1,0 +1,68 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:FIleManager.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="FIleManager.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="FIleManager">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<Grid Background="{DynamicResource ResourceKey=PrimaryBackground}">
+		
+		<!--
+		RowDefinition 1 is for titlebar it is set to auto cuz it will resize
+		according to content inside it
+		
+		RowDefinition 2 is for workplace where folder viewing place will be
+		is set to * cuz it will take all remaining size
+		
+		RowDefinition 3 is for status bar set 30 thats all it needs ig
+		-->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="30"/>
+		</Grid.RowDefinitions>
+
+		<!--
+		ColumnDefinition 1 its for side panel that shows fav, network, disk
+		
+		ColumnDefinition 2 its for showing all folder the main part
+		-->
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<!-- my title bar , wwow its shit-->
+		<Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FF101010" >
+			<TextBlock Text="Titlebar" VerticalAlignment="Center" Margin="10"/>
+		</Border>
+
+		<!-- side pannenell :D its awsome but i hate visual studio preview for avalonia it doesn how perfect color : (-->
+		<Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Background="#FF252525"
+				 CornerRadius="5" Margin="4">
+			<TextBlock Text="Side Panel" VerticalAlignment="Center" Margin="10"/>
+		</Border>
+
+		<Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Background="#FF252525"
+				CornerRadius="5" Margin="4">
+			<TextBlock Text="FIELLELELEL VIEWW PORT" VerticalAlignment="Center" Margin="10"/>
+		</Border>
+
+		<Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FF101010">
+			<TextBlock Text="Status bar" VerticalAlignment="Center" Margin="10"/>
+		</Border>
+		
+	</Grid>
+
+
+</Window>

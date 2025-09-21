@@ -5,13 +5,13 @@ using System.Text.RegularExpressions;
 
 namespace FIleManagerConsole
 {
-    public static class Program
+    internal static class Program
     {
         /*
          * Dictionary to store commands function so
          * i can access it according to user's command
          * in instant
-         * 
+         *
          * and this is easier than switch case or if
          * you dont have to add if or case each time you
          * just come to this dictionary and add 
