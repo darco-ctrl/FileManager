@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace FIleManager.ViewModels
+namespace FileManager.ViewModels
 {
     public class ViewModelBase : ObservableObject
     {

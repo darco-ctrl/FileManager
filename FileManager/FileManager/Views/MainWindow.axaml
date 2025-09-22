@@ -1,13 +1,13 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:FIleManager.ViewModels"
+        xmlns:vm="using:FileManager.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="FIleManager.Views.MainWindow"
+        x:Class="FileManager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="FIleManager">
+        Title="FileManager">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -16,7 +16,7 @@
     </Design.DataContext>
 
 	<Grid Background="{DynamicResource ResourceKey=PrimaryBackground}">
-		
+
 		<!--
 		RowDefinition 1 is for titlebar it is set to auto cuz it will resize
 		according to content inside it
@@ -50,7 +50,22 @@
 		<!-- side pannenell :D its awsome but i hate visual studio preview for avalonia it doesn how perfect color : (-->
 		<Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Background="#FF252525"
 				 CornerRadius="5" Margin="4">
-			<TextBlock Text="Side Panel" VerticalAlignment="Center" Margin="10"/>
+			<ScrollViewer VerticalScrollBarVisibility="Auto">
+				<StackPanel>
+					<!-- <ItemControl/> this is the thing that makes UI for collection we made 
+					 'SidePanelItems' which we set as 'DataContext' in App.axaml.cs (MainWindowViewModel)-->
+					<TreeView ItemsSource="{Binding SidePanelItems}">
+						<!-- this defines a visual template for each item in collection 'SidePanelItems' -->
+						<TreeView.DataTemplates>
+							<!-- DataTemplate recives one item from 'SidePanelItems' as its 'DataContext'
+							this lets us bind to 'SidePanelItems' item's (FileItemViewModel) properties-->
+							<TreeDataTemplate DataType="vm:SidePanelItemViewModel" ItemsSource="{Binding Children}">
+								<TextBlock Text="{Binding Name}"/>
+							</TreeDataTemplate>
+						</TreeView.DataTemplates>
+					</TreeView>
+				</StackPanel>
+			</ScrollViewer>
 		</Border>
 
 		<Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Background="#FF252525"
@@ -61,8 +76,7 @@
 		<Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FF101010">
 			<TextBlock Text="Status bar" VerticalAlignment="Center" Margin="10"/>
 		</Border>
-		
-	</Grid>
 
+	</Grid>
 
 </Window>

@@ -1,6 +1,7 @@
 using Avalonia.Controls;
+using FileManager.ViewModels;
 
-namespace FIleManager.Views
+namespace FileManager.Views
 {
     public partial class MainWindow : Window
     {

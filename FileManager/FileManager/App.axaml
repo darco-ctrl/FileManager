@@ -1,7 +1,7 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="FIleManager.App"
-             xmlns:local="using:FIleManager"
+             x:Class="FileManager.App"
+             xmlns:local="using:FileManager"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -9,11 +9,10 @@
         <local:ViewLocator/>
     </Application.DataTemplates>
 
-
 	<Application.Styles>
-    		<FluentTheme />
-		<StyleInclude Source="avares://FileManagerAvalonia/Styles/DefualtAppStyle.axaml"></StyleInclude>
-    </Application.Styles>
+		<FluentTheme />
+		<StyleInclude Source="avares://FileManager/Styles/DefaultAppStyle.axaml"></StyleInclude>
+	</Application.Styles>
 
 	<Application.Resources>
 		<SolidColorBrush x:Key="PrimaryBackground">#FF191919</SolidColorBrush>

@@ -1,7 +1,7 @@
 ﻿using System;
 using Avalonia;
 
-namespace FIleManager
+namespace FileManager
 {
     internal sealed class Program
     {

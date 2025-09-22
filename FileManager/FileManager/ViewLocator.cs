@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using FIleManager.ViewModels;
+using FileManager.ViewModels;
 
-namespace FIleManager
+namespace FileManager
 {
     public class ViewLocator : IDataTemplate
     {

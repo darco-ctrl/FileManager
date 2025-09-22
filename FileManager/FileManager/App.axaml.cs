@@ -4,10 +4,10 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using FIleManager.ViewModels;
-using FIleManager.Views;
+using FileManager.ViewModels;
+using FileManager.Views;
 
-namespace FIleManager
+namespace FileManager
 {
     public partial class App : Application
     {
