@@ -14,69 +14,105 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
+	
+	
+	<!-- Grid 0 - this is the main grid everything is inside this
+	     ^^^^^^
+		 i marked grid 0 cuz its gona get confusing so to keep track of that
+		 i think this will help if anyone trying to understand this-->
 	<Grid Background="{DynamicResource ResourceKey=PrimaryBackground}">
 
 		<!--
-		RowDefinition 1 is for titlebar it is set to auto cuz it will resize
+		RowDefinition 0 is for titlebar it is set to auto cuz it will resize
 		according to content inside it
 		
-		RowDefinition 2 is for workplace where folder viewing place will be
-		is set to * cuz it will take all remaining size
+		RowDefinition 1 is for tabs sections
 		
-		RowDefinition 3 is for status bar set 30 thats all it needs ig
+		RowDefinition 2 this is for all main stuff
 		-->
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/> <!-- Grid 0 Row 0-->
+			<RowDefinition Height="30"/> <!-- Grid 0 Row 1-->
+			<RowDefinition Height="*"/> <!-- Grid 0 Row 2-->
 		</Grid.RowDefinitions>
+		
+		<!--
+		Grid 0 Row - 0
+		This is title bar thats all to say 
+		-->
+		<Border Grid.Row="0" Background="#FF1D1D1D">
+			<TextBlock Text="Title Bar" Foreground="White" Margin="10" FontSize="15"/>
+		</Border>
 
 		<!--
-		ColumnDefinition 1 its for side panel that shows fav, network, disk
+		Grid: 0
+		Row: 2
 		
-		ColumnDefinition 2 its for showing all folder the main part
+		this is main part just below tabs bar yep i know there is no border or anything
+		for tab i will add that later but for now its liket his
 		-->
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="200"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
 
-		<!-- my title bar , wwow its shit-->
-		<Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FF101010" >
-			<TextBlock Text="Titlebar" VerticalAlignment="Center" Margin="10"/>
+		<Border Grid.Row="2"
+				Background="#4D4D4D" Margin="5, 0, 5, 5" CornerRadius="6">
+			
+			<!-- Grid 1 this is second Grid inside the main area -->
+			<Grid>
+				
+				<!-- Grid: 1 RowDefintions 
+					Row: 0 - Path block 
+					Row: 1 - Main Block -->
+				
+				<Grid.RowDefinitions>
+					<RowDefinition Height="40"/> <!-- Grid 1 Row 0 -->
+					<RowDefinition Height="*"/> <!-- Grid 1 Row 1 -->
+				</Grid.RowDefinitions>
+
+				<!-- Grid 1 ColumnDefintions
+					Column 0 - For Sidepanel
+					Column 1 - For file display
+				-->
+				
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition  Width="300"/> <!-- Grid 2 Column 0 -->
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				
+				<!--
+				Grid: 1
+				Row: 0
+				Column: 0
+				RowSpan: 2 // Merge 2 rows cuz we dont need 2 rows in here actually we need but its 
+				different we will add that inside this thing
+				-->
+				<Border Grid.Row="0" Grid.Column="0"
+						Background="#2F2F2F" Margin="5" CornerRadius="6"
+						BorderBrush="#000000" BorderThickness="2">
+
+
+				</Border>
+
+				<Border Grid.Row="1" Grid.Column="0"
+				Background="#2F2F2F" Margin="5,0,5,5" CornerRadius="6"
+				BorderBrush="#000000" BorderThickness="2">
+
+
+				</Border>
+
+				<Border Grid.Row="0" Grid.Column="1" Background="#2F2F2F"
+						BorderBrush="#000000" BorderThickness="2" CornerRadius="6"
+						Margin="0,5,5,5">
+					
+				</Border>
+
+				<Border Grid.Row="1" Grid.Column="1" Background="#2F2F2F"
+					BorderBrush="#000000" BorderThickness="2" CornerRadius="6"
+					Margin="0,0,5,5">
+
+				</Border>
+
+			</Grid>
 		</Border>
-
-		<!-- side pannenell :D its awsome but i hate visual studio preview for avalonia it doesn how perfect color : (-->
-		<Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Background="#FF252525"
-				 CornerRadius="5" Margin="4">
-			<ScrollViewer VerticalScrollBarVisibility="Auto">
-				<StackPanel>
-					<!-- <ItemControl/> this is the thing that makes UI for collection we made 
-					 'SidePanelItems' which we set as 'DataContext' in App.axaml.cs (MainWindowViewModel)-->
-					<TreeView ItemsSource="{Binding SidePanelItems}">
-						<!-- this defines a visual template for each item in collection 'SidePanelItems' -->
-						<TreeView.DataTemplates>
-							<!-- DataTemplate recives one item from 'SidePanelItems' as its 'DataContext'
-							this lets us bind to 'SidePanelItems' item's (FileItemViewModel) properties-->
-							<TreeDataTemplate DataType="vm:SidePanelItemViewModel" ItemsSource="{Binding Children}">
-								<TextBlock Text="{Binding Name}"/>
-							</TreeDataTemplate>
-						</TreeView.DataTemplates>
-					</TreeView>
-				</StackPanel>
-			</ScrollViewer>
-		</Border>
-
-		<Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Background="#FF252525"
-				CornerRadius="5" Margin="4">
-			<TextBlock Text="FIELLELELEL VIEWW PORT" VerticalAlignment="Center" Margin="10"/>
-		</Border>
-
-		<Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FF101010">
-			<TextBlock Text="Status bar" VerticalAlignment="Center" Margin="10"/>
-		</Border>
-
+		
 	</Grid>
 
 </Window>

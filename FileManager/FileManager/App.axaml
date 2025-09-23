@@ -15,6 +15,6 @@
 	</Application.Styles>
 
 	<Application.Resources>
-		<SolidColorBrush x:Key="PrimaryBackground">#FF191919</SolidColorBrush>
+		<SolidColorBrush x:Key="PrimaryBackground">#2F2F2F</SolidColorBrush>
 	</Application.Resources>
 </Application>
