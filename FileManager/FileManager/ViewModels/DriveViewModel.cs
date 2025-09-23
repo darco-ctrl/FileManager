@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace FileManager.ViewModels
 {
-    public class FileItemViewModel
+    internal class DriveViewModel
     {
         public string? Name { get; set; }
-        public string? HoldingPath { get; set; }
         public string? IconPath { get; set; }
         public string? Size { get; set; }
     }
