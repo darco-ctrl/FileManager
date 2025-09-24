@@ -1,14 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace FileManager.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        public ObservableCollection<FileItemViewModel> SidePanelItems { get; } = FileManager.FetchThisPC();
+        public ObservableCollection<DriveItemViewModel> SidePanelItems { get; } = FileManager.FetchThisPC();
+       
 
         public MainWindowViewModel()
         {
-           
+            FileManager.StartExternalDrivesWatcher(this);
         }
     }
 }

@@ -7,16 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Management;
 using System.Threading.Tasks;
-
+using Avalonia.Threading;
 
 namespace FileManager
 {
     public static class FileManager
     {
-        public static ObservableCollection<FileItemViewModel> FetchThisPC()
+        public static ObservableCollection<DriveItemViewModel> FetchThisPC()
         {
+            Console.WriteLine("-------- Recived to make ------------");
             // Drives to return into 'SidePanelItems' in 'MainWindowViewModel.cs'
-            ObservableCollection<FileItemViewModel> drivesList = new();
+            ObservableCollection<DriveItemViewModel> drivesList = new();
 
             // Gets all drives and saves in drives
             DriveInfo[] drives = DriveInfo.GetDrives();
@@ -26,12 +27,12 @@ namespace FileManager
                 // Checks if drive is Ready or not dont complain me thats littrally the description says too -_-
                 if (drive.IsReady)
                 {
-                    // Add into 'drivesList' straight by creating 'FileItemViewModel'
+                    // Add into 'drivesList' straight by creating 'DriveViewModel'
                     drivesList.Add(
-                        new FileItemViewModel
+                        new DriveItemViewModel
                         {
-                            Name = $"{drive.VolumeLabel} ({drive.Name})",
-                            HoldingPath = drive.VolumeLabel,
+                            Name = $"{drive.Name}",
+                            VolumeLabel = drive.VolumeLabel,
                         });
                 }
             }
@@ -41,17 +42,106 @@ namespace FileManager
         // Idk why i named that i didnt get any better name so its that 
         // so this code checks if anything is added like any other device for example
         // your USB stick or something similar to it this is running in different thread
-        public static void StartExternalDrivesWatcher()
+        public static void StartExternalDrivesWatcher(MainWindowViewModel mainWindowVM)
         {
 #pragma warning disable CA1416 // Validate platform compatibility
 
 
             // This basically listen for system events
+            // this watcher which is 'ManagementEventWatcher' this is a class from System.Management
+            // that listens for Windows Management Instrumentation (WMI) events and
+            // for us we are looking for specific event which is is a driver added or removed or configured that is next line
             ManagementEventWatcher watcher = new ManagementEventWatcher();
 
+            // like i said above we only need Change in drive info like drive added or removed or configed
+            // so we use 'Win32_VolumeChangeEvent' to get those all like drive added or removed  stuf like that
+            // and 'SELECT *' selects everything in that like all type of event in 'Win32_VolumeChangeEvent'
             watcher.Query = new WqlEventQuery("SELECT * FROM Win32_VolumeChangeEvent");
 
-            ///////// STOPEDD HEREE //////////////////////
+
+            // so this activates when a WMI event is occured
+            // if so we subscribe (or lambda) to it 
+            // where 'sender' is our 'watcher'
+            // and e is the arguement which contains event data that we need
+
+            // -- I HOPE THIS IS UNDERSTANDABLE T_T
+            watcher.EventArrived += (sender, e) =>
+            {
+                // so using 'e.NewEvent' that contains WMI event data
+                // we get 'EventType' property
+                // EventType Code:
+                //     1 = config change of the drive/volum
+                //     2 = Drive added
+                //     3 = drive removed
+                // and using 'Convert.ToInt32' we convert it into int
+                int eventType = Convert.ToInt32(e.NewEvent["EventType"]);
+
+
+                /*
+                 * string? cuz it may be null here :/
+                 * we are getting Drive name as name says :D
+                 * we get it using 'e.NewEvent["DriveName"] turn it into string and store in 'driveName'
+                 */
+                string? driveName = e.NewEvent["DriveName"]?.ToString();
+
+                if (driveName != null)
+                {
+                    /*
+                     * This is to change stuff in UI or update UI 
+                     * since Avalonia UI updates in UIthread 
+                     * we cant do in different thread which watcher is runnning so we doing this 
+                     * i will try to explain as i can
+                     * 
+                     * 'Dispatcher' its an class in 'Avalonia.Threading' which manages threading for the UI
+                     * it just make sure all UI stuff update in 'UIThread'
+                     * 
+                     * 'UIThread' this is main Ui thread where all ui is updated in avalonia
+                     * 
+                     * 'InvokeAsync()' this schedule a code to run on 'UIThread' asynchronously
+                     * here it does not block the thread it just queues it and run it later so its scheduling like i said
+                     * 
+                     * and Lambda experssion a mini Function i would say
+                     * () => {}
+                     * ^^
+                     * parameters for the functions inside or code block inside '{}' so quick way to make a function without making a function?
+                     * you can imagin as you want basically it just makes a mini function yes ofc you can make a function outside and call that but
+                     * you would have to pass everything needed like 'eventType' and stuff
+                     * 
+                     * here we paremters empty as i know they are not empty most of the time when subscribed like
+                     * += (sender, e) like we did above
+                     */
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        
+
+                        if (eventType == 2) // if drive is added
+                        {
+                            DriveItemViewModel driveItem = new DriveItemViewModel
+                            {
+                                Name = driveName,
+                                //VolumeLabel = e.NewEvent[""] will do tmr
+                            };
+
+                            if (!mainWindowVM.SidePanelItems.Contains(driveItem))
+                            {
+                                mainWindowVM.SidePanelItems.Add(driveItem);
+                            }
+                        }
+                        else if (eventType == 3) // if drive is removed
+                        {
+                            DriveItemViewModel? driveToRemove = mainWindowVM.SidePanelItems.FirstOrDefault(drive => drive.Name == driveName);
+
+                            if (driveToRemove != null)
+                            {
+                                mainWindowVM.SidePanelItems.Remove(driveToRemove);
+                            }
+                        }
+                    });
+                }
+            };
+
+            // as it says watcher starts so it starts listening for events (WMI events ) from here on
+            watcher.Start();
 
 #pragma warning restore CA1416
         }
