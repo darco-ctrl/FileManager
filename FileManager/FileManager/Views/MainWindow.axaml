@@ -131,7 +131,7 @@
 								CornerRadius="20"
 								ClipToBounds="True">
 							<TextBox x:Name="PathTextBlock"
-									 Text=""
+									 Text="{Binding CurrentWorkingDir}"
 									 Background="Transparent"
 									 Foreground="White"
 									 VerticalAlignment="Center"
@@ -151,7 +151,20 @@
 
 				<Border Grid.Row="1" Background="{DynamicResource ResourceKey=SecondaryBackground}"  Margin="10,5,10,10"
 						CornerRadius="10">
-					
+					<ScrollViewer Margin="5" CornerRadius="10">
+						<ItemsControl ItemsSource="{Binding CurrentLoadedEntires}">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<Border Background="{DynamicResource ResourceKey=PrimaryBackground}" 
+											Margin="1" CornerRadius="1">
+										<TextBlock Text="{Binding Name}" 
+												   Foreground="White"
+												   Padding="10,0,0,0"/>
+									</Border>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</ScrollViewer>
 				</Border>
 			</Grid>
 		</Border>

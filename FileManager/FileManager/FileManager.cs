@@ -17,8 +17,25 @@ namespace FileManager
 
         public static void StartUpSetup()
         {
-            string newPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            GlobalVariables.GetWindow().UpdatePathTextBox(newPath);
+
+            GlobalVariables.GetWindowViewModel().SetCurrentDir(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+        }
+
+        public static void updateDirItems()
+        {
+            GlobalVariables.GetWindowViewModel().CurrentLoadedEntires.Clear();
+            var entries = Directory.EnumerateFileSystemEntries(GlobalVariables.GetWindowViewModel().CurrentWorkingDir);
+
+            foreach (var entry in entries)
+            {
+                EntryItemViewModel? entryItem = new EntryItemViewModel
+                {
+                    Name = Path.GetFileName(entry),
+                    HoldingPath = entry
+                };
+                GlobalVariables.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
+                Console.WriteLine($"{entry}");
+            }
         }
 
         public static ObservableCollection<DriveItemViewModel> FetchThisPC()

@@ -44,7 +44,6 @@ namespace FIleManagerConsole
                 } else
                 {
                     Console.WriteLine("That is not a folder");
-
                 }
 
 

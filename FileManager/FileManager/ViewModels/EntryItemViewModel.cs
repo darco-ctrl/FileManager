@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileManager.ViewModels
 {
-    public class FolderItemViewModel
+    public class EntryItemViewModel
     {
         public string? Name { get; set; }
         public string? HoldingPath { get; set; }

@@ -10,12 +10,6 @@ namespace FileManager.Views
         {
             InitializeComponent();
             GlobalVariables.SetWindow(this);
-            FileManager.StartUpSetup();
-        }
-
-        public void UpdatePathTextBox(string path)
-        {
-            PathTextBlock.Text = path;
         }
     }
 }
