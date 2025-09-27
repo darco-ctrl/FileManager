@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using FileManager.ViewModels;
+using System;
 
 namespace FileManager.Views
 {
@@ -8,6 +9,13 @@ namespace FileManager.Views
         public MainWindow()
         {
             InitializeComponent();
+            GlobalVariables.SetWindow(this);
+            FileManager.StartUpSetup();
+        }
+
+        public void UpdatePathTextBox(string path)
+        {
+            PathTextBlock.Text = path;
         }
     }
 }

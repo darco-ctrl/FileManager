@@ -8,11 +8,19 @@ using System.Text;
 using System.Management;
 using System.Threading.Tasks;
 using Avalonia.Threading;
+using FileManager.Views;
 
 namespace FileManager
 {
     public static class FileManager
     {
+
+        public static void StartUpSetup()
+        {
+            string newPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            GlobalVariables.GetWindow().UpdatePathTextBox(newPath);
+        }
+
         public static ObservableCollection<DriveItemViewModel> FetchThisPC()
         {
             Console.WriteLine("-------- Recived to make ------------");
@@ -145,5 +153,7 @@ namespace FileManager
 
 #pragma warning restore CA1416
         }
+
+        
     }
 }

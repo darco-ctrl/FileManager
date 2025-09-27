@@ -121,7 +121,27 @@
 						<Border Grid.Column="0" Margin="5" Background="White"></Border>
 						<Border Grid.Column="1" Margin="5" Background="White"></Border>
 						<Border Grid.Column="2" Margin="5" Background="White"></Border>
-						<Border Grid.Column="3" Margin="5" Background="White"></Border>
+
+						<!--
+						THisi s path block this is where path is shown
+						-->
+						<Border Grid.Column="3" Margin="5" 
+								Background="{DynamicResource ResourceKey=SecondaryBackground}"
+								BorderBrush="White" BorderThickness="1"
+								CornerRadius="20"
+								ClipToBounds="True">
+							<TextBox x:Name="PathTextBlock"
+									 Text=""
+									 Background="Transparent"
+									 Foreground="White"
+									 VerticalAlignment="Center"
+									 SelectionForegroundBrush="White"
+									 BorderBrush="Transparent"
+									 >
+								
+							</TextBox>
+						</Border>
+						
 						<Border Grid.Column="4" Margin="5" Background="White"></Border>
 						<Border Grid.Column="5" Margin="5" Background="White"></Border>
 						<Border Grid.Column="6" Margin="5" Background="White"></Border>
