@@ -12,6 +12,7 @@ namespace FileManager
     {
         public static MainWindow? window { get; private set; }
         public static MainWindowViewModel? windowViewmodel { get; private set; }
+        
 
         public static void SetWindow(MainWindow mw)
         {

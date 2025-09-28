@@ -14,6 +14,11 @@ namespace FileManager
 {
     public static class FileManager
     {
+        private readonly static List<FileAttributes> BlackListAttr = new List<FileAttributes> 
+        {
+            FileAttributes.System,
+            FileAttributes.Hidden,
+        };
 
         public static void StartUpSetup()
         {
@@ -27,14 +32,41 @@ namespace FileManager
             var entries = Directory.EnumerateFileSystemEntries(GlobalVariables.GetWindowViewModel().CurrentWorkingDir);
 
             foreach (var entry in entries)
-            {
+            {   
+                if (!IsEntryInBlackList(entry)) { continue; }
+
                 EntryItemViewModel? entryItem = new EntryItemViewModel
                 {
                     Name = Path.GetFileName(entry),
                     HoldingPath = entry
                 };
                 GlobalVariables.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
-                Console.WriteLine($"{entry}");
+                //Console.WriteLine($"{entry}");
+            }
+        }
+
+        private static bool IsEntryInBlackList(string entry)
+        {
+            var attr = File.GetAttributes(entry);
+
+            foreach(var blacklistatr in BlackListAttr)
+            {
+                if (attr.HasFlag(blacklistatr))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static void GoBackOne()
+        {
+            string? parent = Path.GetDirectoryName(GlobalVariables.GetWindowViewModel().CurrentWorkingDir);
+
+            if (parent != null)
+            {
+                GlobalVariables.GetWindowViewModel().SetCurrentDir(parent);
             }
         }
 

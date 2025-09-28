@@ -8,8 +8,8 @@ namespace FileManager.ViewModels
 {
     public class EntryItemViewModel
     {
-        public string? Name { get; set; }
-        public string? HoldingPath { get; set; }
+        public string Name { get; set; } = "";
+        public string HoldingPath { get; set; } = "";
         public string? IconPath { get; set; }
         public string? Size { get; set; }
     }
