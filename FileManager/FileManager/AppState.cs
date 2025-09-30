@@ -13,7 +13,16 @@ namespace FileManager
 
         public static MainWindow? window { get; private set; }
         public static MainWindowViewModel? windowViewmodel { get; private set; }
+
+        public static bool IsSearching = false;
         
+        public enum States
+        {
+            NONE,
+            SEARCHING
+        }
+
+        public static States CurrentState = States.NONE;
 
         public static void SetWindow(MainWindow mw)
         {

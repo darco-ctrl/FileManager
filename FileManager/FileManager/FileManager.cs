@@ -16,6 +16,8 @@ namespace FileManager
 {
     public static class FileManager
     {
+        
+
         private readonly static List<FileAttributes> BlackListAttr = new List<FileAttributes> 
         {
             FileAttributes.System,
@@ -81,8 +83,7 @@ namespace FileManager
             {
                 AppState.GetWindow().UpdatePathBlockText();
             }
-
-            AppState.GetWindow().Focus();
+            AppState.GetWindow().FocusWindow();
         }
 
         public static ObservableCollection<DriveItemViewModel> FetchThisPC()

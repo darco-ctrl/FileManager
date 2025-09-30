@@ -14,6 +14,8 @@ namespace FileManager
         private Dictionary<Key, Action> KeyActionSet = new(); // All keys and functions that tell what it should do
         private readonly HashSet<Key> IsPressed = new(); // this is to prevent held action
 
+
+
         public InputManager()
         {
             KeyActionSet.Add(Key.Back, FileManager.GoBackOne);
@@ -35,7 +37,13 @@ namespace FileManager
         {
             if (AppState.GetWindow().PathTextBox.IsFocused)
             {
-                FileManager.PathBoxTryingToSetNewPath(AppState.GetWindow().PathTextBox.Text);
+               if (AppState.CurrentState == AppState.States.SEARCHING)
+               {
+                    SearchSystem.StartSearchSetup(AppState.GetWindow().PathTextBox.Text);
+               } else
+               {
+                    FileManager.PathBoxTryingToSetNewPath(AppState.GetWindow().PathTextBox.Text);
+               }
             }
         }
 

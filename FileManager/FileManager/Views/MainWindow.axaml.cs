@@ -34,6 +34,11 @@ namespace FileManager.Views
             }
         }
 
+        public void FocusWindow()
+        {
+            Focus();
+        }
+
         private void PointerPresed(Object sender, PointerCaptureLostEventArgs e)
         {
             Focus();
@@ -41,10 +46,15 @@ namespace FileManager.Views
 
         public void UpdatePathBlockText()
         {
+            if (AppState.IsSearching) { return; }
             PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
         }
 
-        
+        public void SearchButtonClicked(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            SearchSystem.RequestForSearching();
+            PathTextBox.Text = "";
+        }
 
         public InputManager GetInputManager() => IM;
     }

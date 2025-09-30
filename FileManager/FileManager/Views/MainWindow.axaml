@@ -135,7 +135,10 @@
 						</Border>
 
 						<Border Grid.Column="6" Background="White" Margin="5,5,0,5">
-							
+							<Button Content="S" 
+									VerticalAlignment="Center" HorizontalAlignment="Center"
+									Click="SearchButtonClicked"
+									/>
 						</Border>
 
 
