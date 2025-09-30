@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace FileManager
 {
-    public static class GlobalVariables
+    public static class AppState
     {
         public static MainWindow? window { get; private set; }
         public static MainWindowViewModel? windowViewmodel { get; private set; }
-        
+
+
 
         public static void SetWindow(MainWindow mw)
         {

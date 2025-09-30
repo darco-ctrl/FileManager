@@ -15,7 +15,7 @@ namespace FileManager
 
         public InputManager()
         {
-            KeyActionSet.Add(Key.Enter, FileManager.GoBackOne);
+            KeyActionSet.Add(Key.Back, FileManager.GoBackOne);
         }
 
         public void OnKeyDown(KeyEventArgs e)

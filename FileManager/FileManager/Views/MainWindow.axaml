@@ -32,7 +32,7 @@
 		-->
 
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="300"/> <!-- Grid 0 Colum 0 side panel-->
+			<ColumnDefinition Width="250"/> <!-- Grid 0 Colum 0 side panel-->
 			<ColumnDefinition Width="*"/> <!-- Gird 0 Colunm 1 Main body-->
 		</Grid.ColumnDefinitions>
 		
@@ -57,6 +57,7 @@
 					<RowDefinition Height="40"/> <!-- Grid: 0 Row: 0-->
 					<RowDefinition Height="60"/> <!-- Grid: 0 Row: 1-->
 					<RowDefinition Height="*"/> <!-- Grid: 0 Column: 2-->
+					<RowDefinition Height="60"/>
 				</Grid.RowDefinitions>
 				
 				<!-- Something here am thinking like icon or file manager name-->
@@ -68,29 +69,29 @@
 				<Border Grid.Row="1" Background="White" Margin="10, 0, 0, 5" VerticalAlignment="Center" Height="30">
 					<TextBlock Text="fav and some stuff like that"/>
 				</Border>
-
-				<Border Grid.Row="2" Margin="10, 5, 0, 10" Background="{DynamicResource ResourceKey=SecondaryBackground}"
-						CornerRadius="10">
 					<!-- Side panel-->
-					<ScrollViewer Grid.Row="2" Margin="5, 5, 0, 5">
-						<!-- <ItemControl/> this is the thing that makes UI for collection we made 'SidePanelItems' which we set 
-						as 'DataContext' in App.axaml.cs (MainWindowViewModel)-->
-						<ItemsControl ItemsSource="{Binding SidePanelItems}">
-							<!-- this defines a visual template for each item in collection 'SidePanelItems' -->
-							<ItemsControl.ItemTemplate>
-								<!-- DataTemplate recives one item from 'SidePanelItems' as its 'DataContext' this lets us bind to 
-            'SidePanelItems' item's (DriveViewModel) properties-->
-								<DataTemplate>
-									<Border Margin="5, 5, 5, 5">
-										<TextBlock Foreground="LightGray" Text="{Binding Name}"/>
-									</Border>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-					</ScrollViewer>
+				<ScrollViewer Grid.Row="2" Margin="10, 5, 10, 10" Background="Transparent"
+					CornerRadius="10">
+					<!-- <ItemControl/> this is the thing that makes UI for collection we made 'SidePanelItems' which we set 
+					as 'DataContext' in App.axaml.cs (MainWindowViewModel)-->
+					<ItemsControl ItemsSource="{Binding SidePanelItems}">
+						<!-- this defines a visual template for each item in collection 'SidePanelItems' -->
+						<ItemsControl.ItemTemplate>
+							<!-- DataTemplate recives one item from 'SidePanelItems' as its 'DataContext' this lets us bind to 
+        'SidePanelItems' item's (DriveViewModel) properties-->
+							<DataTemplate>
+								<Border Margin="5, 5, 5, 5">
+									<TextBlock Foreground="LightGray" Text="{Binding Name}"/>
+								</Border>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</ScrollViewer>
+
+				<Border Grid.Row="3" Background="White">
+					
 				</Border>
-
-
+				
 			</Grid>
 		</Border>
 		
@@ -109,47 +110,35 @@
 				<Border Grid.Row="0" Margin="5, 0, 5, 0">
 					<Grid>
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="40"/> <!---->
-							<ColumnDefinition Width="40"/>
-							<ColumnDefinition Width="40"/>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="40"/>
-							<ColumnDefinition Width="40"/>
-							<ColumnDefinition Width="40"/>
+						<!-- 0,  1,  2,  3,  4, 5,  6,  7,  8,  9, 10 -->
+							40, 40, 40, 40, 40, *, 40, 40, 40, 40, 40
 						</Grid.ColumnDefinitions>
-
-						<Border Grid.Column="0" Margin="5" Background="Blue">
-							<Button Content="B" HorizontalAlignment="Stretch"
-									VerticalAlignment="Stretch" Click="GoBack"/>
-						</Border>
-						<Border Grid.Column="1" Margin="5" Background="White"></Border>
-						<Border Grid.Column="2" Margin="5" Background="White"></Border>
-
 						<!--
 						THisi s path block this is where path is shown
 						-->
-						<Border Grid.Column="3" Margin="5" 
-								Background="{DynamicResource ResourceKey=SecondaryBackground}"
-								BorderBrush="White" BorderThickness="1"
-								CornerRadius="6"
-								ClipToBounds="True"
-								>
-							<TextBox x:Name="PathTextBlock"
-									 Text="{Binding CurrentWorkingDir}"
+						<Border Margin="5, 5, 0, 5" Grid.Column="5"
+								BorderThickness="2"
+								BorderBrush="White"
+								Background="{DynamicResource ResourceKey=PrimaryBackground}"
+								CornerRadius="6">
+							<TextBox x:Name="PathTextBox"
+									 Text=""
+									 
+									 TextChanged="PathTextBoxChanged"
 									 Background="Transparent"
 									 Foreground="White"
 									 VerticalAlignment="Center"
 									 SelectionForegroundBrush="White"
 									 BorderBrush="Transparent"
-									 >
-								
+									 Margin="2,3,2,3">
 							</TextBox>
 						</Border>
-						
-						<Border Grid.Column="4" Margin="5" Background="White"></Border>
-						<Border Grid.Column="5" Margin="5" Background="White"></Border>
-						<Border Grid.Column="6" Margin="5" Background="White"></Border>
-						
+
+						<Border Grid.Column="6" Background="White" Margin="5,5,0,5">
+							
+						</Border>
+
+
 					</Grid>
 				</Border>
 

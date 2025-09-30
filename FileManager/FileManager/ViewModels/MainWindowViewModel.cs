@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace FileManager.ViewModels
 {
@@ -15,18 +16,21 @@ namespace FileManager.ViewModels
         {
             CurrentWorkingDir = "";
             FileManager.StartExternalDrivesWatcher(this);
-            GlobalVariables.SetMainWindowViewModel(this);
+            AppState.SetMainWindowViewModel(this);
             FileManager.StartUpSetup();
             
         }
 
-        public void SetCurrentDir(string newPath)
+        public bool SetCurrentDir(string? newPath)
         {
             if (Directory.Exists(newPath))
             {
                 CurrentWorkingDir = newPath;
                 FileManager.updateDirItems();
+                AppState.GetWindow().UpdatePathBlockText();
+                return true;
             }
+            return false;
         }
     }
 }

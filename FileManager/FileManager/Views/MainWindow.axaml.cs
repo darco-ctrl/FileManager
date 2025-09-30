@@ -1,6 +1,8 @@
 using Avalonia.Controls;
 using FileManager.ViewModels;
+using HarfBuzzSharp;
 using System;
+using System.IO;
 
 namespace FileManager.Views
 {
@@ -11,7 +13,7 @@ namespace FileManager.Views
         public MainWindow()
         {
             InitializeComponent();
-            GlobalVariables.SetWindow(this);
+            AppState.SetWindow(this);
 
             this.KeyUp += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyUp(e);
             this.KeyDown += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyDown(e);
@@ -25,7 +27,7 @@ namespace FileManager.Views
         {
             if (sender is Button but && but.DataContext is EntryItemViewModel entry)
             {
-                GlobalVariables.GetWindowViewModel().SetCurrentDir(entry.HoldingPath);
+                AppState.GetWindowViewModel().SetCurrentDir(entry.HoldingPath);
             }
         }
 
@@ -36,6 +38,28 @@ namespace FileManager.Views
         {
             FileManager.GoBackOne();
         }
+
+        public void PathTextBoxChanged(Object sender, TextChangedEventArgs e)
+        {
+            TextBox pathTextBox = (TextBox)sender;
+            string? path = PathTextBox.Text;
+
+            if (Directory.Exists(path))
+            {
+                PathTextBox.Text = path;
+            } else
+            {
+                PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
+            }
+
+        }
+
+        public void UpdatePathBlockText()
+        {
+            PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
+        }
+
+        
 
         public InputManager GetInputManager() => IM;
     }

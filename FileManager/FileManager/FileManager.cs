@@ -23,13 +23,13 @@ namespace FileManager
         public static void StartUpSetup()
         {
 
-            GlobalVariables.GetWindowViewModel().SetCurrentDir(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+            AppState.GetWindowViewModel().SetCurrentDir(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
         }
 
         public static void updateDirItems()
         {
-            GlobalVariables.GetWindowViewModel().CurrentLoadedEntires.Clear();
-            var entries = Directory.EnumerateFileSystemEntries(GlobalVariables.GetWindowViewModel().CurrentWorkingDir);
+            AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
+            var entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir);
 
             foreach (var entry in entries)
             {   
@@ -40,7 +40,7 @@ namespace FileManager
                     Name = Path.GetFileName(entry),
                     HoldingPath = entry
                 };
-                GlobalVariables.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
+                AppState.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
                 //Console.WriteLine($"{entry}");
             }
         }
@@ -62,11 +62,11 @@ namespace FileManager
 
         public static void GoBackOne()
         {
-            string? parent = Path.GetDirectoryName(GlobalVariables.GetWindowViewModel().CurrentWorkingDir);
+            string? parent = Path.GetDirectoryName(AppState.GetWindowViewModel().CurrentWorkingDir);
 
             if (parent != null)
             {
-                GlobalVariables.GetWindowViewModel().SetCurrentDir(parent);
+                AppState.GetWindowViewModel().SetCurrentDir(parent);
             }
         }
 
