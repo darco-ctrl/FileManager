@@ -16,9 +16,6 @@ namespace FileManager.ViewModels
         {
             CurrentWorkingDir = "";
             FileManager.StartExternalDrivesWatcher(this);
-            AppState.SetMainWindowViewModel(this);
-            FileManager.StartUpSetup();
-            
         }
 
         public bool SetCurrentDir(string? newPath)

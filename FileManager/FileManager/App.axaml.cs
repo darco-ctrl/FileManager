@@ -32,14 +32,22 @@ namespace FileManager
 #endif
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                Console.WriteLine("HELLOOOO AM I WORKING???");
+                Console.WriteLine("STARTING APP");
+
+                AppState.SetMainWindowViewModel(new MainWindowViewModel());
+                MainWindow? mainWindow = new MainWindow
+                {
+                    DataContext = AppState.GetWindowViewModel()
+                };
+                AppState.SetWindow(mainWindow);
+                FileManager.StartUpSetup();
+                
+                mainWindow = null;
+
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(),
-                };
+                desktop.MainWindow = AppState.GetWindow();
             }
 
             base.OnFrameworkInitializationCompleted();

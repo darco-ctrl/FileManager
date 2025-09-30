@@ -9,6 +9,8 @@ using System.Management;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using FileManager.Views;
+using Avalonia.Controls;
+using Avalonia.Input;
 
 namespace FileManager
 {
@@ -70,9 +72,22 @@ namespace FileManager
             }
         }
 
+        public static void PathBoxTryingToSetNewPath(string? path)
+        {
+            if (Directory.Exists(path))
+            {
+                AppState.GetWindowViewModel().SetCurrentDir(path);
+            } else
+            {
+                AppState.GetWindow().UpdatePathBlockText();
+            }
+
+            AppState.GetWindow().Focus();
+        }
+
         public static ObservableCollection<DriveItemViewModel> FetchThisPC()
         {
-            Console.WriteLine("-------- Recived to make ------------");
+            Console.WriteLine("--------  Recived to make  ------------");
             // Drives to return into 'SidePanelItems' in 'MainWindowViewModel.cs'
             ObservableCollection<DriveItemViewModel> drivesList = new();
 

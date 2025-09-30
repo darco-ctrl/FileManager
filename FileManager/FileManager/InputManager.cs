@@ -9,6 +9,7 @@ namespace FileManager
 {
     public class InputManager
     {
+
         private readonly HashSet<Key> _KeyDown = new();
         private Dictionary<Key, Action> KeyActionSet = new(); // All keys and functions that tell what it should do
         private readonly HashSet<Key> IsPressed = new(); // this is to prevent held action
@@ -16,6 +17,7 @@ namespace FileManager
         public InputManager()
         {
             KeyActionSet.Add(Key.Back, FileManager.GoBackOne);
+            KeyActionSet.Add(Key.Enter, EnterKeyFunction);
         }
 
         public void OnKeyDown(KeyEventArgs e)
@@ -26,6 +28,14 @@ namespace FileManager
             {
                 KeyActionSet[e.Key]();
                 IsPressed.Add(e.Key);
+            }
+        }
+
+        private void EnterKeyFunction()
+        {
+            if (AppState.GetWindow().PathTextBox.IsFocused)
+            {
+                FileManager.PathBoxTryingToSetNewPath(AppState.GetWindow().PathTextBox.Text);
             }
         }
 

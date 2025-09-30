@@ -7,7 +7,9 @@
         x:Class="FileManager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="FileManager">
+        Title="FileManager"
+		Focusable="True"
+		PointerPressed="">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -100,7 +102,7 @@
 		THis is main part like the part where path window close and ttitle bar
 		and most importantly files viewer
 		-->
-		<Border Grid.Column="1">
+		<Border Grid.Column="1" Background="{DynamicResource ResourceKey=SecondaryBackground}">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="40"/>
@@ -123,8 +125,6 @@
 								CornerRadius="6">
 							<TextBox x:Name="PathTextBox"
 									 Text=""
-									 
-									 TextChanged="PathTextBoxChanged"
 									 Background="Transparent"
 									 Foreground="White"
 									 VerticalAlignment="Center"
@@ -142,24 +142,30 @@
 					</Grid>
 				</Border>
 
+				<!-- 
 				<Border Grid.Row="1" Background="{DynamicResource ResourceKey=SecondaryBackground}"  Margin="10,5,10,10"
 						CornerRadius="10">
-					<ScrollViewer Margin="5" CornerRadius="10">
-						<ItemsControl ItemsSource="{Binding CurrentLoadedEntires}">
-							<ItemsControl.ItemTemplate>
-								<DataTemplate>
-									<Button Background="Transparent" Click="EntryClicked" HorizontalAlignment="Stretch">
-										<TextBlock
-											Text="{Binding Name}"
-											Foreground="White"
-											Padding="10,0,0,0">
-										</TextBlock>
-									</Button>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-					</ScrollViewer>
+
 				</Border>
+				-->
+
+
+				<ScrollViewer Grid.Row="1" Margin="5" CornerRadius="10">
+					<ItemsControl ItemsSource="{Binding CurrentLoadedEntires}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Button Background="Transparent" Click="EntryClicked" HorizontalAlignment="Stretch">
+									<TextBlock
+										Text="{Binding Name}"
+										Foreground="White"
+										Padding="10,0,0,0">
+									</TextBlock>
+								</Button>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</ScrollViewer>
+				
 			</Grid>
 		</Border>
 
