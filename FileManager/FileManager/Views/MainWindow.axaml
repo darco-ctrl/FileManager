@@ -157,7 +157,11 @@
 					<ItemsControl ItemsSource="{Binding CurrentLoadedEntires}">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
-								<Button Background="Transparent" Click="EntryClicked" HorizontalAlignment="Stretch">
+								<Button Background="Transparent" 
+										DoubleTapped="OnEntryDoubleTapped" 
+										Click="EntryClicked"
+										PointerPressed="OnEntryButtonPointerPressed"
+										HorizontalAlignment="Stretch">
 									<TextBlock
 										Text="{Binding Name}"
 										Foreground="White"

@@ -54,11 +54,7 @@ namespace FileManager
             {   
                 if (!IsEntryInBlackList(entry)) { continue; }
 
-                EntryItemViewModel? entryItem = new EntryItemViewModel
-                {
-                    Name = Path.GetFileName(entry),
-                    HoldingPath = entry
-                };
+                EntryItemViewModel entryItem = DynamicControlManager.CreateEntryItem(entry);
                 AppState.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
                 //Console.WriteLine($"{entry}");
             }

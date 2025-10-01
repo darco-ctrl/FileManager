@@ -1,8 +1,10 @@
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Media;
 using FileManager.ViewModels;
 using HarfBuzzSharp;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
@@ -26,11 +28,31 @@ namespace FileManager.Views
          * What this do is when an Entry like file or folder is clicked it try to set it as current Dir
          * by try i mean it checks if given entry is file or folder if folder then set it if not dont set
          */
-        private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void OnEntryDoubleTapped(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             if (sender is Button but && but.DataContext is EntryItemViewModel entry)
             {
                 AppState.GetWindowViewModel().SetCurrentDir(entry.HoldingPath);
+            }
+        }
+
+        private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+
+        /*
+         * checking for mouse right click
+         */
+        private void OnEntryButtonPointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            if (sender == null) { return; }
+            var properties = e.GetCurrentPoint(sender as Button).Properties;
+
+            if (properties.IsRightButtonPressed)
+            {
+                DynamicControlManager.MakeRightClickMenu(sender);
             }
         }
 
