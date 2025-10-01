@@ -18,6 +18,9 @@ namespace FileManager.ViewModels
             FileManager.StartExternalDrivesWatcher(this);
         }
 
+        /*
+         * this try to set current path if it did set bath it returns true if not it returns a false
+         */
         public bool SetCurrentDir(string? newPath)
         {
             if (Directory.Exists(newPath))

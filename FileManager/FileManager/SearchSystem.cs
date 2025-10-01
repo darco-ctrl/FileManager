@@ -13,7 +13,10 @@ namespace FileManager
 {
     public static class SearchSystem
     {
-
+        /*
+         * this makes PathTextBox eligible to recive input for for searching or what to search 
+         * and set AppState to Searching
+         */
         public static void RequestForSearching()
         {
             AppState.GetWindow().PathTextBox.Focus();
@@ -21,6 +24,11 @@ namespace FileManager
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
         }
 
+        /*
+         * After reciving the input it may be null if null do nothing if not null
+         * run a task after task is done AppState is set to none
+         * i used Task and async becuase i dont want my app to get stuck in one place
+         */
         public static async Task StartSearchSetup(string? fileName)
         {
             if (string.IsNullOrWhiteSpace(fileName))
@@ -32,13 +40,17 @@ namespace FileManager
 
                 await Task.Run(() => StartSearching(fileName));
 
-                AppState.CurrentState = AppState.States.NONE;
+                
             }
         }
 
+        /*
+         * This starts the search in different thread and get live output from FD
+         */ 
         private static void StartSearching(string fileName)
         {
             StringBuilder fd_arg = new StringBuilder($"{fileName} {AppState.GetWindowViewModel().CurrentWorkingDir}");
+            AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
 
             Console.WriteLine($"Fd args: {fd_arg}");
 

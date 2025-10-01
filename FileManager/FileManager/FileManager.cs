@@ -17,18 +17,36 @@ namespace FileManager
     public static class FileManager
     {
         
-
+        /*
+         * Black list stuff i can add something that shouldnt appear in the Display
+         * or just ignore it
+         * i didnt use HashSet for this cuz i have to loop through this anyways so
+         * 
+         */
         private readonly static List<FileAttributes> BlackListAttr = new List<FileAttributes> 
         {
             FileAttributes.System,
             FileAttributes.Hidden,
         };
 
+        /*
+         * this is the function called at the starting inside App.axaml.cs
+         * and this is called to display and update UI on first 
+         */
         public static void StartUpSetup()
         {
 
             AppState.GetWindowViewModel().SetCurrentDir(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
         }
+
+        /*
+         * when ever CurrentDir inside MainWindowViewModel is changed this function is called
+         * to display new dir list of CurrentDir 
+         * 
+         * IF YOU NEED FURTHER EXPLANATION FOR THIS CHECK CONSOLE VERSION OF THIS
+         */
+
+        
 
         public static void updateDirItems()
         {
@@ -49,6 +67,12 @@ namespace FileManager
             }
         }
 
+        /*
+         * this function checks if the Entry (could be file or folder) is in black list 
+         * right now the defualt black list has System files attribute
+         * and hidden attrubute (this hidden attrubute is system one not . one you usee in 
+         * .config or .gitignore this is different)
+         */
         private static bool IsEntryInBlackList(string entry)
         {
             var attr = File.GetAttributes(entry);
@@ -64,6 +88,15 @@ namespace FileManager
             return true;
         }
 
+        /*
+         * When pressed Backspace or asgined key for GoBackOne in 'InputManager.KeyActionSet'
+         * this makes go back one step if user is in
+         * C:\user\user_name
+         * when function is called on this path it goes into 
+         * C:\user
+         * and set this as CurrentWorkingDir
+         * 
+         */
         public static void GoBackOne()
         {
             string? parent = Path.GetDirectoryName(AppState.GetWindowViewModel().CurrentWorkingDir);
@@ -74,6 +107,15 @@ namespace FileManager
             }
         }
 
+        /*
+         * This is manual way to make PathTextBox TwoWay i didnt use avalonia
+         * Mode=TwoWay becuase the user input could be a preall path or not 
+         * so i made manual
+         * 
+         * after PathTextBox enters TextChanging and Enter key is pressed tis Function is called
+         * this function checks if Dir exists (not path itself) if its file it wont work either 
+         * it must be a Directory
+         */
         public static void PathBoxTryingToSetNewPath(string? path)
         {
             if (Directory.Exists(path))
@@ -86,6 +128,11 @@ namespace FileManager
             AppState.GetWindow().FocusWindow();
         }
 
+        /*
+         * this runs at the start of program
+         * fetching all current drives inside pc
+         * for example any USB's or drives like HDD's or SSD's
+         */
         public static ObservableCollection<DriveItemViewModel> FetchThisPC()
         {
             Console.WriteLine("--------  Recived to make  ------------");

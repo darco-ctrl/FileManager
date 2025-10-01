@@ -34,26 +34,55 @@ namespace FileManager.Views
             }
         }
 
+        /*
+         * i made this function isntead of using window.Focus if i had to do somethng when i focus in future i 
+         * can just add it here instead of going everywhere and changing it
+         */
         public void FocusWindow()
         {
             Focus();
         }
 
-        private void PointerPresed(Object sender, PointerCaptureLostEventArgs e)
+        /*
+         * this is to regain focus back to window when pressed somewhere else like lets say if your changing
+         * text in PathTextBox and clicked somewhere else inside the window if so window will automatically
+         * foucs into itself and this is the function that does that
+         * 
+         * PointerPressed is something from avalonia you can read its doc here > 'https://docs.avaloniaui.net/docs/concepts/input/pointer'
+         * it explains it well
+         */
+        private void PointerPresed(Object sender, PointerPressedEventArgs e)
         {
             Focus();
         }
 
+        /*
+         * after CurrentWorkingDir is updated this is called to update PathTextBox i made it into a function becuase
+         * i can add stuff what to do before or after it is upated like now i added if its searching if so dont update
+         * just return 
+         * it helpfull cuz i dont have to add this if statement everywhere
+         */
         public void UpdatePathBlockText()
         {
             if (AppState.IsSearching) { return; }
             PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
         }
 
+        /*
+         * the sets up env for searching after SearchButton is clicked
+         */
         public void SearchButtonClicked(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            SearchSystem.RequestForSearching();
-            PathTextBox.Text = "";
+            if (AppState.CurrentState == AppState.States.NONE)
+            {
+                SearchSystem.RequestForSearching();
+                PathTextBox.Text = "";
+            } else if (AppState.CurrentState == AppState.States.SEARCHING)
+            {
+                UpdatePathBlockText();
+                FileManager.updateDirItems();
+            }
+
         }
 
         public InputManager GetInputManager() => IM;

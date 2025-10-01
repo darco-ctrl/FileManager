@@ -9,7 +9,7 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="FileManager"
 		Focusable="True"
-		PointerPressed="">
+		PointerPressed="PointerPresed">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
