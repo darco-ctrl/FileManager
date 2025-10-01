@@ -45,9 +45,6 @@ namespace FileManager
          * 
          * IF YOU NEED FURTHER EXPLANATION FOR THIS CHECK CONSOLE VERSION OF THIS
          */
-
-        
-
         public static void updateDirItems()
         {
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
