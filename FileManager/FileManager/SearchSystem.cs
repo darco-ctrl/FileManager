@@ -76,10 +76,7 @@ namespace FileManager
                 {
                     if (!string.IsNullOrWhiteSpace(e.Data))
                     {
-                        EntryItemViewModel entryItem = new EntryItemViewModel
-                        {
-                            HoldingPath = e.Data,
-                        };
+                        EntryItemViewModel entryItem = DynamicControlManager.CreateEntryItem(e.Data);
 
                         if (File.Exists(e.Data))
                         {
