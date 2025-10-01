@@ -38,7 +38,7 @@ namespace FileManager.Views
 
         private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            e.Handled = true;
+            DynamicControlManager.SelectionManager(sender as Button);
         }
 
 
@@ -62,6 +62,7 @@ namespace FileManager.Views
          */
         public void FocusWindow()
         {
+            DynamicControlManager.ResetButtonSelection();
             Focus();
         }
 

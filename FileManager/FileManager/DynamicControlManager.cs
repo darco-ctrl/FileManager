@@ -14,6 +14,8 @@ namespace FileManager
     {
         private static List<Control> Menus = new List<Control>();
 
+        private static Button? MainSelectedEntry;
+        private static HashSet<Button> SelectedEntries = new HashSet<Button>();
 
         public static EntryItemViewModel CreateEntryItem(string entry)
         {
@@ -24,6 +26,40 @@ namespace FileManager
             };
 
             return entryItem;
+        }
+
+        public static void SelectionManager(Button? button)
+        {
+            if (button == null) { return; }
+
+            //STOPED AT MAKING COLOR
+            MainSelectedEntry = button;
+            
+            if (SelectedEntries.Contains(button))
+            {
+                SelectedEntries.Remove(button);
+            } else
+            {
+                SelectedEntries.Add(button);
+            }
+        }
+
+        public static void ButtonSelected(Button? button)
+        {
+            if (button == null) { return; }
+            MainSelectedEntry = button;
+            SelectedEntries.Add(button);
+        }
+
+        public static void ResetButtonSelection()
+        {
+            MainSelectedEntry = null;
+            SelectedEntries.Clear();
+        }
+
+        public static void CanRemoveButtonSelection(Button? button)
+        {
+           
         }
 
         public static void MakeRightClickMenu(Object sender)

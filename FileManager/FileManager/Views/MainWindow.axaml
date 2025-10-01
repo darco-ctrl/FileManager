@@ -161,7 +161,9 @@
 										DoubleTapped="OnEntryDoubleTapped" 
 										Click="EntryClicked"
 										PointerPressed="OnEntryButtonPointerPressed"
-										HorizontalAlignment="Stretch">
+										HorizontalAlignment="Stretch"
+										RenderTransform="None"
+										>
 									<TextBlock
 										Text="{Binding Name}"
 										Foreground="White"
