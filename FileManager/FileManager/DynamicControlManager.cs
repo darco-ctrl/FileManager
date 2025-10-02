@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Avalonia.Input;
+
 
 namespace FileManager
 {
@@ -16,6 +18,9 @@ namespace FileManager
 
         private static Button? MainSelectedEntry;
         private static HashSet<Button> SelectedEntries = new HashSet<Button>();
+
+        private static SolidColorBrush MainSelectedEntryColor = new SolidColorBrush(Color.Parse("#FF7B7B7B"));
+        private static SolidColorBrush SelectedEntryColor = new SolidColorBrush(Color.Parse("#FF4C4C4C"));
 
         public static EntryItemViewModel CreateEntryItem(string entry)
         {
@@ -32,15 +37,18 @@ namespace FileManager
         {
             if (button == null) { return; }
 
-            //STOPED AT MAKING COLOR
-            MainSelectedEntry = button;
-            
-            if (SelectedEntries.Contains(button))
+            if (MainSelectedEntry == button)
             {
-                SelectedEntries.Remove(button);
+                MainSelectedEntry.Background = Brushes.Transparent;
+                MainSelectedEntry = null;
             } else
             {
-                SelectedEntries.Add(button);
+                if (MainSelectedEntry != null)
+                {
+                    MainSelectedEntry.Background = Brushes.Transparent;
+                }
+                MainSelectedEntry = button;
+                MainSelectedEntry.Background = MainSelectedEntryColor;
             }
         }
 

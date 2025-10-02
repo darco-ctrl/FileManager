@@ -3,6 +3,8 @@
         xmlns:vm="using:FileManager.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		
+		xmlns:controls="using:FileManager.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FileManager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -10,6 +12,21 @@
         Title="FileManager"
 		Focusable="True"
 		PointerPressed="PointerPresed">
+
+	<Window.Styles>
+		<Style Selector="controls|EntriesButton">
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+
+		<Style Selector="controls|EntriesButton:pointerover">
+			<Setter Property="Background" Value="#FF4C4C4C"/>
+		</Style>
+
+		<Style Selector="controls|EntriesButton:pressed">
+			<Setter Property="Background" Value="#FF7B7B7B"/>
+		</Style>
+		
+	</Window.Styles>
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -157,19 +174,20 @@
 					<ItemsControl ItemsSource="{Binding CurrentLoadedEntires}">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
-								<Button Background="Transparent" 
+								<controls:EntriesButton  
 										DoubleTapped="OnEntryDoubleTapped" 
 										Click="EntryClicked"
 										PointerPressed="OnEntryButtonPointerPressed"
 										HorizontalAlignment="Stretch"
 										RenderTransform="None"
+										VerticalAlignment="Stretch"
 										>
 									<TextBlock
 										Text="{Binding Name}"
 										Foreground="White"
 										Padding="10,0,0,0">
 									</TextBlock>
-								</Button>
+								</controls:EntriesButton>
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
