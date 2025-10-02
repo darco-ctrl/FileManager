@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Media;
 using FileManager.ViewModels;
@@ -38,7 +39,9 @@ namespace FileManager.Views
 
         private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            DynamicControlManager.SelectionManager(sender as Button);
+            ToggleButton? toggleButton = sender as ToggleButton;
+            DynamicControlManager.SelectionManager(toggleButton);
+
         }
 
 

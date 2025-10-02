@@ -1,14 +1,16 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Media;
 using FileManager.ViewModels;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using Avalonia.Input;
-
 
 namespace FileManager
 {
@@ -16,11 +18,12 @@ namespace FileManager
     {
         private static List<Control> Menus = new List<Control>();
 
-        private static Button? MainSelectedEntry;
-        private static HashSet<Button> SelectedEntries = new HashSet<Button>();
+        private static ToggleButton? MainSelectedEntry;
+        private static HashSet<ToggleButton> SelectedEntries = new HashSet<ToggleButton>();
 
         private static SolidColorBrush MainSelectedEntryColor = new SolidColorBrush(Color.Parse("#FF7B7B7B"));
         private static SolidColorBrush SelectedEntryColor = new SolidColorBrush(Color.Parse("#FF4C4C4C"));
+
 
         public static EntryItemViewModel CreateEntryItem(string entry)
         {
@@ -33,26 +36,31 @@ namespace FileManager
             return entryItem;
         }
 
-        public static void SelectionManager(Button? button)
+        public static void SelectionManager(ToggleButton? button)
         {
+
             if (button == null) { return; }
 
-            if (MainSelectedEntry == button)
-            {
-                MainSelectedEntry.Background = Brushes.Transparent;
-                MainSelectedEntry = null;
-            } else
+            if (button.IsChecked == true) // i used litral IsChecked == false bceause its not bool its bool? it can be null
             {
                 if (MainSelectedEntry != null)
                 {
-                    MainSelectedEntry.Background = Brushes.Transparent;
+                    MainSelectedEntry.IsChecked = false;
+                    MainSelectedEntry = button;
+                } 
+                else {
+                    MainSelectedEntry = button;
                 }
-                MainSelectedEntry = button;
-                MainSelectedEntry.Background = MainSelectedEntryColor;
+            } else if (button.IsChecked == false) // i used litral IsChecked == false bceause its not bool its bool? it can be null
+            {
+                if (MainSelectedEntry == button)
+                {
+                    MainSelectedEntry.IsChecked = true;
+                }
             }
         }
 
-        public static void ButtonSelected(Button? button)
+        public static void ButtonSelected(ToggleButton? button)
         {
             if (button == null) { return; }
             MainSelectedEntry = button;
@@ -65,7 +73,7 @@ namespace FileManager
             SelectedEntries.Clear();
         }
 
-        public static void CanRemoveButtonSelection(Button? button)
+        public static void CanRemoveButtonSelection(ToggleButton? button)
         {
            
         }

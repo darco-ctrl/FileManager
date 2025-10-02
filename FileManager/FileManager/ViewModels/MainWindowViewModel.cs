@@ -11,9 +11,6 @@ namespace FileManager.ViewModels
         public ObservableCollection<DriveItemViewModel> SidePanelItems { get; } = FileManager.FetchThisPC();
         public ObservableCollection<EntryItemViewModel> CurrentLoadedEntires { get; set; } = new();
 
-        public SolidColorBrush EntryButtonBackgroundBrush = new SolidColorBrush(Color.Parse("#FF0000"));
-       
-
         public string CurrentWorkingDir { get; set; } 
 
         public MainWindowViewModel()

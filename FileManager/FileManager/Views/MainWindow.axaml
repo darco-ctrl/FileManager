@@ -18,12 +18,16 @@
 			<Setter Property="Background" Value="Transparent"/>
 		</Style>
 
-		<Style Selector="controls|EntriesButton:pointerover">
+		<Style Selector="controls|EntriesButton:checked">
 			<Setter Property="Background" Value="#FF4C4C4C"/>
 		</Style>
 
+		<Style Selector="controls|EntriesButton:pointerover">
+			<Setter Property="Background" Value="#FF858282"/>
+		</Style>
+
 		<Style Selector="controls|EntriesButton:pressed">
-			<Setter Property="Background" Value="#FF7B7B7B"/>
+			<Setter Property="Background" Value="#FF6B6A6A"/>
 		</Style>
 		
 	</Window.Styles>
