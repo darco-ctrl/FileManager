@@ -85,11 +85,11 @@ namespace FileManager
 
             ContextMenu rightClickContextMenu = new ContextMenu();
 
-            MenuItem test1 = new MenuItem { Header = "Test 1" };
-            test1.Click += (s, e) => Console.WriteLine("Test1 BeenClicked");
+            MenuItem test1 = new MenuItem { Header = "New file" };
+            test1.Click += (s, e) => MenuManager.CreateFileCreationWindow(false) ;
 
-            MenuItem test2 = new MenuItem { Header = "Test 2" };
-            test2.Click += (s, e) => Console.WriteLine("Test2 Been clicked");
+            MenuItem test2 = new MenuItem { Header = "New folder" };
+            test2.Click += (s, e) => MenuManager.CreateFileCreationWindow(true);
 
             rightClickContextMenu.Items.Add(test1);
             rightClickContextMenu.Items.Add(test2);
