@@ -1,8 +1,11 @@
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Media;
 using FileManager.ViewModels;
 using HarfBuzzSharp;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
@@ -26,7 +29,7 @@ namespace FileManager.Views
          * What this do is when an Entry like file or folder is clicked it try to set it as current Dir
          * by try i mean it checks if given entry is file or folder if folder then set it if not dont set
          */
-        private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void OnEntryDoubleTapped(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             if (sender is Button but && but.DataContext is EntryItemViewModel entry)
             {
@@ -34,12 +37,25 @@ namespace FileManager.Views
             }
         }
 
+        private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            ToggleButton? toggleButton = sender as ToggleButton;
+            DynamicControlManager.SelectionManager(toggleButton);
+
+        }
+
+
+        /*
+         * checking for mouse right click
+         */
+
         /*
          * i made this function isntead of using window.Focus if i had to do somethng when i focus in future i 
          * can just add it here instead of going everywhere and changing it
          */
         public void FocusWindow()
         {
+            DynamicControlManager.ResetButtonSelection();
             Focus();
         }
 
@@ -54,6 +70,21 @@ namespace FileManager.Views
         private void PointerPresed(Object sender, PointerPressedEventArgs e)
         {
             Focus();
+        }
+
+        private void RefreshMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            FileManager.RefreshDir();
+        }
+
+        private void NewFileMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MenuManager.CreateFileCreationWindow(false);
+        }
+
+        private void NewFolderMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MenuManager.CreateFileCreationWindow(true);
         }
 
         /*
@@ -80,7 +111,7 @@ namespace FileManager.Views
             } else if (AppState.CurrentState == AppState.States.SEARCHING)
             {
                 UpdatePathBlockText();
-                FileManager.updateDirItems();
+                FileManager.RefreshDir();
             }
 
         }

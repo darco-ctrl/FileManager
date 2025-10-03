@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Media;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -26,7 +27,7 @@ namespace FileManager.ViewModels
             if (Directory.Exists(newPath))
             {
                 CurrentWorkingDir = newPath;
-                FileManager.updateDirItems();
+                FileManager.UpdateDirItems();
                 AppState.GetWindow().UpdatePathBlockText();
                 return true;
             }
