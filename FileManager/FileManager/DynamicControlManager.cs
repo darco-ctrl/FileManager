@@ -16,14 +16,9 @@ namespace FileManager
 {
     public static class DynamicControlManager
     {
-        private static List<Control> Menus = new List<Control>();
 
         private static ToggleButton? MainSelectedEntry;
         private static HashSet<ToggleButton> SelectedEntries = new HashSet<ToggleButton>();
-
-        private static SolidColorBrush MainSelectedEntryColor = new SolidColorBrush(Color.Parse("#FF7B7B7B"));
-        private static SolidColorBrush SelectedEntryColor = new SolidColorBrush(Color.Parse("#FF4C4C4C"));
-
 
         public static EntryItemViewModel CreateEntryItem(string entry)
         {
@@ -75,28 +70,7 @@ namespace FileManager
 
         public static void CanRemoveButtonSelection(ToggleButton? button)
         {
-           
-        }
 
-        public static void MakeRightClickMenu(Object sender)
-        {
-            Button? EntryButton = sender as Button;
-            if (EntryButton == null) { return; }
-
-            ContextMenu rightClickContextMenu = new ContextMenu();
-
-            MenuItem test1 = new MenuItem { Header = "New file" };
-            test1.Click += (s, e) => MenuManager.CreateFileCreationWindow(false) ;
-
-            MenuItem test2 = new MenuItem { Header = "New folder" };
-            test2.Click += (s, e) => MenuManager.CreateFileCreationWindow(true);
-
-            rightClickContextMenu.Items.Add(test1);
-            rightClickContextMenu.Items.Add(test2);
-
-            EntryButton.ContextMenu = rightClickContextMenu;
-
-            Menus.Add(EntryButton);
         }
     }
 }

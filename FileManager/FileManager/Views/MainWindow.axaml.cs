@@ -48,16 +48,6 @@ namespace FileManager.Views
         /*
          * checking for mouse right click
          */
-        private void OnEntryButtonPointerPressed(object? sender, PointerPressedEventArgs e)
-        {
-            if (sender == null) { return; }
-            var properties = e.GetCurrentPoint(sender as Button).Properties;
-
-            if (properties.IsRightButtonPressed)
-            {
-                DynamicControlManager.MakeRightClickMenu(sender);
-            }
-        }
 
         /*
          * i made this function isntead of using window.Focus if i had to do somethng when i focus in future i 
@@ -80,6 +70,21 @@ namespace FileManager.Views
         private void PointerPresed(Object sender, PointerPressedEventArgs e)
         {
             Focus();
+        }
+
+        private void RefreshMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            FileManager.RefreshDir();
+        }
+
+        private void NewFileMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MenuManager.CreateFileCreationWindow(false);
+        }
+
+        private void NewFolderMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MenuManager.CreateFileCreationWindow(true);
         }
 
         /*
@@ -106,7 +111,7 @@ namespace FileManager.Views
             } else if (AppState.CurrentState == AppState.States.SEARCHING)
             {
                 UpdatePathBlockText();
-                FileManager.UpdateDirItems();
+                FileManager.RefreshDir();
             }
 
         }

@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		
+		xmlns:local="using:FileManager"
+		
 		xmlns:controls="using:FileManager.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FileManager.Views.MainWindow"
@@ -175,13 +177,21 @@
 
 
 				<ScrollViewer Grid.Row="1" Margin="5" CornerRadius="10">
+
+					<ScrollViewer.ContextMenu>
+						<ContextMenu>
+							<MenuItem Header="Refresh" Click="RefreshMenuItemClicked"/>
+							<MenuItem Header="New File" Click="NewFolderMenuItemClicked"/>
+							<MenuItem Header="New Folder" Click="NewFolderMenuItemClicked"/>
+						</ContextMenu>
+					</ScrollViewer.ContextMenu>
+					
 					<ItemsControl ItemsSource="{Binding CurrentLoadedEntires}">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
 								<controls:EntriesButton  
 										DoubleTapped="OnEntryDoubleTapped" 
 										Click="EntryClicked"
-										PointerPressed="OnEntryButtonPointerPressed"
 										HorizontalAlignment="Stretch"
 										RenderTransform="None"
 										VerticalAlignment="Stretch"

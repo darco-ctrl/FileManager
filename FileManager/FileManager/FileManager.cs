@@ -32,8 +32,9 @@ namespace FileManager
          * 
          * IF YOU NEED FURTHER EXPLANATION FOR THIS CHECK CONSOLE VERSION OF THIS
          */
-        public static void UpdateDirItems()
+        public static void RefreshDir()
         {
+            Console.WriteLine("Clearing and refresing current dir");
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
             var entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir);
 
