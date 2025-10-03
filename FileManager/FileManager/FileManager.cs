@@ -16,19 +16,6 @@ namespace FileManager
 {
     public static class FileManager
     {
-        
-        /*
-         * Black list stuff i can add something that shouldnt appear in the Display
-         * or just ignore it
-         * i didnt use HashSet for this cuz i have to loop through this anyways so
-         * 
-         */
-        private readonly static List<FileAttributes> BlackListAttr = new List<FileAttributes> 
-        {
-            FileAttributes.System,
-            FileAttributes.Hidden,
-        };
-
         /*
          * this is the function called at the starting inside App.axaml.cs
          * and this is called to display and update UI on first 
@@ -45,46 +32,20 @@ namespace FileManager
          * 
          * IF YOU NEED FURTHER EXPLANATION FOR THIS CHECK CONSOLE VERSION OF THIS
          */
-        public static void updateDirItems()
+        public static void UpdateDirItems()
         {
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
             var entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir);
 
             foreach (var entry in entries)
             {   
-                if (!IsEntryInBlackList(entry)) { continue; }
+                if (!FileManagerHelper.IsEntryInBlackList(entry)) { continue; }
 
-                EntryItemViewModel? entryItem = new EntryItemViewModel
-                {
-                    Name = Path.GetFileName(entry),
-                    HoldingPath = entry
-                };
+                EntryItemViewModel entryItem = DynamicControlManager.CreateEntryItem(entry);
                 AppState.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
                 //Console.WriteLine($"{entry}");
             }
         }
-
-        /*
-         * this function checks if the Entry (could be file or folder) is in black list 
-         * right now the defualt black list has System files attribute
-         * and hidden attrubute (this hidden attrubute is system one not . one you usee in 
-         * .config or .gitignore this is different)
-         */
-        private static bool IsEntryInBlackList(string entry)
-        {
-            var attr = File.GetAttributes(entry);
-
-            foreach(var blacklistatr in BlackListAttr)
-            {
-                if (attr.HasFlag(blacklistatr))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         /*
          * When pressed Backspace or asgined key for GoBackOne in 'InputManager.KeyActionSet'
          * this makes go back one step if user is in
@@ -125,6 +86,25 @@ namespace FileManager
             AppState.GetWindow().FocusWindow();
         }
 
+
+        public static void CreateFile(string fileName)
+        {
+            string FilePath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, fileName);
+
+            File.Create(FilePath);
+            UpdateDirItems();
+        }
+
+        public static void CreateDir(string dirName)
+        {
+            string DirPath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, dirName);
+
+            Directory.CreateDirectory(DirPath);
+            UpdateDirItems();
+
+            Console.WriteLine("CreatedFile");
+        }
+         
         /*
          * this runs at the start of program
          * fetching all current drives inside pc
