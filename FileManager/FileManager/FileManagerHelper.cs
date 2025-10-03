@@ -46,7 +46,7 @@ namespace FileManager
 
         public static bool DoesEntryExists(string entry)
         {
-            return Path.Exists(AppState.GetWindowViewModel().CurrentWorkingDir + entry);
+            return Path.Exists(Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, entry));
         }
     }
 }

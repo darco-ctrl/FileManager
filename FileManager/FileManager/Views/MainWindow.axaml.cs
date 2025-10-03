@@ -106,7 +106,7 @@ namespace FileManager.Views
             } else if (AppState.CurrentState == AppState.States.SEARCHING)
             {
                 UpdatePathBlockText();
-                FileManager.updateDirItems();
+                FileManager.UpdateDirItems();
             }
 
         }

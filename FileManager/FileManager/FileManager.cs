@@ -32,7 +32,7 @@ namespace FileManager
          * 
          * IF YOU NEED FURTHER EXPLANATION FOR THIS CHECK CONSOLE VERSION OF THIS
          */
-        public static void updateDirItems()
+        public static void UpdateDirItems()
         {
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
             var entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir);
@@ -89,14 +89,22 @@ namespace FileManager
 
         public static void CreateFile(string fileName)
         {
+            string FilePath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, fileName);
 
+            File.Create(FilePath);
+            UpdateDirItems();
         }
 
         public static void CreateDir(string dirName)
         {
+            string DirPath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, dirName);
 
+            Directory.CreateDirectory(DirPath);
+            UpdateDirItems();
+
+            Console.WriteLine("CreatedFile");
         }
-
+         
         /*
          * this runs at the start of program
          * fetching all current drives inside pc

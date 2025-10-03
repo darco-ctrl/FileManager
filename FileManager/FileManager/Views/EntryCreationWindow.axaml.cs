@@ -25,25 +25,34 @@ public partial class EntryCreationWindow : Window
     private void CreateButtonClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         string? entryName = EntryNameTextBox.Text;
+        Console.WriteLine($"Entry Name: {entryName}");
 
+        //Console.WriteLine($"Checking if its null or empty space");
         if (string.IsNullOrWhiteSpace(entryName))
         {
             ShowError("Cannot be empty");
         } else
         {
+            //Console.WriteLine($"Passed null|empty test");
+            //Console.WriteLine($"Testing if path already exists");
             if (FileManagerHelper.DoesEntryExists(entryName))
             {
                 ShowError("That entry already exists in current scope");
                 return;
             }
-
+            //Console.WriteLine($"Passed path test");
+            //Console.WriteLine($"Checking what to create");
             if (IsCreatingDir)
             {
+                //Console.WriteLine($"Requsting to create Dir");
                 FileManager.CreateDir(entryName);
             } else
             {
+                //Console.WriteLine($"Requsting to create File");
                 FileManager.CreateFile(entryName);
             }
+
+            this.Close();
         }
     }
 
