@@ -17,7 +17,7 @@ namespace FileManager
     public static class DynamicControlManager
     {
 
-        private static ToggleButton? MainSelectedEntry;
+        public static ToggleButton? SelectedEntry;
         private static HashSet<ToggleButton> SelectedEntries = new HashSet<ToggleButton>();
 
         public static EntryItemViewModel CreateEntryItem(string entry)
@@ -38,19 +38,19 @@ namespace FileManager
 
             if (button.IsChecked == true) // i used litral IsChecked == false bceause its not bool its bool? it can be null
             {
-                if (MainSelectedEntry != null)
+                if (SelectedEntry != null)
                 {
-                    MainSelectedEntry.IsChecked = false;
-                    MainSelectedEntry = button;
+                    SelectedEntry.IsChecked = false;
+                    SelectedEntry = button;
                 } 
                 else {
-                    MainSelectedEntry = button;
+                    SelectedEntry = button;
                 }
             } else if (button.IsChecked == false) // i used litral IsChecked == false bceause its not bool its bool? it can be null
             {
-                if (MainSelectedEntry == button)
+                if (SelectedEntry == button)
                 {
-                    MainSelectedEntry.IsChecked = true;
+                    SelectedEntry.IsChecked = true;
                 }
             }
         }
@@ -58,13 +58,17 @@ namespace FileManager
         public static void ButtonSelected(ToggleButton? button)
         {
             if (button == null) { return; }
-            MainSelectedEntry = button;
+            SelectedEntry = button;
             SelectedEntries.Add(button);
         }
 
         public static void ResetButtonSelection()
         {
-            MainSelectedEntry = null;
+            if (SelectedEntry != null)
+            {
+                SelectedEntry.IsChecked = false;
+            }
+            SelectedEntry = null;
             SelectedEntries.Clear();
         }
 

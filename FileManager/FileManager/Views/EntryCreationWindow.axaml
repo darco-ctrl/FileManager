@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="FileManager.EntryCreationWindow"
         Title="EntryCreationWindow"
-		mc:Ignorable="d" d:DesignWidth="444" d:DesignHeight="180"
+		mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="180"
 		Width="450" Height="180"
 		CanResize="False"
 		SystemDecorations="None"

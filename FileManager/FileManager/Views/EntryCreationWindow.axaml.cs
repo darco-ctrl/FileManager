@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using System;
 using System.Windows;
 using System.IO;
+using Avalonia.Platform;
 
 namespace FileManager;
 

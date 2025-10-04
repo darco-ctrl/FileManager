@@ -1,12 +1,14 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using FileManager.ViewModels;
 using HarfBuzzSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 
@@ -31,19 +33,67 @@ namespace FileManager.Views
          */
         private void OnEntryDoubleTapped(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if (sender is Button but && but.DataContext is EntryItemViewModel entry)
+            if (sender is ToggleButton but && but.DataContext is EntryItemViewModel entry)
             {
                 AppState.GetWindowViewModel().SetCurrentDir(entry.HoldingPath);
             }
         }
 
-        private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void EntryScrollViewerPointerPressed(Object sender, PointerPressedEventArgs args)
         {
-            ToggleButton? toggleButton = sender as ToggleButton;
-            DynamicControlManager.SelectionManager(toggleButton);
 
+            if (args.Source is ToggleButton)
+            {
+                return;
+            }
+
+            DynamicControlManager.ResetButtonSelection();
         }
 
+        private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            ToggleButton? entryButton = sender as ToggleButton;
+            if (entryButton == null) { return; }
+            DynamicControlManager.SelectionManager(entryButton);
+        }
+
+        private void EntryPointerPressed(Object sender, PointerPressedEventArgs args)
+        {
+            ToggleButton? entryButton = sender as ToggleButton;
+            if (entryButton == null) { return; }
+
+            if (args.GetCurrentPoint(this).Properties.IsRightButtonPressed)
+            {
+                Console.WriteLine("ToggleButtonPressed");
+                entryButton.IsChecked = !entryButton.IsChecked;
+                DynamicControlManager.SelectionManager(entryButton);
+            }
+        }
+
+        private void DeleteSelectedEntry(Object sender, Avalonia.Interactivity.RoutedEventArgs args)
+        {
+            Console.WriteLine($"SelectedItem: {DynamicControlManager.SelectedEntry}");
+            if (sender is ToggleButton toggleButton && toggleButton.DataContext is EntryItemViewModel entryData)
+            {
+                FileManager.DeleteEntry(entryData.HoldingPath);
+            }
+        }
+
+
+        private void RightClickContextMenuOpened(Object sender, RoutedEventArgs args)
+        {
+            if (sender is ContextMenu rightClickMenu)
+            {
+                List<MenuItem> Items = rightClickMenu.Items.Cast<MenuItem>().ToList();
+                if (DynamicControlManager.SelectedEntry == null)
+                {
+                    Items[3].IsEnabled = false;
+                } else
+                {
+                    Items[3].IsEnabled = true;
+                }
+            }
+        }
 
         /*
          * checking for mouse right click
@@ -55,7 +105,6 @@ namespace FileManager.Views
          */
         public void FocusWindow()
         {
-            DynamicControlManager.ResetButtonSelection();
             Focus();
         }
 
@@ -98,6 +147,8 @@ namespace FileManager.Views
             if (AppState.IsSearching) { return; }
             PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
         }
+
+
 
         /*
          * the sets up env for searching after SearchButton is clicked

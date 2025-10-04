@@ -27,7 +27,7 @@ namespace FileManager.ViewModels
             if (Directory.Exists(newPath))
             {
                 CurrentWorkingDir = newPath;
-                FileManager.UpdateDirItems();
+                FileManager.RefreshDir();
                 AppState.GetWindow().UpdatePathBlockText();
                 return true;
             }

@@ -34,6 +34,8 @@ namespace FileManager
          */
         public static void RefreshDir()
         {
+            DynamicControlManager.ResetButtonSelection();
+
             Console.WriteLine("Clearing and refresing current dir");
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
             var entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir);
@@ -93,7 +95,12 @@ namespace FileManager
             string FilePath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, fileName);
 
             File.Create(FilePath);
-            UpdateDirItems();
+            RefreshDir();
+        }
+
+        public static void DeleteEntry(string entryPath)
+        {
+
         }
 
         public static void CreateDir(string dirName)
@@ -101,7 +108,7 @@ namespace FileManager
             string DirPath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, dirName);
 
             Directory.CreateDirectory(DirPath);
-            UpdateDirItems();
+            RefreshDir();
 
             Console.WriteLine("CreatedFile");
         }

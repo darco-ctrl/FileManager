@@ -176,13 +176,14 @@
 				-->
 
 
-				<ScrollViewer Grid.Row="1" Margin="5" CornerRadius="10">
+				<ScrollViewer Grid.Row="1" Margin="5" CornerRadius="10" PointerPressed="EntryScrollViewerPointerPressed">
 
 					<ScrollViewer.ContextMenu>
-						<ContextMenu>
-							<MenuItem Header="Refresh" Click="RefreshMenuItemClicked"/>
-							<MenuItem Header="New File" Click="NewFolderMenuItemClicked"/>
-							<MenuItem Header="New Folder" Click="NewFolderMenuItemClicked"/>
+						<ContextMenu Opened="RightClickContextMenuOpened">
+							<MenuItem Header="Refresh" Click="RefreshMenuItemClicked" IsVisible="True" IsEnabled="True"/>
+							<MenuItem Header="New File" Click="NewFolderMenuItemClicked" IsVisible="True" IsEnabled="True"/>
+							<MenuItem Header="New Folder" Click="NewFolderMenuItemClicked" IsVisible="True" IsEnabled="True"/>
+							<MenuItem Header="Delete" Click="DeleteSelectedEntry" IsVisible="True" IsEnabled="True"/>
 						</ContextMenu>
 					</ScrollViewer.ContextMenu>
 					
@@ -192,6 +193,7 @@
 								<controls:EntriesButton  
 										DoubleTapped="OnEntryDoubleTapped" 
 										Click="EntryClicked"
+										PointerPressed="EntryPointerPressed"
 										HorizontalAlignment="Stretch"
 										RenderTransform="None"
 										VerticalAlignment="Stretch"

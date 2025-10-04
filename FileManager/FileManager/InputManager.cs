@@ -22,6 +22,7 @@ namespace FileManager
         {
             KeyActionSet.Add(Key.Back, FileManager.GoBackOne); // Adding Backspace key so user can go back from a dir
             KeyActionSet.Add(Key.Enter, EnterKeyFunction); // Adding Enter key
+           
         }
 
         // When any KeyisDown its added to KeyDown and check if the Key Pressed is in 'KeyActionSet' if so
@@ -34,6 +35,11 @@ namespace FileManager
             {
                 KeyActionSet[e.Key]();
                 IsPressed.Add(e.Key);
+            }
+
+            if (_KeyDown.Contains(Key.D) && _KeyDown.Contains(Key.LeftCtrl))
+            {
+                DynamicControlManager.ResetButtonSelection();
             }
         }
 
