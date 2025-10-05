@@ -12,6 +12,7 @@ using FileManager.Views;
 using Avalonia.Controls;
 using Avalonia.Input;
 
+
 namespace FileManager
 {
     public static class FileManager
@@ -38,7 +39,7 @@ namespace FileManager
 
             Console.WriteLine("Clearing and refresing current dir");
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
-            var entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir);
+            var entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir).ToArray();
 
             foreach (var entry in entries)
             {   
@@ -100,7 +101,7 @@ namespace FileManager
 
         public static void DeleteEntry(string entryPath)
         {
-
+            FileOperation.DeleteItem(entryPath);
         }
 
         public static void CreateDir(string dirName)

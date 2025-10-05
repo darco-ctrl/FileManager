@@ -47,7 +47,7 @@ namespace FileManager.Views
                 return;
             }
 
-            DynamicControlManager.ResetButtonSelection();
+            
         }
 
         private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -72,10 +72,13 @@ namespace FileManager.Views
 
         private void DeleteSelectedEntry(Object sender, Avalonia.Interactivity.RoutedEventArgs args)
         {
-            Console.WriteLine($"SelectedItem: {DynamicControlManager.SelectedEntry}");
-            if (sender is ToggleButton toggleButton && toggleButton.DataContext is EntryItemViewModel entryData)
+            if (DynamicControlManager.SelectedEntry != null)
             {
-                FileManager.DeleteEntry(entryData.HoldingPath);
+                if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entry)
+                {
+                    Console.WriteLine($"Passed tests\n Holding path: {entry.HoldingPath}");
+                    FileManager.DeleteEntry(entry.HoldingPath);
+                }
             }
         }
 
@@ -85,6 +88,7 @@ namespace FileManager.Views
             if (sender is ContextMenu rightClickMenu)
             {
                 List<MenuItem> Items = rightClickMenu.Items.Cast<MenuItem>().ToList();
+                Console.WriteLine($"Selected Entry = {DynamicControlManager.SelectedEntry}");
                 if (DynamicControlManager.SelectedEntry == null)
                 {
                     Items[3].IsEnabled = false;

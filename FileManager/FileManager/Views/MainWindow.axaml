@@ -163,8 +163,6 @@
 									Click="SearchButtonClicked"
 									/>
 						</Border>
-
-
 					</Grid>
 				</Border>
 
