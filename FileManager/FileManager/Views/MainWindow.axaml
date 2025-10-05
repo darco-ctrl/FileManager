@@ -178,10 +178,12 @@
 
 					<ScrollViewer.ContextMenu>
 						<ContextMenu Opened="RightClickContextMenuOpened">
-							<MenuItem Header="Refresh" Click="RefreshMenuItemClicked" IsVisible="True" IsEnabled="True"/>
-							<MenuItem Header="New File" Click="NewFolderMenuItemClicked" IsVisible="True" IsEnabled="True"/>
-							<MenuItem Header="New Folder" Click="NewFolderMenuItemClicked" IsVisible="True" IsEnabled="True"/>
-							<MenuItem Header="Delete" Click="DeleteSelectedEntry" IsVisible="True" IsEnabled="True"/>
+							<MenuItem Header="Refresh" Click="RefreshMenuItemClicked" IsEnabled="True"/>
+							<MenuItem Header="Copy" Click="CopyMenuItemClicked" IsEnabled="False"/>
+							<MenuItem Header="Paste" Click="PasteMenuItemClicked" IsEnabled="True"/>
+							<MenuItem Header="New File" Click="NewFolderMenuItemClicked" IsEnabled="True"/>
+							<MenuItem Header="New Folder" Click="NewFolderMenuItemClicked" IsEnabled="True"/>
+							<MenuItem Header="Delete" Click="DeleteSelectedEntry" IsEnabled="True"/>
 						</ContextMenu>
 					</ScrollViewer.ContextMenu>
 					

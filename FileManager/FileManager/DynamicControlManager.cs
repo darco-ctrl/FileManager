@@ -20,6 +20,8 @@ namespace FileManager
         public static ToggleButton? SelectedEntry;
         private static HashSet<ToggleButton> SelectedEntries = new HashSet<ToggleButton>();
 
+        public static string? PathToCopy;
+
         public static EntryItemViewModel CreateEntryItem(string entry)
         {
             EntryItemViewModel? entryItem = new EntryItemViewModel

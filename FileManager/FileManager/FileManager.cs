@@ -104,6 +104,8 @@ namespace FileManager
             FileOperation.DeleteItem(entryPath);
         }
 
+        
+
         public static void CreateDir(string dirName)
         {
             string DirPath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, dirName);

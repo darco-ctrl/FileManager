@@ -50,6 +50,32 @@ namespace FileManager.Views
             
         }
 
+        private void CopyMenuItemClicked(Object sender, RoutedEventArgs args)
+        {
+            if (DynamicControlManager.SelectedEntry == null) { return; }
+
+            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
+            {
+                DynamicControlManager.PathToCopy = entryData.HoldingPath;
+
+                Console.WriteLine(DynamicControlManager.PathToCopy);
+            }
+        }
+
+        private void PasteMenuItemClicked(Object sender, RoutedEventArgs args)
+        {
+            if (DynamicControlManager.PathToCopy == null)
+            {
+                Console.WriteLine("Nothing to paste");
+                return;
+            } else
+            {
+                Console.WriteLine($"------------------------------\nCopying Item . . .\n From : {DynamicControlManager.PathToCopy}\n To : {AppState.GetWindowViewModel().CurrentWorkingDir}");
+                FileOperation.CopyItem(DynamicControlManager.PathToCopy, AppState.GetWindowViewModel().CurrentWorkingDir);
+                DynamicControlManager.PathToCopy = null;
+            }
+        }
+
         private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             ToggleButton? entryButton = sender as ToggleButton;
@@ -91,10 +117,20 @@ namespace FileManager.Views
                 Console.WriteLine($"Selected Entry = {DynamicControlManager.SelectedEntry}");
                 if (DynamicControlManager.SelectedEntry == null)
                 {
-                    Items[3].IsEnabled = false;
+                    Items[1].IsEnabled = false;
+                    Items[5].IsEnabled = false;
                 } else
                 {
-                    Items[3].IsEnabled = true;
+                    Items[1].IsEnabled = true;
+                    Items[5].IsEnabled = true;
+                }
+
+                if (DynamicControlManager.PathToCopy == null)
+                {
+                    Items[2].IsEnabled = false;
+                } else
+                {
+                    Items[2].IsEnabled = true;
                 }
             }
         }
