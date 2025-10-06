@@ -1,4 +1,6 @@
-﻿using HarfBuzzSharp;
+﻿
+using Avalonia.Threading;
+using HarfBuzzSharp;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
@@ -9,24 +11,32 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
+using APath = Avalonia.Controls.Shapes.Path;
+using AShapes = Avalonia.Controls.Shapes;
+using MSearchOption = Microsoft.VisualBasic.FileIO.SearchOption;
 
 namespace FileManager
 {
     [SupportedOSPlatform("windows")]
     public static class FileOperation // File Operation
     {
-        public static void DeleteItem(string path)
+        public static async Task DeleteItem(string path)
         {
-           if (Directory.Exists(path))
-           {
-                FileSystem.DeleteDirectory(path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
-           } else if (File.Exists(path))
+            await Task.Run(() =>
             {
-                FileSystem.DeleteFile(path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
-            } else
-            {
-                Console.WriteLine("It says this file/folder doesnt exists\nidk how this is possible it shouldnt happen");
-            }
+                if (Directory.Exists(path))
+                {
+                    FileSystem.DeleteDirectory(path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                }
+                else if (File.Exists(path))
+                {
+                    FileSystem.DeleteFile(path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                }
+                else
+                {
+                    Console.WriteLine("It says this file/folder doesnt exists\nidk how this is possible it shouldnt happen");
+                }
+            });
 
             FileManager.RefreshDir();
         }
@@ -38,31 +48,67 @@ namespace FileManager
             {
                 Console.WriteLine("Path is detected as a Directory Excuting method");
 
-                //CopyDirectory(path, destination);
+                _ = CopyDirector(src, destination);
 
             }
             else if (File.Exists(src)) 
             {
                 Console.WriteLine("Path is detected as a File Excuting method");
-                Copy(src, destination);
+                _ = Copy(src, destination);
             } else
             {
                 Console.WriteLine("It says this file/folder doesnt exists\nidk how this is possible it shouldnt happen");
             }
 
+            //FileManager.RefreshDir();
+        }
+
+        private static async Task CopyDirector(string sourcePath, string dest)
+        {
+            Console.WriteLine($"Source Path : {sourcePath}");
+
+            await Task.Run(() =>
+            {
+                Console.WriteLine("Creating Folder");
+                string _folderName = GetFolderName(sourcePath);
+                string targetPath = Path.Combine(dest, _folderName);
+
+                Console.WriteLine($"Target Path : {targetPath}");
+
+                FileManager.CreateDir(targetPath);
+
+                //Now Create all of the directories
+                foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", System.IO.SearchOption.AllDirectories))
+                {
+                    Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+                }
+
+                //Copy all the files & Replaces any files with the same name
+                foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", System.IO.SearchOption.AllDirectories))
+                {
+                    File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+                }
+            });
+
+            
             FileManager.RefreshDir();
         }
 
-        private static void CopyDirector(string src, string dest)
+        public static string GetFolderName(string path)
         {
-            
+            DirectoryInfo FolderInfo = new DirectoryInfo(path);
+            return FolderInfo.Name;
         }
 
-        private static void Copy(string src, string destinationFolder)
+        private static async Task Copy(string src, string destinationFolder)
         {
-            string dest = Path.Combine(destinationFolder, Path.GetFileName(src));
 
-            File.Copy(src, dest);
+            await Task.Run(() =>
+            {
+                string dest = Path.Combine(destinationFolder, Path.GetFileName(src));
+
+                File.Copy(src, dest);
+            });
         }
     }
 }

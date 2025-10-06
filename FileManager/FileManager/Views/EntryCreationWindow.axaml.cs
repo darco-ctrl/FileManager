@@ -46,7 +46,7 @@ public partial class EntryCreationWindow : Window
             if (IsCreatingDir)
             {
                 //Console.WriteLine($"Requsting to create Dir");
-                FileManager.CreateDir(entryName);
+                FileManager.CreateDir(Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, entryName));
             } else
             {
                 //Console.WriteLine($"Requsting to create File");

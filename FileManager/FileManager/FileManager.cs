@@ -101,16 +101,17 @@ namespace FileManager
 
         public static void DeleteEntry(string entryPath)
         {
-            FileOperation.DeleteItem(entryPath);
+            _ = FileOperation.DeleteItem(entryPath);
         }
 
         
 
-        public static void CreateDir(string dirName)
+        public static void CreateDir(string dest)
         {
-            string DirPath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, dirName);
 
-            Directory.CreateDirectory(DirPath);
+            Console.WriteLine($"Creating {dest}");
+
+            Directory.CreateDirectory(dest);
             RefreshDir();
 
             Console.WriteLine("CreatedFile");

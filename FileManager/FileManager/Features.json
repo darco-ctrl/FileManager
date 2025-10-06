@@ -5,7 +5,9 @@
 		"Move back and forth",
 		"Input path and go to there",
 		"Fast searching with FD",
-		"Delete files and folders"
+		"Delete files",
+		"Delete folder",
+		"Copy file"
 	],
 	"Controls": [
 		"Files Selection"
