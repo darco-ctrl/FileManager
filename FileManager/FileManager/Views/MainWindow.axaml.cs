@@ -27,6 +27,8 @@ namespace FileManager.Views
             this.KeyDown += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyDown(e);
         }
 
+        #region Navigation Events 
+
         /*
          * What this do is when an Entry like file or folder is clicked it try to set it as current Dir
          * by try i mean it checks if given entry is file or folder if folder then set it if not dont set
@@ -39,6 +41,55 @@ namespace FileManager.Views
             }
         }
 
+        private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            ToggleButton? entryButton = sender as ToggleButton;
+            if (entryButton == null) { return; }
+            DynamicControlManager.SelectionManager(entryButton);
+        }
+
+
+        /*
+         * after CurrentWorkingDir is updated this is called to update PathTextBox i made it into a function becuase
+         * i can add stuff what to do before or after it is upated like now i added if its searching if so dont update
+         * just return 
+         * it helpfull cuz i dont have to add this if statement everywhere
+         */
+        public void UpdatePathBlockText()
+        {
+            if (AppState.IsSearching) { return; }
+            PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
+        }
+
+
+
+
+        #endregion
+
+        #region Search
+
+        /*
+         * the sets up env for searching after SearchButton is clicked
+         */
+        public void SearchButtonClicked(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if (AppState.CurrentState == AppState.States.NONE)
+            {
+                SearchSystem.RequestForSearching();
+                PathTextBox.Text = "";
+            }
+            else if (AppState.CurrentState == AppState.States.SEARCHING)
+            {
+                UpdatePathBlockText();
+                FileManager.RefreshDir();
+            }
+
+        }
+
+        #endregion
+
+        #region PointerPressed
+
         private void EntryScrollViewerPointerPressed(Object sender, PointerPressedEventArgs args)
         {
 
@@ -47,8 +98,70 @@ namespace FileManager.Views
                 return;
             }
 
-            
+
         }
+
+        private void EntryPointerPressed(Object sender, PointerPressedEventArgs args)
+        {
+            ToggleButton? entryButton = sender as ToggleButton;
+            if (entryButton == null) { return; }
+
+            if (args.GetCurrentPoint(this).Properties.IsRightButtonPressed)
+            {
+                Console.WriteLine("ToggleButtonPressed");
+                entryButton.IsChecked = !entryButton.IsChecked;
+                DynamicControlManager.SelectionManager(entryButton);
+            }
+        }
+
+        /*
+         * this is to regain focus back to window when pressed somewhere else like lets say if your changing
+         * text in PathTextBox and clicked somewhere else inside the window if so window will automatically
+         * foucs into itself and this is the function that does that
+         * 
+         * PointerPressed is something from avalonia you can read its doc here > 'https://docs.avaloniaui.net/docs/concepts/input/pointer'
+         * it explains it well
+         */
+        private void PointerPresed(Object sender, PointerPressedEventArgs e)
+        {
+            Focus();
+        }
+
+        #endregion
+
+        #region ContextMenu
+
+        private void RightClickContextMenuOpened(Object sender, RoutedEventArgs args)
+        {
+            if (sender is ContextMenu rightClickMenu)
+            {
+                List<MenuItem> Items = rightClickMenu.Items.Cast<MenuItem>().ToList();
+                Console.WriteLine($"Selected Entry = {DynamicControlManager.SelectedEntry}");
+                if (DynamicControlManager.SelectedEntry == null)
+                {
+                    Items[1].IsEnabled = false;
+                    Items[2].IsEnabled = false;
+                    Items[6].IsEnabled = false;
+                }
+                else
+                {
+                    Items[1].IsEnabled = true;
+                    Items[2].IsEnabled = true;
+                    Items[6].IsEnabled = true;
+                }
+
+                if (DynamicControlManager.ClipBoardItem == null)
+                {
+
+                    Items[3].IsEnabled = false;
+                }
+                else
+                {
+                    Items[3].IsEnabled = true;
+                }
+            }
+        }
+
 
         private void CopyMenuItemClicked(Object sender, RoutedEventArgs args)
         {
@@ -58,6 +171,8 @@ namespace FileManager.Views
             {
                 DynamicControlManager.ClipBoardItem = entryData.HoldingPath;
                 DynamicControlManager.PasteFormMove = 2;
+
+
 
                 Console.WriteLine(DynamicControlManager.ClipBoardItem);
             }
@@ -80,40 +195,22 @@ namespace FileManager.Views
             {
                 Console.WriteLine("Nothing to paste");
                 return;
-            } else
+            }
+            else
             {
                 Console.WriteLine($"------------------------------\nCopying Item . . .\n From : {DynamicControlManager.ClipBoardItem}\n To : {AppState.GetWindowViewModel().CurrentWorkingDir}");
-                
+
                 if (DynamicControlManager.PasteFormMove == 2)
                 {
                     FileOperation.CopyItem(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
-                } else if (DynamicControlManager.PasteFormMove == 1)
+                }
+                else if (DynamicControlManager.PasteFormMove == 1)
                 {
                     FileOperation.MoveEntry(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
                 }
 
 
-                    DynamicControlManager.ClipBoardItem = null;
-            }
-        }
-
-        private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            ToggleButton? entryButton = sender as ToggleButton;
-            if (entryButton == null) { return; }
-            DynamicControlManager.SelectionManager(entryButton);
-        }
-
-        private void EntryPointerPressed(Object sender, PointerPressedEventArgs args)
-        {
-            ToggleButton? entryButton = sender as ToggleButton;
-            if (entryButton == null) { return; }
-
-            if (args.GetCurrentPoint(this).Properties.IsRightButtonPressed)
-            {
-                Console.WriteLine("ToggleButtonPressed");
-                entryButton.IsChecked = !entryButton.IsChecked;
-                DynamicControlManager.SelectionManager(entryButton);
+                DynamicControlManager.ClipBoardItem = null;
             }
         }
 
@@ -127,62 +224,6 @@ namespace FileManager.Views
                     FileManager.DeleteEntry(entry.HoldingPath);
                 }
             }
-        }
-
-
-        private void RightClickContextMenuOpened(Object sender, RoutedEventArgs args)
-        {
-            if (sender is ContextMenu rightClickMenu)
-            {
-                List<MenuItem> Items = rightClickMenu.Items.Cast<MenuItem>().ToList();
-                Console.WriteLine($"Selected Entry = {DynamicControlManager.SelectedEntry}");
-                if (DynamicControlManager.SelectedEntry == null)
-                {
-                    Items[1].IsEnabled = false;
-                    Items[2].IsEnabled = false;
-                    Items[6].IsEnabled = false;
-                } else
-                {
-                    Items[1].IsEnabled = true;
-                    Items[2].IsEnabled = true;
-                    Items[6].IsEnabled = true;
-                }
-
-                if (DynamicControlManager.ClipBoardItem == null)
-                {
-
-                    Items[3].IsEnabled = false;
-                } else
-                {
-                    Items[3].IsEnabled = true;
-                }
-            }
-        }
-
-        /*
-         * checking for mouse right click
-         */
-
-        /*
-         * i made this function isntead of using window.Focus if i had to do somethng when i focus in future i 
-         * can just add it here instead of going everywhere and changing it
-         */
-        public void FocusWindow()
-        {
-            Focus();
-        }
-
-        /*
-         * this is to regain focus back to window when pressed somewhere else like lets say if your changing
-         * text in PathTextBox and clicked somewhere else inside the window if so window will automatically
-         * foucs into itself and this is the function that does that
-         * 
-         * PointerPressed is something from avalonia you can read its doc here > 'https://docs.avaloniaui.net/docs/concepts/input/pointer'
-         * it explains it well
-         */
-        private void PointerPresed(Object sender, PointerPressedEventArgs e)
-        {
-            Focus();
         }
 
         private void RefreshMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -200,37 +241,23 @@ namespace FileManager.Views
             MenuManager.CreateFileCreationWindow(true);
         }
 
-        /*
-         * after CurrentWorkingDir is updated this is called to update PathTextBox i made it into a function becuase
-         * i can add stuff what to do before or after it is upated like now i added if its searching if so dont update
-         * just return 
-         * it helpfull cuz i dont have to add this if statement everywhere
-         */
-        public void UpdatePathBlockText()
-        {
-            if (AppState.IsSearching) { return; }
-            PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
-        }
 
+        #endregion
 
+        #region Utility
 
         /*
-         * the sets up env for searching after SearchButton is clicked
+         * i made this function isntead of using window.Focus if i had to do somethng when i focus in future i 
+         * can just add it here instead of going everywhere and changing it
          */
-        public void SearchButtonClicked(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        public void FocusWindow()
         {
-            if (AppState.CurrentState == AppState.States.NONE)
-            {
-                SearchSystem.RequestForSearching();
-                PathTextBox.Text = "";
-            } else if (AppState.CurrentState == AppState.States.SEARCHING)
-            {
-                UpdatePathBlockText();
-                FileManager.RefreshDir();
-            }
-
+            Focus();
         }
 
         public InputManager GetInputManager() => IM;
+
+
+        #endregion
     }
 }
