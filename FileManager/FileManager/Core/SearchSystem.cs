@@ -1,4 +1,6 @@
 ﻿using Avalonia.Threading;
+using FileManager.Managers;
+using FileManager.Utils;
 using FileManager.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FileManager
+namespace FileManager.Core
 {
     public static class SearchSystem
     {

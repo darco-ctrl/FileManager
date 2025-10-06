@@ -3,6 +3,9 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using FileManager.Core;
+using FileManager.Managers;
+using FileManager.Utils;
 using FileManager.ViewModels;
 using HarfBuzzSharp;
 using System;
@@ -81,7 +84,7 @@ namespace FileManager.Views
             else if (AppState.CurrentState == AppState.States.SEARCHING)
             {
                 UpdatePathBlockText();
-                FileManager.RefreshDir();
+                FileSystemManager.RefreshDir();
             }
 
         }
@@ -141,13 +144,15 @@ namespace FileManager.Views
                 {
                     Items[1].IsEnabled = false;
                     Items[2].IsEnabled = false;
-                    Items[6].IsEnabled = false;
+                    Items[4].IsEnabled = false;
+                    Items[7].IsEnabled = false;
                 }
                 else
                 {
                     Items[1].IsEnabled = true;
                     Items[2].IsEnabled = true;
-                    Items[6].IsEnabled = true;
+                    Items[4].IsEnabled = true;
+                    Items[7].IsEnabled = true;
                 }
 
                 if (DynamicControlManager.ClipBoardItem == null)
@@ -214,6 +219,16 @@ namespace FileManager.Views
             }
         }
 
+        private void RenameSelectedEntry(Object sender, Avalonia.Interactivity.RoutedEvent args)
+        {
+            if (DynamicControlManager.SelectedEntry == null) { return; }
+
+            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
+            {
+                DynamicControlManager.RenameEntry = entryData.HoldingPath;
+            }
+        }
+
         private void DeleteSelectedEntry(Object sender, Avalonia.Interactivity.RoutedEventArgs args)
         {
             if (DynamicControlManager.SelectedEntry != null)
@@ -221,24 +236,24 @@ namespace FileManager.Views
                 if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entry)
                 {
                     Console.WriteLine($"Passed tests\n Holding path: {entry.HoldingPath}");
-                    FileManager.DeleteEntry(entry.HoldingPath);
+                    FileOperation.DeleteEntry(entry.HoldingPath);
                 }
             }
         }
 
         private void RefreshMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            FileManager.RefreshDir();
+            FileSystemManager.RefreshDir();
         }
 
         private void NewFileMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            MenuManager.CreateFileCreationWindow(false);
+            MenuManager.OpenGetNameWindow(FileOperation.OperationState.CREATE_FILE);
         }
 
         private void NewFolderMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            MenuManager.CreateFileCreationWindow(true);
+            MenuManager.OpenGetNameWindow(FileOperation.OperationState.CREATE_FOLDER);
         }
 
 

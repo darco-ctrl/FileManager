@@ -11,11 +11,13 @@ using Avalonia.Threading;
 using FileManager.Views;
 using Avalonia.Controls;
 using Avalonia.Input;
+using FileManager.Core;
+using FileManager.Utils;
 
 
-namespace FileManager
+namespace FileManager.Managers
 {
-    public static class FileManager
+    public static class FileSystemManager
     {
         /*
          * this is the function called at the starting inside App.axaml.cs
@@ -91,32 +93,7 @@ namespace FileManager
         }
 
 
-        public static void CreateFile(string fileName)
-        {
-            string FilePath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, fileName);
 
-            File.Create(FilePath);
-            RefreshDir();
-        }
-
-        public static void DeleteEntry(string entryPath)
-        {
-            _ = FileOperation.DeleteItem(entryPath);
-        }
-
-        
-
-        public static void CreateDir(string dest)
-        {
-
-            Console.WriteLine($"Creating {dest}");
-
-            Directory.CreateDirectory(dest);
-            RefreshDir();
-
-            Console.WriteLine("CreatedFile");
-        }
-         
         /*
          * this runs at the start of program
          * fetching all current drives inside pc

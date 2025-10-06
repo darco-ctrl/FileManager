@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileManager
+namespace FileManager.Core
 {
     internal class Dubbug
     {

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Input;
+using FileManager.Core;
+using FileManager.Utils;
 
-namespace FileManager
+namespace FileManager.Managers
 {
     public class InputManager
     {
@@ -20,7 +22,7 @@ namespace FileManager
         // INPUT MANAGE CONSTRUCTOR
         public InputManager()
         {
-            KeyActionSet.Add(Key.Back, FileManager.GoBackOne); // Adding Backspace key so user can go back from a dir
+            KeyActionSet.Add(Key.Back, FileSystemManager.GoBackOne); // Adding Backspace key so user can go back from a dir
             KeyActionSet.Add(Key.Enter, EnterKeyFunction); // Adding Enter key
            
         }
@@ -53,7 +55,7 @@ namespace FileManager
                     _ = SearchSystem.StartSearchSetup(AppState.GetWindow().PathTextBox.Text);
                } else
                {
-                    FileManager.PathBoxTryingToSetNewPath(AppState.GetWindow().PathTextBox.Text);
+                    FileSystemManager.PathBoxTryingToSetNewPath(AppState.GetWindow().PathTextBox.Text);
                }
             }
         }

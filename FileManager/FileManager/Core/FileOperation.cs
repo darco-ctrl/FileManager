@@ -1,5 +1,7 @@
 ﻿
 using Avalonia.Threading;
+using FileManager.Managers;
+using FileManager.Utils;
 using HarfBuzzSharp;
 using Microsoft.VisualBasic.FileIO;
 using System;
@@ -15,11 +17,20 @@ using APath = Avalonia.Controls.Shapes.Path;
 using AShapes = Avalonia.Controls.Shapes;
 using MSearchOption = Microsoft.VisualBasic.FileIO.SearchOption;
 
-namespace FileManager
+namespace FileManager.Core
 {
     [SupportedOSPlatform("windows")]
     public static class FileOperation // File Operation
     {
+
+        public enum OperationState 
+        {
+            NONE,
+            RENAME,
+            CREATE_FILE,
+            CREATE_FOLDER
+        }
+
         public static async Task DeleteItem(string path)
         {
             await Task.Run(() =>
@@ -38,7 +49,7 @@ namespace FileManager
                 }
             });
 
-            FileManager.RefreshDir();
+            FileSystemManager.RefreshDir();
         }
 
         public static void CopyItem(string src, string destination)
@@ -75,7 +86,7 @@ namespace FileManager
 
                 Console.WriteLine($"Target Path : {targetPath}");
 
-                FileManager.CreateDir(targetPath);
+                FileOperation.CreateDir(targetPath);
 
                 //Now Create all of the directories
                 foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", System.IO.SearchOption.AllDirectories))
@@ -90,8 +101,8 @@ namespace FileManager
                 }
             });
 
-            
-            FileManager.RefreshDir();
+
+            FileSystemManager.RefreshDir();
         }
 
         public static void MoveEntry(string src, string dest)
@@ -122,5 +133,44 @@ namespace FileManager
                 File.Copy(src, dest);
             });
         }
+
+        public static void CreatingDecider(string entry_name, OperationState state)
+        {
+            if (state == OperationState.CREATE_FILE)
+            {
+                CreateFile(entry_name);
+            } else if (state == OperationState.CREATE_FOLDER)
+            {
+                CreateDir(Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, entry_name));
+            }
+        }
+
+        #region Create File/Folder
+
+        public static void CreateFile(string fileName)
+        {
+            string FilePath = Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, fileName);
+
+            File.Create(FilePath);
+            FileSystemManager.RefreshDir();
+        }
+
+        public static void DeleteEntry(string entryPath)
+        {
+            _ = FileOperation.DeleteItem(entryPath);
+        }
+
+        public static void CreateDir(string dest)
+        {
+
+            Console.WriteLine($"Creating {dest}");
+
+            Directory.CreateDirectory(dest);
+            FileSystemManager.RefreshDir();
+
+            Console.WriteLine("CreatedFile");
+        }
+
+        #endregion
     }
 }

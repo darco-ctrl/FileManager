@@ -3,6 +3,8 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using FileManager.Managers;
+using FileManager.Utils;
 using FileManager.ViewModels;
 using FileManager.Views;
 using System;
@@ -40,7 +42,7 @@ namespace FileManager
                     DataContext = AppState.GetWindowViewModel()
                 };
                 AppState.SetWindow(mainWindow);
-                FileManager.StartUpSetup();
+                FileSystemManager.StartUpSetup();
                 
                 mainWindow = null;
 

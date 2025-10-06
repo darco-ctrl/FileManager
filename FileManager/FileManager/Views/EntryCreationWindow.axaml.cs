@@ -1,16 +1,20 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using System;
-using System.Windows;
-using System.IO;
 using Avalonia.Platform;
+using FileManager.Core;
+using FileManager.Managers;
+using FileManager.Utils;
+using System;
+using System.IO;
+using System.Windows;
 
 namespace FileManager;
 
 public partial class EntryCreationWindow : Window
 {
-    private bool IsCreatingDir;
+    private Action<string, FileOperation.OperationState>? ReturnAction;
+    private FileOperation.OperationState ReturnWith = FileOperation.OperationState.NONE;
 
     public EntryCreationWindow()
     {
@@ -25,7 +29,7 @@ public partial class EntryCreationWindow : Window
 
     private void CreateButtonClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        string? entryName = EntryNameTextBox.Text;
+        string? entryName = InputBox.Text;
         Console.WriteLine($"Entry Name: {entryName}");
 
         //Console.WriteLine($"Checking if its null or empty space");
@@ -43,38 +47,30 @@ public partial class EntryCreationWindow : Window
             }
             //Console.WriteLine($"Passed path test");
             //Console.WriteLine($"Checking what to create");
-            if (IsCreatingDir)
+
+            if (ReturnAction != null)
             {
-                //Console.WriteLine($"Requsting to create Dir");
-                FileManager.CreateDir(Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, entryName));
-            } else
-            {
-                //Console.WriteLine($"Requsting to create File");
-                FileManager.CreateFile(entryName);
+                ReturnAction(entryName, ReturnWith);
             }
 
             this.Close();
         }
     }
 
-    public void ShowWindow(bool is_creating_dir)
+    public void ShowWindow(Action<string, FileOperation.OperationState> action, string title, string waterMark, FileOperation.OperationState return_with)
     {
-        IsCreatingDir = is_creating_dir;
+        ReturnAction = action;
+        ReturnWith = return_with;
 
-        if (IsCreatingDir)
-        {
-            EntryNameTextBox.Watermark = "Folder name";
-        } else
-        {
-            EntryNameTextBox.Watermark = "File name";
-        }
+        Title.Text = title;
+        InputBox.Watermark = waterMark;
 
         this.ShowDialog(AppState.GetWindow());
     }
 
     private void ShowError(string errorText)
     {
-        EntryNameTextBox.Text = "";
-        EntryNameTextBox.Watermark = errorText;
+        InputBox.Text = "";
+        InputBox.Watermark = errorText;
     }
 }

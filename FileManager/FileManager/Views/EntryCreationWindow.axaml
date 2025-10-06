@@ -27,6 +27,7 @@ ExtendClientAreaTitleBarHeightHint="0"
 
 			<Border Grid.Row="0" Background="#FF555252">
 				<TextBlock
+					x:Name="Title"
 					Text="Create Entry"
 					Foreground="White"
 					FontSize="20"
@@ -35,7 +36,7 @@ ExtendClientAreaTitleBarHeightHint="0"
 			</Border>
 
 			<TextBox
-				x:Name="EntryNameTextBox"
+				x:Name="InputBox"
 				Watermark="File name"
 				Foreground="White"
 				Grid.Row="1"

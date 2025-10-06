@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileManager
+namespace FileManager.Managers
 {
     public static class DynamicControlManager
     {
@@ -21,10 +21,12 @@ namespace FileManager
         private static HashSet<ToggleButton> SelectedEntries = new HashSet<ToggleButton>();
 
         public static string? ClipBoardItem;
-        public static byte? PasteFormMove = 0; 
+        public static byte? PasteFormMove = 0;
         // 0 = none
         // 1 = Move
         // 2 = Copy 
+
+        public static string? RenameEntry;
 
         public static EntryItemViewModel CreateEntryItem(string entry)
         {
@@ -76,11 +78,6 @@ namespace FileManager
             }
             SelectedEntry = null;
             SelectedEntries.Clear();
-        }
-
-        public static void CanRemoveButtonSelection(ToggleButton? button)
-        {
-
         }
     }
 }

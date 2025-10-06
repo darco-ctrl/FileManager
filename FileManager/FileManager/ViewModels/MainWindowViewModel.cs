@@ -1,4 +1,6 @@
 ﻿using Avalonia.Media;
+using FileManager.Managers;
+using FileManager.Utils;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -8,7 +10,7 @@ namespace FileManager.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        public ObservableCollection<DriveItemViewModel> SidePanelItems { get; } = FileManager.FetchThisPC();
+        public ObservableCollection<DriveItemViewModel> SidePanelItems { get; } = FileSystemManager.FetchThisPC();
         public ObservableCollection<EntryItemViewModel> CurrentLoadedEntires { get; set; } = new();
 
         public string CurrentWorkingDir { get; set; } 
@@ -16,7 +18,7 @@ namespace FileManager.ViewModels
         public MainWindowViewModel()
         {
             CurrentWorkingDir = "";
-            FileManager.StartExternalDrivesWatcher(this);
+            FileSystemManager.StartExternalDrivesWatcher(this);
         }
 
         /*
@@ -27,7 +29,7 @@ namespace FileManager.ViewModels
             if (Directory.Exists(newPath))
             {
                 CurrentWorkingDir = newPath;
-                FileManager.RefreshDir();
+                FileSystemManager.RefreshDir();
                 AppState.GetWindow().UpdatePathBlockText();
                 return true;
             }
