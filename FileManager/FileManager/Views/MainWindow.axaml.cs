@@ -56,23 +56,44 @@ namespace FileManager.Views
 
             if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
             {
-                DynamicControlManager.PathToCopy = entryData.HoldingPath;
+                DynamicControlManager.ClipBoardItem = entryData.HoldingPath;
+                DynamicControlManager.PasteFormMove = 2;
 
-                Console.WriteLine(DynamicControlManager.PathToCopy);
+                Console.WriteLine(DynamicControlManager.ClipBoardItem);
+            }
+        }
+
+        private void MoveMenuItemClicked(Object sender, RoutedEventArgs args)
+        {
+            if (DynamicControlManager.SelectedEntry == null) { return; }
+
+            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
+            {
+                DynamicControlManager.ClipBoardItem = entryData.HoldingPath;
+                DynamicControlManager.PasteFormMove = 1;
             }
         }
 
         private void PasteMenuItemClicked(Object sender, RoutedEventArgs args)
         {
-            if (DynamicControlManager.PathToCopy == null)
+            if (DynamicControlManager.ClipBoardItem == null)
             {
                 Console.WriteLine("Nothing to paste");
                 return;
             } else
             {
-                Console.WriteLine($"------------------------------\nCopying Item . . .\n From : {DynamicControlManager.PathToCopy}\n To : {AppState.GetWindowViewModel().CurrentWorkingDir}");
-                FileOperation.CopyItem(DynamicControlManager.PathToCopy, AppState.GetWindowViewModel().CurrentWorkingDir);
-                DynamicControlManager.PathToCopy = null;
+                Console.WriteLine($"------------------------------\nCopying Item . . .\n From : {DynamicControlManager.ClipBoardItem}\n To : {AppState.GetWindowViewModel().CurrentWorkingDir}");
+                
+                if (DynamicControlManager.PasteFormMove == 2)
+                {
+                    FileOperation.CopyItem(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
+                } else if (DynamicControlManager.PasteFormMove == 1)
+                {
+                    FileOperation.MoveEntry(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
+                }
+
+
+                    DynamicControlManager.ClipBoardItem = null;
             }
         }
 
@@ -118,19 +139,22 @@ namespace FileManager.Views
                 if (DynamicControlManager.SelectedEntry == null)
                 {
                     Items[1].IsEnabled = false;
-                    Items[5].IsEnabled = false;
+                    Items[2].IsEnabled = false;
+                    Items[6].IsEnabled = false;
                 } else
                 {
                     Items[1].IsEnabled = true;
-                    Items[5].IsEnabled = true;
+                    Items[2].IsEnabled = true;
+                    Items[6].IsEnabled = true;
                 }
 
-                if (DynamicControlManager.PathToCopy == null)
+                if (DynamicControlManager.ClipBoardItem == null)
                 {
-                    Items[2].IsEnabled = false;
+
+                    Items[3].IsEnabled = false;
                 } else
                 {
-                    Items[2].IsEnabled = true;
+                    Items[3].IsEnabled = true;
                 }
             }
         }

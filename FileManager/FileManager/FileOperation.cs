@@ -94,6 +94,18 @@ namespace FileManager
             FileManager.RefreshDir();
         }
 
+        public static void MoveEntry(string src, string dest)
+        {
+            if (Directory.Exists(src)) 
+            {
+                string _dest = Path.Combine(dest, GetFolderName(src));
+
+                Directory.Move(src, _dest);
+            } else if (File.Exists(src)) {
+                File.Move(src, dest);
+            }
+        }
+
         public static string GetFolderName(string path)
         {
             DirectoryInfo FolderInfo = new DirectoryInfo(path);

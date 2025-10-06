@@ -7,7 +7,10 @@
 		"Fast searching with FD",
 		"Delete files",
 		"Delete folder",
-		"Copy file"
+		"Copy file",
+		"Copy Folder",
+		"Move file",
+		"Move Folder"
 	],
 	"Controls": [
 		"Files Selection"

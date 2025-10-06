@@ -180,6 +180,7 @@
 						<ContextMenu Opened="RightClickContextMenuOpened">
 							<MenuItem Header="Refresh" Click="RefreshMenuItemClicked" IsEnabled="True"/>
 							<MenuItem Header="Copy" Click="CopyMenuItemClicked" IsEnabled="False"/>
+							<MenuItem Header="Move" Click="MoveMenuItemClicked" IsEnabled="False"/>
 							<MenuItem Header="Paste" Click="PasteMenuItemClicked" IsEnabled="True"/>
 							<MenuItem Header="New File" Click="NewFolderMenuItemClicked" IsEnabled="True"/>
 							<MenuItem Header="New Folder" Click="NewFolderMenuItemClicked" IsEnabled="True"/>
