@@ -1,14 +1,14 @@
-﻿using System;
+﻿using HarfBuzzSharp;
+using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic.FileIO;
-using System.IO;
-using HarfBuzzSharp;
 
 namespace FileManager
 {
@@ -31,34 +31,38 @@ namespace FileManager
             FileManager.RefreshDir();
         }
 
-        public static void CopyItem(string path, string destination)
+        public static void CopyItem(string src, string destination)
         {
             Console.WriteLine("Reviced Request to copy");
-            if (Directory.Exists(path))
+            if (Directory.Exists(src))
             {
                 Console.WriteLine("Path is detected as a Directory Excuting method");
-                try
-                {
-                    string _folderName = Path.GetFileName(path.TrimEnd(Path.DirectorySeparatorChar));
-                    string _desitination = Path.Combine(_folderName, destination);
 
-                    FileSystem.CopyDirectory(path, _desitination, UIOption.AllDialogs);
-                } catch (Exception ex)
-                {
-                    Console.WriteLine($"Failed to excute error: {ex}");
-                }
+                //CopyDirectory(path, destination);
 
             }
-            else if (File.Exists(path)) 
+            else if (File.Exists(src)) 
             {
                 Console.WriteLine("Path is detected as a File Excuting method");
-                FileSystem.CopyFile(path, destination, UIOption.AllDialogs);
+                Copy(src, destination);
             } else
             {
                 Console.WriteLine("It says this file/folder doesnt exists\nidk how this is possible it shouldnt happen");
             }
 
             FileManager.RefreshDir();
+        }
+
+        private static void CopyDirector(string src, string dest)
+        {
+            
+        }
+
+        private static void Copy(string src, string destinationFolder)
+        {
+            string dest = Path.Combine(destinationFolder, Path.GetFileName(src));
+
+            File.Copy(src, dest);
         }
     }
 }
