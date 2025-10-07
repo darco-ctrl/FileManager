@@ -219,13 +219,14 @@ namespace FileManager.Views
             }
         }
 
-        private void RenameSelectedEntry(Object sender, Avalonia.Interactivity.RoutedEvent args)
+        private void RenameSelectedEntry(Object sender, RoutedEventArgs args)
         {
             if (DynamicControlManager.SelectedEntry == null) { return; }
 
             if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
             {
                 DynamicControlManager.RenameEntry = entryData.HoldingPath;
+                MenuManager.OpenGetNameWindow(FileOperation.OperationState.RENAME);
             }
         }
 

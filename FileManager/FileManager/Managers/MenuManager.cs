@@ -2,6 +2,7 @@
 using FileManager.Core;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace FileManager.Managers
 
             string _title = "";
             string _waterMark = "";
+            string _text = "";
 
             if (state == FileOperation.OperationState.CREATE_FOLDER)
             {
@@ -29,9 +31,23 @@ namespace FileManager.Managers
             {
                 _title = "File";
                 _waterMark = "File name";
+            } else if (state == FileOperation.OperationState.RENAME)
+            {
+                _title = "Rename";
+                _waterMark = "New name";
+                
+                
+                
+                if (Directory.Exists(DynamicControlManager.RenameEntry))
+                {
+                    _text = new DirectoryInfo(DynamicControlManager.RenameEntry).Name;
+                } else
+                {
+                    _text = $"{Path.GetFileName(DynamicControlManager.RenameEntry)}";
+                }
             }
 
-            NemeReturnWindow.ShowWindow(FileOperation.CreatingDecider, _title, _waterMark, state);
+            NemeReturnWindow.ShowWindow(FileOperation.CreatingDecider, _title, _waterMark, state, _text);
 
         }
     }

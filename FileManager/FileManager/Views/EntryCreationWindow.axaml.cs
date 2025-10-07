@@ -57,7 +57,9 @@ public partial class EntryCreationWindow : Window
         }
     }
 
-    public void ShowWindow(Action<string, FileOperation.OperationState> action, string title, string waterMark, FileOperation.OperationState return_with)
+    public void ShowWindow(Action<string, FileOperation.OperationState> action,
+        string title, string waterMark, FileOperation.OperationState return_with,
+        string text="")
     {
         ReturnAction = action;
         ReturnWith = return_with;
@@ -65,7 +67,25 @@ public partial class EntryCreationWindow : Window
         Title.Text = title;
         InputBox.Watermark = waterMark;
 
+        InputBox.Text = text;
+
+        int i = text.LastIndexOf('.');
+        if (i == -1)
+        {
+            i = text.Length;
+            InputBox.CaretIndex = i;
+            InputBox.SelectionStart = 0;
+            InputBox.SelectionEnd = i;
+        } else
+        {
+            InputBox.CaretIndex = i;
+            InputBox.SelectionStart = 0;
+            InputBox.SelectionEnd = i;
+        }
+
         this.ShowDialog(AppState.GetWindow());
+        this.Focus();
+        InputBox.Focus();
     }
 
     private void ShowError(string errorText)

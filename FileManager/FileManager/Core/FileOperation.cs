@@ -110,11 +110,13 @@ namespace FileManager.Core
             if (Directory.Exists(src)) 
             {
                 string _dest = Path.Combine(dest, GetFolderName(src));
-
                 Directory.Move(src, _dest);
+
             } else if (File.Exists(src)) {
                 File.Move(src, dest);
             }
+
+            FileSystemManager.RefreshDir();
         }
 
         public static string GetFolderName(string path)
@@ -142,6 +144,10 @@ namespace FileManager.Core
             } else if (state == OperationState.CREATE_FOLDER)
             {
                 CreateDir(Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, entry_name));
+            } else if (state == OperationState.RENAME && DynamicControlManager.RenameEntry != null)
+            {
+                MoveEntry(DynamicControlManager.RenameEntry, Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, entry_name));
+                DynamicControlManager.RenameEntry = null;
             }
         }
 
