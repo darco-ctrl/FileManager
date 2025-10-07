@@ -1,7 +1,8 @@
 ﻿{
+	"Version":  0.14,
+
 	"EssentailFeatures": [
-		"
-		File",
+		"Create File",
 		"Create Folder",
 		"Move back and forth",
 		"Input path and go to there",
@@ -11,7 +12,8 @@
 		"Copy file",
 		"Copy Folder",
 		"Move file",
-		"Move Folder"
+		"Move Folder",
+		"Rename File/Folder"
 	],
 	"Controls": [
 		"Files Selection"
