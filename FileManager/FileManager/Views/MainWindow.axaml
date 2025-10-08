@@ -174,9 +174,16 @@
 				-->
 
 
-				<ScrollViewer Grid.Row="1" Margin="5" CornerRadius="10" PointerPressed="EntryScrollViewerPointerPressed">
+				<ListBox Grid.Row="1"
+						 ItemsSource="{Binding CurrentLoadedEntires}"
+						 Margin="5"
+						 CornerRadius="10"
+						 DoubleTapped="OnEntryDoubleTapped"
+						 SelectionMode="Single"
+						 Background="Transparent">
 
-					<ScrollViewer.ContextMenu>
+					<!-- Context Menu -->
+					<ListBox.ContextMenu>
 						<ContextMenu Opened="RightClickContextMenuOpened">
 							<MenuItem Header="Refresh" Click="RefreshMenuItemClicked" IsEnabled="True"/>
 							<MenuItem Header="Copy" Click="CopyMenuItemClicked" IsEnabled="False"/>
@@ -187,30 +194,29 @@
 							<MenuItem Header="New Folder" Click="NewFolderMenuItemClicked" IsEnabled="True"/>
 							<MenuItem Header="Delete" Click="DeleteSelectedEntry" IsEnabled="True"/>
 						</ContextMenu>
-					</ScrollViewer.ContextMenu>
-					
-					<ItemsControl ItemsSource="{Binding CurrentLoadedEntires}">
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-								<controls:EntriesButton  
-										DoubleTapped="OnEntryDoubleTapped" 
-										Click="EntryClicked"
-										PointerPressed="EntryPointerPressed"
-										HorizontalAlignment="Stretch"
-										RenderTransform="None"
-										VerticalAlignment="Stretch"
-										>
-									<TextBlock
-										Text="{Binding Name}"
-										Foreground="White"
-										Padding="10,0,0,0">
-									</TextBlock>
-								</controls:EntriesButton>
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
-				</ScrollViewer>
-				
+					</ListBox.ContextMenu>
+
+					<!-- Items Panel with virtualization -->
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<VirtualizingStackPanel/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<controls:EntriesButton
+								Click="EntryClicked"
+								PointerPressed="EntryPointerPressed"
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch">
+								<TextBlock Text="{Binding Name}" Foreground="White" Padding="10,0,0,0"/>
+							</controls:EntriesButton>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+
+
 			</Grid>
 		</Border>
 

@@ -1,4 +1,5 @@
 ﻿using Avalonia.Threading;
+using DynamicData;
 using FileManager.Managers;
 using FileManager.Utils;
 using FileManager.ViewModels;
@@ -8,7 +9,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FileManager.Core
@@ -71,39 +71,63 @@ namespace FileManager.Core
                 }
             };
 
+            List<EntryItemViewModel> _tempEntries = [];
+            int _index = 0;
+
 
             process.OutputDataReceived += (sender, e) =>
             {
-                Dispatcher.UIThread.InvokeAsync(() =>
+
+                if (!string.IsNullOrWhiteSpace(e.Data))
                 {
-                    if (!string.IsNullOrWhiteSpace(e.Data))
+                    EntryItemViewModel entryItem = DynamicControlManager.CreateEntryItem(e.Data);
+
+
+
+                    if (File.Exists(e.Data))
                     {
-                        EntryItemViewModel entryItem = DynamicControlManager.CreateEntryItem(e.Data);
+                        entryItem.Name = Path.GetFileName(e.Data);
 
-                        if (File.Exists(e.Data))
-                        {
-                            entryItem.Name = Path.GetFileName(e.Data);
-                            
-                            
-                        } else if (Directory.Exists(e.Data))
-                        {
-                            string? dir = e.Data.Remove(e.Data.Count() - 1);
-                            if (!string.IsNullOrWhiteSpace(dir))
-                            {
-                                entryItem.Name = Path.GetFileName(dir);
-                            }
-                        }
-
-                        Console.WriteLine($"Found: {e.Data}");
-                        AppState.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
 
                     }
-                });
+                    else if (Directory.Exists(e.Data))
+                    {
+                        string? dir = e.Data.Remove(e.Data.Count() - 1);
+                        if (!string.IsNullOrWhiteSpace(dir))
+                        {
+                            entryItem.Name = Path.GetFileName(dir);
+                        }
+                    }
+
+                    _index += 1;
+                    _tempEntries.Add(entryItem);
+
+                    if (_index % 20 == 0)
+                    {
+                        Dispatcher.UIThread.InvokeAsync(() =>
+                        {
+                            AppState.GetWindowViewModel().CurrentLoadedEntires.AddRange(_tempEntries);
+                            _tempEntries.Clear(); 
+                        });
+                    }
+
+                    Console.WriteLine($"Found: {e.Data}");
+
+                }
             };
 
             process.Start();
             process.BeginOutputReadLine();
             process.WaitForExit();
+
+            if (_tempEntries.Count > 0)
+            {
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    AppState.GetWindowViewModel().CurrentLoadedEntires.AddRange(_tempEntries);
+
+                });
+            }
         }
     }
 }

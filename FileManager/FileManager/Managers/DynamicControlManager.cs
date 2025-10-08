@@ -1,16 +1,7 @@
-﻿using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Input;
-using Avalonia.Media;
+﻿using Avalonia.Controls.Primitives;
 using FileManager.ViewModels;
-using ReactiveUI;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileManager.Managers
 {

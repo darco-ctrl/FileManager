@@ -1,21 +1,10 @@
-﻿
-using Avalonia.Threading;
-using FileManager.Managers;
+﻿using FileManager.Managers;
 using FileManager.Utils;
-using HarfBuzzSharp;
 using Microsoft.VisualBasic.FileIO;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Versioning;
-using System.Text;
 using System.Threading.Tasks;
-using APath = Avalonia.Controls.Shapes.Path;
-using AShapes = Avalonia.Controls.Shapes;
-using MSearchOption = Microsoft.VisualBasic.FileIO.SearchOption;
 
 namespace FileManager.Core
 {

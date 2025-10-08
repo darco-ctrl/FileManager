@@ -1,11 +1,6 @@
-﻿using Avalonia.Controls;
-using FileManager.Core;
+﻿using FileManager.Core;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileManager.Managers
 {
@@ -46,7 +41,7 @@ namespace FileManager.Managers
                     _text = $"{Path.GetFileName(DynamicControlManager.RenameEntry)}";
                 }
             }
-
+            
             NemeReturnWindow.ShowWindow(FileOperation.CreatingDecider, _title, _waterMark, state, _text);
 
         }

@@ -100,8 +100,6 @@ namespace FileManager.Views
             {
                 return;
             }
-
-
         }
 
         private void EntryPointerPressed(Object sender, PointerPressedEventArgs args)

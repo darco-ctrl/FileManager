@@ -4,14 +4,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Management;
-using System.Threading.Tasks;
 using Avalonia.Threading;
-using FileManager.Views;
-using Avalonia.Controls;
-using Avalonia.Input;
-using FileManager.Core;
 using FileManager.Utils;
 
 
