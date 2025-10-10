@@ -1,0 +1,116 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaTest.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaTest.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+		Title="FileManager"
+		Focusable="True"
+		Background="#FF1A1A1A"
+		>
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+
+	<Grid>
+
+		<Grid.RowDefinitions>
+			40, *
+		</Grid.RowDefinitions>
+
+		<Border 
+			Grid.Row="0"
+			BorderBrush="#2A2A2A"
+			BorderThickness="1,1,1,0">
+			
+		</Border>
+
+		<Grid 
+			Grid.Row="1" 
+			Background="#FF141414"
+			>
+
+			<Grid.ColumnDefinitions>
+				275, *
+			</Grid.ColumnDefinitions>
+
+			<Border
+				Grid.Column="0"
+				Background="#FF1A1A1A"
+				BorderBrush="#2A2A2A"
+				BorderThickness="1">
+				
+			</Border>
+
+			<Grid
+				Grid.Column="1">
+
+				<Grid.RowDefinitions>
+					42, 60, *
+				</Grid.RowDefinitions>
+				
+				<!-- Path and recent -->
+				
+				<Border
+					Grid.Row="0"
+					BorderBrush="#2A2A2A"
+					BorderThickness="0,1,1,1"
+					Background="#1E1E1E">
+
+					<StackPanel
+						Background="White"
+						Margin="10,5,10,5"
+						Orientation="Horizontal"
+						Spacing="5">
+
+						<Border
+							Background="red"
+							Width="64"
+							Height="32"
+							HorizontalAlignment="Left"
+							>
+							
+						</Border>
+
+
+						<Line
+							StartPoint="0,0"
+							EndPoint="0,32"
+							Stroke="Blue">
+							
+						</Line>
+
+					</StackPanel>
+
+				</Border>
+				
+				<!-- Options and features -->
+				<Border
+					Grid.Row="1"
+					BorderBrush="#2A2A2A"
+					BorderThickness="0,0,1,1"
+					Background="#1E1E1E">
+					
+				</Border>
+				
+				
+				<!-- MAIN File viewer-->
+				<Border
+					Grid.Row="2"
+					BorderBrush="#2A2A2A"
+					BorderThickness="0,0,1,1">
+
+
+
+				</Border>
+			</Grid>
+		</Grid>
+	</Grid>
+</Window>

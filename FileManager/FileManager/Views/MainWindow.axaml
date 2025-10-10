@@ -13,6 +13,7 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="FileManager"
 		Focusable="True"
+		Background="#FF1A1A1A"
 		PointerPressed="PointerPresed">
 
 	<Window.Styles>
@@ -31,16 +32,16 @@
 		<Style Selector="controls|EntriesButton:pressed">
 			<Setter Property="Background" Value="#FF6B6A6A"/>
 		</Style>
-		
+
 	</Window.Styles>
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-	
-	
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+
 	<!-- Grid 0 - this is the main grid everything is inside this
 	     ^^^^^^
 		 i marked grid 0 cuz its gona get confusing so to keep track of that
@@ -57,10 +58,12 @@
 		-->
 
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="250"/> <!-- Grid 0 Colum 0 side panel-->
-			<ColumnDefinition Width="*"/> <!-- Gird 0 Colunm 1 Main body-->
+			<ColumnDefinition Width="250"/>
+			<!-- Grid 0 Colum 0 side panel-->
+			<ColumnDefinition Width="*"/>
+			<!-- Gird 0 Colunm 1 Main body-->
 		</Grid.ColumnDefinitions>
-		
+
 		<!--
 		Grid 0 Row - 0
 		This is title bar thats all to say 1D1D1D
@@ -72,29 +75,32 @@
 
 		<Border Grid.Column="0"
 				Background="{DynamicResource ResourceKey=PrimaryBackground}">
-			
+
 			<!--
 			Grid: 0
 			-->
 			<Grid>
 
 				<Grid.RowDefinitions>
-					<RowDefinition Height="40"/> <!-- Grid: 0 Row: 0-->
-					<RowDefinition Height="60"/> <!-- Grid: 0 Row: 1-->
-					<RowDefinition Height="*"/> <!-- Grid: 0 Column: 2-->
+					<RowDefinition Height="40"/>
+					<!-- Grid: 0 Row: 0-->
+					<RowDefinition Height="60"/>
+					<!-- Grid: 0 Row: 1-->
+					<RowDefinition Height="*"/>
+					<!-- Grid: 0 Column: 2-->
 					<RowDefinition Height="60"/>
 				</Grid.RowDefinitions>
-				
+
 				<!-- Something here am thinking like icon or file manager name-->
 				<Border Grid.Row="0" VerticalAlignment="Center">
 					<TextBlock Text=">_   Dew" Foreground="White" FontWeight="ExtraBold" FontSize="20" VerticalAlignment="Center" Padding="20, 0, 0, 0"/>
 				</Border>
-				
+
 				<!-- Utitlies like fav, recent stuff like that-->
 				<Border Grid.Row="1" Background="White" Margin="10, 0, 0, 5" VerticalAlignment="Center" Height="30">
 					<TextBlock Text="fav and some stuff like that"/>
 				</Border>
-					<!-- Side panel-->
+				<!-- Side panel-->
 				<ScrollViewer Grid.Row="2" Margin="10, 5, 10, 10" Background="Transparent"
 					CornerRadius="10">
 					<!-- <ItemControl/> this is the thing that makes UI for collection we made 'SidePanelItems' which we set 
@@ -114,13 +120,13 @@
 				</ScrollViewer>
 
 				<Border Grid.Row="3" Background="White">
-					
+
 				</Border>
-				
+
 			</Grid>
 		</Border>
-		
-		
+
+
 		<!--
 		THis is main part like the part where path window close and ttitle bar
 		and most importantly files viewer
@@ -135,7 +141,7 @@
 				<Border Grid.Row="0" Margin="5, 0, 5, 0">
 					<Grid>
 						<Grid.ColumnDefinitions>
-						<!-- 0,  1,  2,  3,  4, 5,  6,  7,  8,  9, 10 -->
+							<!-- 0,  1,  2,  3,  4, 5,  6,  7,  8,  9, 10 -->
 							40, 40, 40, 40, 40, *, 40, 40, 40, 40, 40
 						</Grid.ColumnDefinitions>
 						<!--
@@ -158,7 +164,7 @@
 						</Border>
 
 						<Border Grid.Column="6" Background="White" Margin="5,5,0,5">
-							<Button Content="S" 
+							<Button Content="S"
 									VerticalAlignment="Center" HorizontalAlignment="Center"
 									Click="SearchButtonClicked"
 									/>
