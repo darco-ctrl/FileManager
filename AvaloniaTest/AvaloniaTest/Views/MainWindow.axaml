@@ -3,8 +3,9 @@
         xmlns:vm="using:AvaloniaTest.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="AvaloniaTest.Views.MainWindow"
+        mc:Ignorable="d" d:DesignWidth="1620" d:DesignHeight="920"
+        Width="1620" Height="920"
+		x:Class="AvaloniaTest.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
 		Title="FileManager"
@@ -38,7 +39,7 @@
 			>
 
 			<Grid.ColumnDefinitions>
-				275, *
+				320, *
 			</Grid.ColumnDefinitions>
 
 			<Border
@@ -53,7 +54,7 @@
 				Grid.Column="1">
 
 				<Grid.RowDefinitions>
-					42, 60, *
+					50, 70, *
 				</Grid.RowDefinitions>
 				
 				<!-- Path and recent -->
@@ -64,30 +65,80 @@
 					BorderThickness="0,1,1,1"
 					Background="#1E1E1E">
 
-					<StackPanel
-						Background="White"
-						Margin="10,5,10,5"
-						Orientation="Horizontal"
-						Spacing="5">
+					<Grid
+						Margin="10, 5, 10, 5"
+						ColumnSpacing="10">
+
+						<Grid.ColumnDefinitions>
+							Auto, Auto, Auto, Auto, Auto, *
+						</Grid.ColumnDefinitions>
 
 						<Border
-							Background="red"
-							Width="64"
+							Grid.Column="0"
+							Width="32"
 							Height="32"
+							VerticalAlignment="Center"
 							HorizontalAlignment="Left"
-							>
-							
+							Background="Blue">
+
+						</Border>
+
+						<Border
+							Grid.Column="1"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							HorizontalAlignment="Left"
+							Background="Blue">
+
+						</Border>
+
+						<Border
+							Grid.Column="2"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							HorizontalAlignment="Left"
+							Background="Blue">
+
+						</Border>
+
+						<Border
+							Grid.Column="3"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							HorizontalAlignment="Left"
+							Background="Blue">
+
+						</Border>
+
+						<Line
+							Grid.Column="4"
+							StartPoint="0,5"
+							EndPoint="0,35"
+							Stroke="#2a2a2a"
+							StrokeThickness="1"
+							Margin="5,0,0,0">
+
+						</Line>
+
+						<Border
+							Grid.Column="5"
+							Background="#2a2a2a"
+							CornerRadius="6">
+
+							<TextBox
+								Background="Transparent"
+								Foreground="White"
+								>
+
+							</TextBox>
+
 						</Border>
 
 
-						<Line
-							StartPoint="0,0"
-							EndPoint="0,32"
-							Stroke="Blue">
-							
-						</Line>
-
-					</StackPanel>
+					</Grid>
 
 				</Border>
 				
@@ -97,7 +148,128 @@
 					BorderBrush="#2A2A2A"
 					BorderThickness="0,0,1,1"
 					Background="#1E1E1E">
+
+					<Grid
+						ColumnSpacing="10"
+						Margin="10, 5, 10, 5">
+
+						<Grid.ColumnDefinitions>
+							Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *, Auto, Auto
+						</Grid.ColumnDefinitions>
+						
+						<Border
+							Grid.Column="0"
+							Background="red"
+							Width="64"
+							Height="40"
+							VerticalAlignment="Center"
+													>
+
+						</Border>
+
+						<Line
+							Grid.Column="1"
+							StartPoint="0,15"
+							EndPoint="0,45"
+							Stroke="#2a2a2a">
+
+						</Line>
+
+
+						<Border
+							Grid.Column="2"
+							Background="Red"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							>
+
+						</Border>
+
+						<Border
+							Grid.Column="3"
+							Background="Red"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							>
+
+						</Border>
+
+						<Border
+							Grid.Column="4"
+							Background="Red"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							>
+
+						</Border>
+
+						<Border
+							Grid.Column="5"
+							Background="Red"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							>
+
+						</Border>
+
+
+						<Line
+							Grid.Column="6"
+							StartPoint="0,15"
+							EndPoint="0,45"
+							Stroke="#2a2a2a">
+
+						</Line>
+
+						<Border
+							Grid.Column="7"
+							Background="Red"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							>
+
+						</Border>
+
+						<Border
+							Grid.Column="8"
+							Background="Red"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							>
+
+						</Border>
+
+						<Border
+							Grid.Column="10"
+							Width="320"
+							Height="40"
+							Background="#2a2a2a"
+							CornerRadius="6"
+							BorderBrush="#3a3a3a"
+							BorderThickness="1"
+							>
+
+						</Border>
+
+						<Border
+							Grid.Column="11"
+							Width="70"
+							Height="40"
+							Background="Red"
+							>
+
+						</Border>
+						
+					</Grid>
+
 					
+
 				</Border>
 				
 				
