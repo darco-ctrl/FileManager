@@ -53,25 +53,31 @@
 				<TextBlock Grid.Column="0" Text="File Manager" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
 				
 				<!-- minimize -->
-				<Border
+				<Button	
 					Grid.Column="2"
-					Background="Red">
+					Background="Red"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch">
 					
-				</Border>
+				</Button>
 					
 				<!-- maximize -->
-				<Border
+				<Button
 					Grid.Column="3"
-					Background="Blue">
+					Background="Blue"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch">
 
-				</Border>
+				</Button>
 				
 				<!-- close -->
-				<Border
+				<Button
 					Grid.Column="4"
-					Background="Green">
+					Background="Green"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch">
 
-				</Border>
+				</Button>
 				
 			</Grid>
 			
