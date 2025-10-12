@@ -58,6 +58,15 @@
 					Background="Red"
 					HorizontalAlignment="Stretch"
 					VerticalAlignment="Stretch">
+
+					<Image
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						Width="32"
+						Height="32"
+						Source="avares://AvaloniaTest/Assets/titlebar/minus.ico">
+		
+					</Image>
 					
 				</Button>
 					
@@ -67,7 +76,7 @@
 					Background="Blue"
 					HorizontalAlignment="Stretch"
 					VerticalAlignment="Stretch">
-
+					
 				</Button>
 				
 				<!-- close -->
