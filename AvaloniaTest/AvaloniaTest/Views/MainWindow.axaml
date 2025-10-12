@@ -19,6 +19,19 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
+	<!--
+	
+	Background color : #141414
+	Primary color : #1a1a1a
+	Secondary Color : #1e1e1e
+	Accent color : #155dfc
+	PS border color : #2a2a2a
+	
+	1 TextColor : White
+	2 TextColor : #959caa
+	3 TextColor : #353E47
+	
+	-->
 
 	<Grid>
 
@@ -30,6 +43,37 @@
 			Grid.Row="0"
 			BorderBrush="#2A2A2A"
 			BorderThickness="1,1,1,0">
+
+			<Grid Margin="20, 0, 0, 0">
+				<Grid.ColumnDefinitions>
+					Auto, *, 60, 60, 60
+				</Grid.ColumnDefinitions>
+				
+				<!-- icon and title name -->
+				<TextBlock Grid.Column="0" Text="File Manager" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+				
+				<!-- minimize -->
+				<Border
+					Grid.Column="2"
+					Background="Red">
+					
+				</Border>
+					
+				<!-- maximize -->
+				<Border
+					Grid.Column="3"
+					Background="Blue">
+
+				</Border>
+				
+				<!-- close -->
+				<Border
+					Grid.Column="4"
+					Background="Green">
+
+				</Border>
+				
+			</Grid>
 			
 		</Border>
 
@@ -47,6 +91,123 @@
 				Background="#FF1A1A1A"
 				BorderBrush="#2A2A2A"
 				BorderThickness="1">
+
+				<Grid>
+					<Grid.RowDefinitions>
+						50, *, 280
+					</Grid.RowDefinitions>
+					
+					<TextBlock 
+						Text="QUICK ACCESS"
+						VerticalAlignment="Center" 
+						Foreground="#353E47"
+						Margin="20, 0, 0, 0"/>
+
+					<StackPanel
+						Grid.Row="1"
+						Spacing="0"
+						Margin="15, 0, 15, 0"
+						Orientation="Vertical">
+
+						<!-- Recent -->
+						<Button
+							Height="50"
+							HorizontalAlignment="Stretch"
+							Background="#155dfc"
+							CornerRadius="15">
+						</Button>
+
+						<!-- Downloads -->
+						<Button
+							Height="50"
+							HorizontalAlignment="Stretch"
+							Background="#155dfc"
+							CornerRadius="15">
+						</Button>
+
+						<!-- Photos -->
+						<Button
+							Height="50"
+							HorizontalAlignment="Stretch"
+							Background="#155dfc"
+							CornerRadius="15">
+						</Button>
+
+						<!-- Videos -->
+						<Button
+							Height="50"
+							HorizontalAlignment="Stretch"
+							Background="#155dfc"
+							CornerRadius="15">
+						</Button>
+
+						<!-- Document -->
+						<Button
+							Height="50"
+							HorizontalAlignment="Stretch"
+							Background="#155dfc"
+							CornerRadius="15">
+						</Button>
+
+					</StackPanel>
+
+					<Border
+						Grid.Row="2"
+						Background="#161616"
+						Padding="20, 0, 20, 0">
+
+						<Grid>
+							<Grid.RowDefinitions>
+								50, 120, *
+							</Grid.RowDefinitions>
+							
+							<TextBlock
+								Grid.Row="0"
+								Text="STORAGE"
+								Foreground="#353E47"
+								VerticalAlignment="Center"
+								FontSize="15"/>
+
+							<Border
+								Grid.Row="1"
+								Background="#1e1e1e"
+								CornerRadius="10">
+								
+							</Border>
+
+							<Button
+								Grid.Row="2"
+								Background="#161616"
+								Height="70"
+								HorizontalAlignment="Stretch"
+								CornerRadius="10"
+								VerticalAlignment="Center">
+
+								<StackPanel
+									Margin="15, 15, 15, 15"
+									VerticalAlignment="Center"
+									Height="40"
+									Background="White"
+									Spacing="10"
+									Orientation="Horizontal">
+
+									<Border
+										Background="#2a2a2a"
+										Width="40"
+										HorizontalAlignment="Left"
+										CornerRadius="6">
+										
+									</Border>
+									
+								</StackPanel>
+								
+							</Button>
+							
+						</Grid>
+						
+					</Border>
+					
+				</Grid>
 				
 			</Border>
 
@@ -66,13 +227,14 @@
 					Background="#1E1E1E">
 
 					<Grid
-						Margin="10, 5, 10, 5"
+						Margin="20, 5, 20, 5"
 						ColumnSpacing="10">
 
 						<Grid.ColumnDefinitions>
 							Auto, Auto, Auto, Auto, Auto, *
 						</Grid.ColumnDefinitions>
-
+						
+						<!-- previous dir -->
 						<Border
 							Grid.Column="0"
 							Width="32"
@@ -82,7 +244,8 @@
 							Background="Blue">
 
 						</Border>
-
+						
+						<!-- forward dir -->
 						<Border
 							Grid.Column="1"
 							Width="32"
@@ -92,7 +255,8 @@
 							Background="Blue">
 
 						</Border>
-
+						
+						<!-- jump back from current dir -->
 						<Border
 							Grid.Column="2"
 							Width="32"
@@ -102,7 +266,8 @@
 							Background="Blue">
 
 						</Border>
-
+						
+						<!-- refresh current dir -->
 						<Border
 							Grid.Column="3"
 							Width="32"
@@ -122,7 +287,8 @@
 							Margin="5,0,0,0">
 
 						</Line>
-
+						
+						<!-- path block -->
 						<Border
 							Grid.Column="5"
 							Background="#2a2a2a"
@@ -151,22 +317,23 @@
 
 					<Grid
 						ColumnSpacing="10"
-						Margin="10, 5, 10, 5">
+						Margin="20, 5, 20, 5">
 
 						<Grid.ColumnDefinitions>
-							Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *, Auto, Auto
+							Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *, Auto, Auto
 						</Grid.ColumnDefinitions>
 						
+						<!-- new button -->
 						<Border
 							Grid.Column="0"
-							Background="red"
-							Width="64"
+							Background="#155dfc"
+							Width="120"
 							Height="40"
 							VerticalAlignment="Center"
 													>
 
 						</Border>
-
+						
 						<Line
 							Grid.Column="1"
 							StartPoint="0,15"
@@ -175,7 +342,7 @@
 
 						</Line>
 
-
+						<!-- move file/folder -->
 						<Border
 							Grid.Column="2"
 							Background="Red"
@@ -185,7 +352,9 @@
 							>
 
 						</Border>
-
+						
+						
+						<!-- copy file/folder-->
 						<Border
 							Grid.Column="3"
 							Background="Red"
@@ -195,7 +364,8 @@
 							>
 
 						</Border>
-
+						
+						<!-- paste file/folder-->
 						<Border
 							Grid.Column="4"
 							Background="Red"
@@ -206,6 +376,7 @@
 
 						</Border>
 
+						<!-- delete file/folder -->
 						<Border
 							Grid.Column="5"
 							Background="Red"
@@ -216,17 +387,9 @@
 
 						</Border>
 
-
-						<Line
-							Grid.Column="6"
-							StartPoint="0,15"
-							EndPoint="0,45"
-							Stroke="#2a2a2a">
-
-						</Line>
-
+						<!-- rename file/folder -->
 						<Border
-							Grid.Column="7"
+							Grid.Column="6"
 							Background="Red"
 							Width="32"
 							Height="32"
@@ -235,6 +398,16 @@
 
 						</Border>
 
+						<Line
+							Grid.Column="7"
+							StartPoint="0,15"
+							EndPoint="0,45"
+							Stroke="#2a2a2a">
+
+						</Line>
+
+
+						<!-- home -->
 						<Border
 							Grid.Column="8"
 							Background="Red"
@@ -245,8 +418,21 @@
 
 						</Border>
 
+						
+						<!-- sort -->
 						<Border
-							Grid.Column="10"
+							Grid.Column="9"
+							Background="Red"
+							Width="32"
+							Height="32"
+							VerticalAlignment="Center"
+							>
+
+						</Border>
+						
+						<!-- search -->
+						<Border
+							Grid.Column="11"
 							Width="320"
 							Height="40"
 							Background="#2a2a2a"
@@ -256,9 +442,10 @@
 							>
 
 						</Border>
-
+						
+						<!-- view options -->
 						<Border
-							Grid.Column="11"
+							Grid.Column="12"
 							Width="70"
 							Height="40"
 							Background="Red"
