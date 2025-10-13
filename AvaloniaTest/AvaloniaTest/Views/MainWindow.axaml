@@ -1,490 +1,843 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:AvaloniaTest.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="1620" d:DesignHeight="920"
-        Width="1620" Height="920"
-		x:Class="AvaloniaTest.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-		Title="FileManager"
-		Focusable="True"
-		Background="#FF1A1A1A"
-		>
+<Window
+    x:Class="AvaloniaTest.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:AvaloniaTest.ViewModels"
+    Title="FileManager"
+    Width="1620"
+    Height="920"
+    d:DesignHeight="920"
+    d:DesignWidth="1620"
+    x:DataType="vm:MainWindowViewModel"
+    Background="#FF1A1A1A"
+    ExtendClientAreaChromeHints="NoChrome"
+    ExtendClientAreaToDecorationsHint="True"
+    Focusable="True"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+        -->
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
-	<!--
-	
-	Background color : #141414
-	Primary color : #1a1a1a
-	Secondary Color : #1e1e1e
-	Accent color : #155dfc
-	PS border color : #2a2a2a
-	
-	1 TextColor : White
-	2 TextColor : #959caa
-	3 TextColor : #353E47
-	
-	-->
-
-	<Grid>
-
-		<Grid.RowDefinitions>
-			40, *
-		</Grid.RowDefinitions>
-
-		<Border 
-			Grid.Row="0"
-			BorderBrush="#2A2A2A"
-			BorderThickness="1,1,1,0">
-
-			<Grid Margin="20, 0, 0, 0">
-				<Grid.ColumnDefinitions>
-					Auto, *, 60, 60, 60
-				</Grid.ColumnDefinitions>
-				
-				<!-- icon and title name -->
-				<TextBlock Grid.Column="0" Text="File Manager" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-				
-				<!-- minimize -->
-				<Button	
-					Grid.Column="2"
-					Background="Red"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch">
-
-					<Image
-						HorizontalAlignment="Center"
-						VerticalAlignment="Center"
-						Width="32"
-						Height="32"
-						Source="avares://AvaloniaTest/Assets/titlebar/minus.ico">
-		
-					</Image>
-					
-				</Button>
-					
-				<!-- maximize -->
-				<Button
-					Grid.Column="3"
-					Background="Blue"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch">
-					
-				</Button>
-				
-				<!-- close -->
-				<Button
-					Grid.Column="4"
-					Background="Green"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch">
-
-				</Button>
-				
-			</Grid>
-			
-		</Border>
-
-		<Grid 
-			Grid.Row="1" 
-			Background="#FF141414"
-			>
-
-			<Grid.ColumnDefinitions>
-				320, *
-			</Grid.ColumnDefinitions>
-
-			<Border
-				Grid.Column="0"
-				Background="#FF1A1A1A"
-				BorderBrush="#2A2A2A"
-				BorderThickness="1">
-
-				<Grid>
-					<Grid.RowDefinitions>
-						50, *, 280
-					</Grid.RowDefinitions>
-					
-					<TextBlock 
-						Text="QUICK ACCESS"
-						VerticalAlignment="Center" 
-						Foreground="#353E47"
-						Margin="20, 0, 0, 0"/>
-
-					<StackPanel
-						Grid.Row="1"
-						Spacing="0"
-						Margin="15, 0, 15, 0"
-						Orientation="Vertical">
-
-						<!-- Recent -->
-						<Button
-							Height="50"
-							HorizontalAlignment="Stretch"
-							Background="#155dfc"
-							CornerRadius="15">
-						</Button>
-
-						<!-- Downloads -->
-						<Button
-							Height="50"
-							HorizontalAlignment="Stretch"
-							Background="#155dfc"
-							CornerRadius="15">
-						</Button>
-
-						<!-- Photos -->
-						<Button
-							Height="50"
-							HorizontalAlignment="Stretch"
-							Background="#155dfc"
-							CornerRadius="15">
-						</Button>
-
-						<!-- Videos -->
-						<Button
-							Height="50"
-							HorizontalAlignment="Stretch"
-							Background="#155dfc"
-							CornerRadius="15">
-						</Button>
-
-						<!-- Document -->
-						<Button
-							Height="50"
-							HorizontalAlignment="Stretch"
-							Background="#155dfc"
-							CornerRadius="15">
-						</Button>
-
-					</StackPanel>
-
-					<Border
-						Grid.Row="2"
-						Background="#161616"
-						Padding="20, 0, 20, 0">
-
-						<Grid>
-							<Grid.RowDefinitions>
-								50, 120, *
-							</Grid.RowDefinitions>
-							
-							<TextBlock
-								Grid.Row="0"
-								Text="STORAGE"
-								Foreground="#353E47"
-								VerticalAlignment="Center"
-								FontSize="15"/>
-
-							<Border
-								Grid.Row="1"
-								Background="#1e1e1e"
-								CornerRadius="10">
-								
-							</Border>
-
-							<Button
-								Grid.Row="2"
-								Background="#161616"
-								Height="70"
-								HorizontalAlignment="Stretch"
-								CornerRadius="10"
-								VerticalAlignment="Center">
-
-								<StackPanel
-									Margin="15, 15, 15, 15"
-									VerticalAlignment="Center"
-									Height="40"
-									Background="White"
-									Spacing="10"
-									Orientation="Horizontal">
-
-									<Border
-										Background="#2a2a2a"
-										Width="40"
-										HorizontalAlignment="Left"
-										CornerRadius="6">
-										
-									</Border>
-									
-								</StackPanel>
-								
-							</Button>
-							
-						</Grid>
-						
-					</Border>
-					
-				</Grid>
-				
-			</Border>
-
-			<Grid
-				Grid.Column="1">
-
-				<Grid.RowDefinitions>
-					50, 70, *
-				</Grid.RowDefinitions>
-				
-				<!-- Path and recent -->
-				
-				<Border
-					Grid.Row="0"
-					BorderBrush="#2A2A2A"
-					BorderThickness="0,1,1,1"
-					Background="#1E1E1E">
-
-					<Grid
-						Margin="20, 5, 20, 5"
-						ColumnSpacing="10">
-
-						<Grid.ColumnDefinitions>
-							Auto, Auto, Auto, Auto, Auto, *
-						</Grid.ColumnDefinitions>
-						
-						<!-- previous dir -->
-						<Border
-							Grid.Column="0"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							HorizontalAlignment="Left"
-							Background="Blue">
-
-						</Border>
-						
-						<!-- forward dir -->
-						<Border
-							Grid.Column="1"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							HorizontalAlignment="Left"
-							Background="Blue">
-
-						</Border>
-						
-						<!-- jump back from current dir -->
-						<Border
-							Grid.Column="2"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							HorizontalAlignment="Left"
-							Background="Blue">
-
-						</Border>
-						
-						<!-- refresh current dir -->
-						<Border
-							Grid.Column="3"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							HorizontalAlignment="Left"
-							Background="Blue">
-
-						</Border>
-
-						<Line
-							Grid.Column="4"
-							StartPoint="0,5"
-							EndPoint="0,35"
-							Stroke="#2a2a2a"
-							StrokeThickness="1"
-							Margin="5,0,0,0">
-
-						</Line>
-						
-						<!-- path block -->
-						<Border
-							Grid.Column="5"
-							Background="#2a2a2a"
-							CornerRadius="6">
-
-							<TextBox
-								Background="Transparent"
-								Foreground="White"
-								>
-
-							</TextBox>
-
-						</Border>
-
-
-					</Grid>
-
-				</Border>
-				
-				<!-- Options and features -->
-				<Border
-					Grid.Row="1"
-					BorderBrush="#2A2A2A"
-					BorderThickness="0,0,1,1"
-					Background="#1E1E1E">
-
-					<Grid
-						ColumnSpacing="10"
-						Margin="20, 5, 20, 5">
-
-						<Grid.ColumnDefinitions>
-							Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *, Auto, Auto
-						</Grid.ColumnDefinitions>
-						
-						<!-- new button -->
-						<Border
-							Grid.Column="0"
-							Background="#155dfc"
-							Width="120"
-							Height="40"
-							VerticalAlignment="Center"
-													>
-
-						</Border>
-						
-						<Line
-							Grid.Column="1"
-							StartPoint="0,15"
-							EndPoint="0,45"
-							Stroke="#2a2a2a">
-
-						</Line>
-
-						<!-- move file/folder -->
-						<Border
-							Grid.Column="2"
-							Background="Red"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							>
-
-						</Border>
-						
-						
-						<!-- copy file/folder-->
-						<Border
-							Grid.Column="3"
-							Background="Red"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							>
-
-						</Border>
-						
-						<!-- paste file/folder-->
-						<Border
-							Grid.Column="4"
-							Background="Red"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							>
-
-						</Border>
-
-						<!-- delete file/folder -->
-						<Border
-							Grid.Column="5"
-							Background="Red"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							>
-
-						</Border>
-
-						<!-- rename file/folder -->
-						<Border
-							Grid.Column="6"
-							Background="Red"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							>
-
-						</Border>
-
-						<Line
-							Grid.Column="7"
-							StartPoint="0,15"
-							EndPoint="0,45"
-							Stroke="#2a2a2a">
-
-						</Line>
-
-
-						<!-- home -->
-						<Border
-							Grid.Column="8"
-							Background="Red"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							>
-
-						</Border>
-
-						
-						<!-- sort -->
-						<Border
-							Grid.Column="9"
-							Background="Red"
-							Width="32"
-							Height="32"
-							VerticalAlignment="Center"
-							>
-
-						</Border>
-						
-						<!-- search -->
-						<Border
-							Grid.Column="11"
-							Width="320"
-							Height="40"
-							Background="#2a2a2a"
-							CornerRadius="6"
-							BorderBrush="#3a3a3a"
-							BorderThickness="1"
-							>
-
-						</Border>
-						
-						<!-- view options -->
-						<Border
-							Grid.Column="12"
-							Width="70"
-							Height="40"
-							Background="Red"
-							>
-
-						</Border>
-						
-					</Grid>
-
-					
-
-				</Border>
-				
-				
-				<!-- MAIN File viewer-->
-				<Border
-					Grid.Row="2"
-					BorderBrush="#2A2A2A"
-					BorderThickness="0,0,1,1">
-
-
-
-				</Border>
-			</Grid>
-		</Grid>
-	</Grid>
+    <!--
+        Background color : #141414
+        Primary color : #1a1a1a
+        Secondary Color : #1e1e1e
+        Accent color : #155dfc
+        PS border color : #2a2a2a
+        
+        1 TextColor : White
+        2 TextColor : #959caa
+        3 TextColor : #353E47
+    -->
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            40, *
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Row="0"
+            BorderBrush="#2A2A2A"
+            BorderThickness="1,1,1,0">
+
+            <Grid Margin="20,0,0,0">
+                <Grid.ColumnDefinitions>
+                    Auto, *, 60, 60, 60
+                </Grid.ColumnDefinitions>
+
+                <!--  icon and title name  -->
+                <TextBlock
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    FontSize="15"
+                    Foreground="White"
+                    Text="File Manager" />
+
+                <!--  minimize  -->
+                <Button
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="Transparent">
+
+                    <Image
+                        Width="16"
+                        Height="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="avares://AvaloniaTest/Assets/titlebar/minus_32.ico" />
+
+                </Button>
+
+                <!--  maximize  -->
+                <Button
+                    Grid.Column="3"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="Transparent">
+
+                    <Image
+                        Width="16"
+                        Height="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="avares://AvaloniaTest/Assets/titlebar/square_32.ico" />
+
+                </Button>
+
+                <!--  close  -->
+                <Button
+                    Grid.Column="4"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="Transparent">
+
+                    <Image
+                        Width="16"
+                        Height="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="avares://AvaloniaTest/Assets/titlebar/x_32.ico" />
+
+                </Button>
+
+            </Grid>
+
+        </Border>
+
+        <Grid Grid.Row="1" Background="#FF141414">
+
+            <Grid.ColumnDefinitions>
+                320, *
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Column="0"
+                Background="#FF1A1A1A"
+                BorderBrush="#2A2A2A"
+                BorderThickness="1">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        50, *, 200
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Margin="20,0,0,0"
+                        VerticalAlignment="Center"
+                        Foreground="#353E47"
+                        Text="QUICK ACCESS" />
+
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="15,0,15,0"
+                        Orientation="Vertical"
+                        Spacing="0">
+
+                        <!--  Recent  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    24, *
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://AvaloniaTest/Assets/props/clock.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Recent"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                        <!--  Downloads  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    24, *
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://AvaloniaTest/Assets/props/download.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Downloads"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                        <!--  Photos  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    24, *
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://AvaloniaTest/Assets/props/image.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Photos"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                        <!--  Videos  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    24, *
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://AvaloniaTest/Assets/props/video.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Videos"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                        <!--  Document  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    24, *
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://AvaloniaTest/Assets/props/file-text.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Documents"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                    </StackPanel>
+
+                    <!--  Disc info  -->
+                    <Border
+                        Grid.Row="2"
+                        Padding="20,0,20,0"
+                        Background="#161616">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                50, 120, *
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Foreground="#353E47"
+                                Text="STORAGE" />
+
+                            <Border
+                                Grid.Row="1"
+                                Padding="15"
+                                Background="#1e1e1e"
+                                CornerRadius="10">
+
+                                <Grid ColumnSpacing="10" RowSpacing="10">
+
+                                    <Grid.RowDefinitions>
+                                        20, 20, 10, *
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        40, *, 40
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="0"
+                                        Width="40"
+                                        Height="40"
+                                        Background="#2a2a2a"
+                                        CornerRadius="6">
+
+                                        <Image
+                                            Width="24"
+                                            Height="24"
+                                            Source="avares://AvaloniaTest/Assets/props/hard-drive.ico" />
+
+                                    </Border>
+
+                                    <Border
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="3"
+                                        Width="40"
+                                        Height="40"
+                                        Background="#2a2a2a"
+                                        CornerRadius="6">
+
+                                        <Image
+                                            Width="24"
+                                            Height="24"
+                                            Source="avares://AvaloniaTest/Assets/props/trash-2.ico" />
+
+                                    </Border>
+
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="White"
+                                        Text="Local Disk (C:)" />
+
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        FontSize="10"
+                                        Foreground="#353E47"
+                                        Text="256.0 GB Total" />
+
+                                    <Border
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                        Background="#2a2a2a"
+                                        CornerRadius="10" />
+
+                                    <TextBlock
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="9"
+                                        Foreground="#353E47"
+                                        Text="68% Used" />
+
+                                    <TextBlock
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        FontSize="9"
+                                        Foreground="#353E47"
+                                        Text="180 GB Free" />
+
+                                </Grid>
+
+                            </Border>
+
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+
+            </Border>
+
+            <Grid Grid.Column="1">
+
+                <Grid.RowDefinitions>
+                    50, 70, *
+                </Grid.RowDefinitions>
+
+                <!--  Path and recent  -->
+
+                <Border
+                    Grid.Row="0"
+                    Background="#1E1E1E"
+                    BorderBrush="#2A2A2A"
+                    BorderThickness="0,1,1,1">
+
+                    <Grid Margin="10,5,20,5" ColumnSpacing="0">
+
+                        <Grid.ColumnDefinitions>
+                            Auto, Auto, Auto, Auto, Auto, *
+                        </Grid.ColumnDefinitions>
+
+                        <!--  previous dir  -->
+                        <Button
+                            Grid.Column="0"
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="avares://AvaloniaTest/Assets/props/chevron-left.ico" />
+
+                        </Button>
+
+                        <!--  forward dir  -->
+                        <Button
+                            Grid.Column="1"
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="avares://AvaloniaTest/Assets/props/chevron-right.ico" />
+
+                        </Button>
+
+                        <!--  jump back from current dir  -->
+                        <Button
+                            Grid.Column="2"
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/chevron-up.ico" />
+
+                        </Button>
+
+                        <!--  refresh current dir  -->
+                        <Button
+                            Grid.Column="3"
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height=""
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="avares://AvaloniaTest/Assets/props/rotate-cw.ico" />
+
+                        </Button>
+
+                        <Line
+                            Grid.Column="4"
+                            Margin="10,0,10,0"
+                            Stroke="#2a2a2a"
+                            StrokeThickness="1"
+                            StartPoint="0,5"
+                            EndPoint="0,35" />
+
+                        <!--  path block  -->
+                        <Border
+                            Grid.Column="5"
+                            Background="#2a2a2a"
+                            CornerRadius="6">
+
+                            <TextBox Background="Transparent" Foreground="White" />
+
+                        </Border>
+
+
+                    </Grid>
+
+                </Border>
+
+                <!--  Options and features  -->
+                <Border
+                    Grid.Row="1"
+                    Background="#1E1E1E"
+                    BorderBrush="#2A2A2A"
+                    BorderThickness="0,0,1,1">
+
+                    <Grid Margin="20,5,20,5" ColumnSpacing="10">
+
+                        <Grid.ColumnDefinitions>
+                            Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *, Auto, Auto
+                        </Grid.ColumnDefinitions>
+
+                        <!--  new button  -->
+                        <Button
+                            Grid.Column="0"
+                            Width="120"
+                            Height="40"
+                            VerticalAlignment="Center"
+                            Background="#155dfc"
+                            CornerRadius="10">
+
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://AvaloniaTest/Assets/props/plus.ico" />
+
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="New" />
+
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://AvaloniaTest/Assets/props/chevron-down.ico" />
+
+                            </StackPanel>
+
+                        </Button>
+
+                        <Line
+                            Grid.Column="1"
+                            Stroke="#2a2a2a"
+                            StartPoint="0,15"
+                            EndPoint="0,45" />
+
+                        <!--  move file/folder  -->
+                        <Button
+                            Grid.Column="2"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/folder-input.ico" />
+
+                        </Button>
+
+
+                        <!--  copy file/folder  -->
+                        <Button
+                            Grid.Column="3"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/copy.ico" />
+
+                        </Button>
+
+                        <!--  paste file/folder  -->
+                        <Button
+                            Grid.Column="4"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/clipboard.ico" />
+
+                        </Button>
+
+                        <!--  delete file/folder  -->
+                        <Button
+                            Grid.Column="5"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/trash-2.ico" />
+
+                        </Button>
+
+                        <!--  rename file/folder  -->
+                        <Button
+                            Grid.Column="6"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/pencil-line.ico" />
+
+                        </Button>
+
+                        <Line
+                            Grid.Column="7"
+                            Stroke="#2a2a2a"
+                            StartPoint="0,15"
+                            EndPoint="0,45" />
+
+
+                        <!--  home  -->
+                        <Button
+                            Grid.Column="8"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/house.ico" />
+
+                        </Button>
+
+
+                        <!--  sort  -->
+                        <Button
+                            Grid.Column="9"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/arrow-down-up.ico" />
+
+                        </Button>
+
+                        <!--  search  -->
+                        <Border
+                            Grid.Column="11"
+                            Width="320"
+                            Height="40"
+                            Padding="10,0,10,0"
+                            Background="#2a2a2a"
+                            BorderBrush="#3a3a3a"
+                            BorderThickness="1"
+                            CornerRadius="6">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    24, *
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Grid.Column="0"
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://AvaloniaTest/Assets/props/search.ico" />
+
+                                <TextBox
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0"
+                                    FontSize="20"
+                                    Foreground="White"
+                                    TextAlignment="Left"
+                                    Watermark="Search" />
+
+                            </Grid>
+
+                        </Border>
+
+                        <!--  view options  -->
+                        <Border
+                            Grid.Column="12"
+                            Width="70"
+                            Height="40"
+                            Background="#2a2a2a"
+                            CornerRadius="10">
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    *, *
+                                </Grid.ColumnDefinitions>
+
+                                <ToggleButton
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="Transparent"
+                                    CornerRadius="10">
+
+                                    <Image
+                                        Width="24"
+                                        Height="24"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Source="avares://AvaloniaTest/Assets/props/grid-3x3.ico" />
+
+                                </ToggleButton>
+
+                                <ToggleButton
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="Transparent"
+                                    CornerRadius="10">
+
+                                    <Image
+                                        Width="24"
+                                        Height="24"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Source="avares://AvaloniaTest/Assets/props/list.ico" />
+
+                                </ToggleButton>
+
+                            </Grid>
+
+                        </Border>
+
+                    </Grid>
+
+
+
+                </Border>
+
+
+                <!--  MAIN File viewer  -->
+                <Border
+                    Grid.Row="2"
+                    BorderBrush="#2A2A2A"
+                    BorderThickness="0,0,1,1" />
+            </Grid>
+        </Grid>
+    </Grid>
 </Window>

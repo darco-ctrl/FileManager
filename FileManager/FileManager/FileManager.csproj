@@ -27,6 +27,7 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Svg.Skia" Version="3.2.1" />
     <PackageReference Include="System.Management" Version="9.0.9" />
   </ItemGroup>
 
