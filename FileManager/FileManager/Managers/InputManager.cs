@@ -47,13 +47,14 @@ namespace FileManager.Managers
         {
             if (AppState.GetWindow().PathTextBox.IsFocused)
             {
-               if (AppState.CurrentState == AppState.States.SEARCHING)
-               {
-                    _ = SearchSystem.StartSearchSetup(AppState.GetWindow().PathTextBox.Text);
-               } else
-               {
-                    FileSystemManager.PathBoxTryingToSetNewPath(AppState.GetWindow().PathTextBox.Text);
-               }
+                FileSystemManager.PathBoxTryingToSetNewPath(AppState.GetWindow().PathTextBox.Text);
+            } else if (AppState.GetWindow().SearchTextBox.IsFocused)
+            {
+                if (!string.IsNullOrWhiteSpace(AppState.GetWindow().SearchTextBox.Text))
+                {
+                    AppState.CurrentState = AppState.States.SEARCHING;
+                    _ = SearchSystem.StartSearchSetup(AppState.GetWindow().SearchTextBox.Text);
+                }
             }
         }
 

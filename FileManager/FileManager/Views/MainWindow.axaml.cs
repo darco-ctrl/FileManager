@@ -30,6 +30,111 @@ namespace FileManager.Views
             this.KeyDown += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyDown(e);
         }
 
+        #region Button Pressed
+
+        private void CloseButtonPressed(Object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void MinimizeButtonPressed(Object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeButtonPressed(Object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState != WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Maximized;
+            } else
+            {
+                this.WindowState = WindowState.Normal;
+            }
+
+        }
+
+        private void MoveMenuItemClicked(Object sender, RoutedEventArgs args)
+        {
+            if (DynamicControlManager.SelectedEntry == null) { return; }
+
+            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
+            {
+                DynamicControlManager.ClipBoardItem = entryData.HoldingPath;
+                DynamicControlManager.PasteFormMove = 1;
+            }
+        }
+
+        private void CopyMenuItemClicked(Object sender, RoutedEventArgs args)
+        {
+            if (DynamicControlManager.SelectedEntry == null) { return; }
+
+            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
+            {
+                DynamicControlManager.ClipBoardItem = entryData.HoldingPath;
+                DynamicControlManager.PasteFormMove = 2;
+
+
+
+                Console.WriteLine(DynamicControlManager.ClipBoardItem);
+            }
+        }
+
+        private void PasteMenuItemClicked(Object sender, RoutedEventArgs args)
+        {
+            if (DynamicControlManager.ClipBoardItem == null)
+            {
+                Console.WriteLine("Nothing to paste");
+                return;
+            }
+            else
+            {
+                Console.WriteLine($"------------------------------\nCopying Item . . .\n From : {DynamicControlManager.ClipBoardItem}\n To : {AppState.GetWindowViewModel().CurrentWorkingDir}");
+
+                if (DynamicControlManager.PasteFormMove == 2)
+                {
+                    FileOperation.CopyItem(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
+                }
+                else if (DynamicControlManager.PasteFormMove == 1)
+                {
+                    FileOperation.MoveEntry(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
+                }
+
+
+                DynamicControlManager.ClipBoardItem = null;
+            }
+        }
+
+        private void RenameSelectedEntry(Object sender, RoutedEventArgs args)
+        {
+            if (DynamicControlManager.SelectedEntry == null) { return; }
+
+            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
+            {
+                DynamicControlManager.RenameEntry = entryData.HoldingPath;
+                MenuManager.OpenGetNameWindow(FileOperation.OperationState.RENAME);
+            }
+        }
+
+        private void DeleteSelectedEntry(Object sender, RoutedEventArgs args)
+        {
+            if (DynamicControlManager.SelectedEntry != null)
+            {
+                if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entry)
+                {
+                    Console.WriteLine($"Passed tests\n Holding path: {entry.HoldingPath}");
+                    FileOperation.DeleteEntry(entry.HoldingPath);
+                }
+            }
+        }
+
+        private void RefreshMenuItemClicked(Object? sender, RoutedEventArgs e)
+        {
+            FileSystemManager.RefreshDir();
+        }
+
+        #endregion
+
         #region Navigation Events 
 
         /*
@@ -60,38 +165,20 @@ namespace FileManager.Views
          */
         public void UpdatePathBlockText()
         {
-            if (AppState.IsSearching) { return; }
             PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
-        }
-
-
-
-
-        #endregion
-
-        #region Search
-
-        /*
-         * the sets up env for searching after SearchButton is clicked
-         */
-        public void SearchButtonClicked(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            if (AppState.CurrentState == AppState.States.NONE)
-            {
-                SearchSystem.RequestForSearching();
-                PathTextBox.Text = "";
-            }
-            else if (AppState.CurrentState == AppState.States.SEARCHING)
-            {
-                UpdatePathBlockText();
-                FileSystemManager.RefreshDir();
-            }
-
         }
 
         #endregion
 
         #region PointerPressed
+
+        private void TitleBarPointerPressed(Object sender, PointerPressedEventArgs args)
+        {
+            if (args.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+            {
+                BeginMoveDrag(args);
+            }
+        }
 
         private void EntryScrollViewerPointerPressed(Object sender, PointerPressedEventArgs args)
         {
@@ -134,6 +221,7 @@ namespace FileManager.Views
 
         private void RightClickContextMenuOpened(Object sender, RoutedEventArgs args)
         {
+            /*
             if (sender is ContextMenu rightClickMenu)
             {
                 List<MenuItem> Items = rightClickMenu.Items.Cast<MenuItem>().ToList();
@@ -163,87 +251,9 @@ namespace FileManager.Views
                     Items[3].IsEnabled = true;
                 }
             }
+            */
         }
 
-
-        private void CopyMenuItemClicked(Object sender, RoutedEventArgs args)
-        {
-            if (DynamicControlManager.SelectedEntry == null) { return; }
-
-            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
-            {
-                DynamicControlManager.ClipBoardItem = entryData.HoldingPath;
-                DynamicControlManager.PasteFormMove = 2;
-
-
-
-                Console.WriteLine(DynamicControlManager.ClipBoardItem);
-            }
-        }
-
-        private void MoveMenuItemClicked(Object sender, RoutedEventArgs args)
-        {
-            if (DynamicControlManager.SelectedEntry == null) { return; }
-
-            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
-            {
-                DynamicControlManager.ClipBoardItem = entryData.HoldingPath;
-                DynamicControlManager.PasteFormMove = 1;
-            }
-        }
-
-        private void PasteMenuItemClicked(Object sender, RoutedEventArgs args)
-        {
-            if (DynamicControlManager.ClipBoardItem == null)
-            {
-                Console.WriteLine("Nothing to paste");
-                return;
-            }
-            else
-            {
-                Console.WriteLine($"------------------------------\nCopying Item . . .\n From : {DynamicControlManager.ClipBoardItem}\n To : {AppState.GetWindowViewModel().CurrentWorkingDir}");
-
-                if (DynamicControlManager.PasteFormMove == 2)
-                {
-                    FileOperation.CopyItem(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
-                }
-                else if (DynamicControlManager.PasteFormMove == 1)
-                {
-                    FileOperation.MoveEntry(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
-                }
-
-
-                DynamicControlManager.ClipBoardItem = null;
-            }
-        }
-
-        private void RenameSelectedEntry(Object sender, RoutedEventArgs args)
-        {
-            if (DynamicControlManager.SelectedEntry == null) { return; }
-
-            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
-            {
-                DynamicControlManager.RenameEntry = entryData.HoldingPath;
-                MenuManager.OpenGetNameWindow(FileOperation.OperationState.RENAME);
-            }
-        }
-
-        private void DeleteSelectedEntry(Object sender, Avalonia.Interactivity.RoutedEventArgs args)
-        {
-            if (DynamicControlManager.SelectedEntry != null)
-            {
-                if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entry)
-                {
-                    Console.WriteLine($"Passed tests\n Holding path: {entry.HoldingPath}");
-                    FileOperation.DeleteEntry(entry.HoldingPath);
-                }
-            }
-        }
-
-        private void RefreshMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            FileSystemManager.RefreshDir();
-        }
 
         private void NewFileMenuItemClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {

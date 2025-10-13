@@ -87,12 +87,12 @@ namespace FileManager.Managers
         }
 
 
-
+        
         /*
          * this runs at the start of program
          * fetching all current drives inside pc
          * for example any USB's or drives like HDD's or SSD's
-         */
+         *
         public static ObservableCollection<DriveItemViewModel> FetchThisPC()
         {
             Console.WriteLine("--------  Recived to make  ------------");
@@ -161,7 +161,7 @@ namespace FileManager.Managers
                  * string? cuz it may be null here :/
                  * we are getting Drive name as name says :D
                  * we get it using 'e.NewEvent["DriveName"] turn it into string and store in 'driveName'
-                 */
+                 *
                 string? driveName = e.NewEvent["DriveName"]?.ToString();
 
                 if (driveName != null)
@@ -189,7 +189,7 @@ namespace FileManager.Managers
                      * 
                      * here we paremters empty as i know they are not empty most of the time when subscribed like
                      * += (sender, e) like we did above
-                     */
+                     *
                     Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         
@@ -226,6 +226,6 @@ namespace FileManager.Managers
 #pragma warning restore CA1416
         }
 
-        
+        */
     }
 }

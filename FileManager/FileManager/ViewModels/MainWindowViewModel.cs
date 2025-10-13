@@ -10,7 +10,6 @@ namespace FileManager.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        public ObservableCollection<DriveItemViewModel> SidePanelItems { get; } = FileSystemManager.FetchThisPC();
         public ObservableCollection<EntryItemViewModel> CurrentLoadedEntires { get; set; } = new();
 
         public string CurrentWorkingDir { get; set; } 
@@ -18,7 +17,6 @@ namespace FileManager.ViewModels
         public MainWindowViewModel()
         {
             CurrentWorkingDir = "";
-            FileSystemManager.StartExternalDrivesWatcher(this);
         }
 
         /*

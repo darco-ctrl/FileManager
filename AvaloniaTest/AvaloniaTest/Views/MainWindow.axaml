@@ -11,12 +11,13 @@
     d:DesignHeight="920"
     d:DesignWidth="1620"
     x:DataType="vm:MainWindowViewModel"
-    Background="#FF1A1A1A"
+    Background="Transparent"
     ExtendClientAreaChromeHints="NoChrome"
     ExtendClientAreaToDecorationsHint="True"
     Focusable="True"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
+    <!--  TransparencyLevelHint="AcrylicBlur"  -->
 
     <Design.DataContext>
         <!--
@@ -30,7 +31,7 @@
         Background color : #141414
         Primary color : #1a1a1a
         Secondary Color : #1e1e1e
-        Accent color : #155dfc
+        Accent color : #155dfc # Blue
         PS border color : #2a2a2a
         
         1 TextColor : White
@@ -45,9 +46,11 @@
         </Grid.RowDefinitions>
 
         <Border
+            x:Name="TitleBar"
             Grid.Row="0"
             BorderBrush="#2A2A2A"
-            BorderThickness="1,1,1,0">
+            BorderThickness="1,1,1,0"
+            PointerPressed="">
 
             <Grid Margin="20,0,0,0">
                 <Grid.ColumnDefinitions>
@@ -67,7 +70,8 @@
                     Grid.Column="2"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    Background="Transparent">
+                    Background="Transparent"
+                    Click="">
 
                     <Image
                         Width="16"
@@ -349,6 +353,7 @@
                                         40, *, 40
                                     </Grid.ColumnDefinitions>
 
+                                    <!--  Disk icon  -->
                                     <Border
                                         Grid.Row="0"
                                         Grid.RowSpan="2"
@@ -365,7 +370,9 @@
 
                                     </Border>
 
-                                    <Border
+
+                                    <!--  Recycle Bin  -->
+                                    <Button
                                         Grid.Row="0"
                                         Grid.RowSpan="2"
                                         Grid.Column="3"
@@ -379,17 +386,21 @@
                                             Height="24"
                                             Source="avares://AvaloniaTest/Assets/props/trash-2.ico" />
 
-                                    </Border>
+                                    </Button>
 
+                                    <!--  Disk/Volume label  -->
                                     <TextBlock
+                                        x:Name="DiskLabel"
                                         Grid.Row="0"
                                         Grid.Column="1"
-                                        VerticalAlignment="Center"
+                                        VerticalAlignment="Bottom"
                                         FontSize="12"
                                         Foreground="White"
                                         Text="Local Disk (C:)" />
 
+                                    <!--  Total volume size  -->
                                     <TextBlock
+                                        x:Name="TotalVolumeSizeTextBlock"
                                         Grid.Row="1"
                                         Grid.Column="1"
                                         VerticalAlignment="Center"
@@ -397,13 +408,21 @@
                                         Foreground="#353E47"
                                         Text="256.0 GB Total" />
 
-                                    <Border
+                                    <!--  Storage progress bar  -->
+                                    <ProgressBar
+                                        x:Name="DiskStorageProgressbar"
                                         Grid.Row="2"
                                         Grid.Column="0"
                                         Grid.ColumnSpan="3"
+                                        Height="10"
                                         Background="#2a2a2a"
-                                        CornerRadius="10" />
+                                        CornerRadius="10"
+                                        Foreground="#155dfc"
+                                        Maximum="100"
+                                        Minimum="0"
+                                        Value="20" />
 
+                                    <!--  Percentage in text  -->
                                     <TextBlock
                                         Grid.Row="3"
                                         Grid.Column="0"
@@ -414,6 +433,7 @@
                                         Foreground="#353E47"
                                         Text="68% Used" />
 
+                                    <!--  Free space  -->
                                     <TextBlock
                                         Grid.Row="3"
                                         Grid.Column="0"
@@ -543,7 +563,12 @@
                             Background="#2a2a2a"
                             CornerRadius="6">
 
-                            <TextBox Background="Transparent" Foreground="White" />
+                            <TextBox
+                                x:Name="PathTextBox"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                Foreground="White" />
 
                         </Border>
 
