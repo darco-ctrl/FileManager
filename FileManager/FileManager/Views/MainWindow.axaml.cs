@@ -56,17 +56,26 @@ namespace FileManager.Views
 
         private void MoveMenuItemClicked(Object sender, RoutedEventArgs args)
         {
-            if (DynamicControlManager.SelectedEntry == null) { return; }
-
-            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
             {
-                DynamicControlManager.ClipBoardItem = entryData.HoldingPath;
-                DynamicControlManager.PasteFormMove = 1;
+                DynamicControlManager.ClipBoardItem = selectedItem.HoldingPath;
+                DynamicControlManager.NoneMoveCopy = 1;
             }
+
         }
 
         private void CopyMenuItemClicked(Object sender, RoutedEventArgs args)
         {
+
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
+            {
+                DynamicControlManager.ClipBoardItem = selectedItem.HoldingPath;
+                DynamicControlManager.NoneMoveCopy = 2; 
+            }
+
+            /*
             if (DynamicControlManager.SelectedEntry == null) { return; }
 
             if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
@@ -77,7 +86,7 @@ namespace FileManager.Views
 
 
                 Console.WriteLine(DynamicControlManager.ClipBoardItem);
-            }
+            }*/
         }
 
         private void PasteMenuItemClicked(Object sender, RoutedEventArgs args)
@@ -91,11 +100,11 @@ namespace FileManager.Views
             {
                 Console.WriteLine($"------------------------------\nCopying Item . . .\n From : {DynamicControlManager.ClipBoardItem}\n To : {AppState.GetWindowViewModel().CurrentWorkingDir}");
 
-                if (DynamicControlManager.PasteFormMove == 2)
+                if (DynamicControlManager.NoneMoveCopy == 2)
                 {
                     FileOperation.CopyItem(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
                 }
-                else if (DynamicControlManager.PasteFormMove == 1)
+                else if (DynamicControlManager.NoneMoveCopy == 1)
                 {
                     FileOperation.MoveEntry(DynamicControlManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
                 }
@@ -107,24 +116,21 @@ namespace FileManager.Views
 
         private void RenameSelectedEntry(Object sender, RoutedEventArgs args)
         {
-            if (DynamicControlManager.SelectedEntry == null) { return; }
-
-            if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
             {
-                DynamicControlManager.RenameEntry = entryData.HoldingPath;
+                DynamicControlManager.RenameEntry = selectedItem.HoldingPath;
                 MenuManager.OpenGetNameWindow(FileOperation.OperationState.RENAME);
             }
         }
 
         private void DeleteSelectedEntry(Object sender, RoutedEventArgs args)
         {
-            if (DynamicControlManager.SelectedEntry != null)
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
             {
-                if (DynamicControlManager.SelectedEntry.DataContext is EntryItemViewModel entry)
-                {
-                    Console.WriteLine($"Passed tests\n Holding path: {entry.HoldingPath}");
-                    FileOperation.DeleteEntry(entry.HoldingPath);
-                }
+                Console.WriteLine($"Passed tests\n Holding path: {selectedItem.HoldingPath}");
+                FileOperation.DeleteEntry(selectedItem.HoldingPath);
             }
         }
 
@@ -141,11 +147,12 @@ namespace FileManager.Views
          * What this do is when an Entry like file or folder is clicked it try to set it as current Dir
          * by try i mean it checks if given entry is file or folder if folder then set it if not dont set
          */
-        private void OnEntryDoubleTapped(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void OnEntryDoubleTapped(Object sender, Avalonia.Input.TappedEventArgs e)
         {
-            if (sender is ToggleButton but && but.DataContext is EntryItemViewModel entry)
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
             {
-                AppState.GetWindowViewModel().SetCurrentDir(entry.HoldingPath);
+                AppState.GetWindowViewModel().SetCurrentDir(selectedItem.HoldingPath);
             }
         }
 
@@ -186,19 +193,6 @@ namespace FileManager.Views
             if (args.Source is ToggleButton)
             {
                 return;
-            }
-        }
-
-        private void EntryPointerPressed(Object sender, PointerPressedEventArgs args)
-        {
-            ToggleButton? entryButton = sender as ToggleButton;
-            if (entryButton == null) { return; }
-
-            if (args.GetCurrentPoint(this).Properties.IsRightButtonPressed)
-            {
-                Console.WriteLine("ToggleButtonPressed");
-                entryButton.IsChecked = !entryButton.IsChecked;
-                DynamicControlManager.SelectionManager(entryButton);
             }
         }
 

@@ -58,13 +58,13 @@ public partial class EntryCreationWindow : Window
     }
 
     public void ShowWindow(Action<string, FileOperation.OperationState> action,
-        string title, string waterMark, FileOperation.OperationState return_with,
+        string _title, string waterMark, FileOperation.OperationState return_with,
         string text="")
     {
         ReturnAction = action;
         ReturnWith = return_with;
 
-        Title.Text = title;
+        Title.Text = _title;
         InputBox.Watermark = waterMark;
 
         InputBox.Text = text;

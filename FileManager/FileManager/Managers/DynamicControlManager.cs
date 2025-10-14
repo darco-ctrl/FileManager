@@ -12,7 +12,7 @@ namespace FileManager.Managers
         private static HashSet<ToggleButton> SelectedEntries = new HashSet<ToggleButton>();
 
         public static string? ClipBoardItem;
-        public static byte? PasteFormMove = 0;
+        public static byte? NoneMoveCopy = 0;
         // 0 = none
         // 1 = Move
         // 2 = Copy 
