@@ -31,7 +31,6 @@ namespace FileManager.Managers
          */
         public static void RefreshDir()
         {
-            DynamicControlManager.ResetButtonSelection();
 
             Console.WriteLine("Clearing and refresing current dir");
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();

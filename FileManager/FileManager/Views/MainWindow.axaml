@@ -2,7 +2,7 @@
     x:Class="FileManager.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:FileManager.Controls"
+    xmlns:buttons="using:FileManager.Buttons"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FileManager"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -29,25 +29,6 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <Window.Styles>
-        <Style Selector="controls|EntriesButton">
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
-
-        <Style Selector="controls|EntriesButton:checked">
-            <Setter Property="Background" Value="#FF4C4C4C" />
-        </Style>
-
-        <Style Selector="controls|EntriesButton:pointerover">
-            <Setter Property="Background" Value="#FF858282" />
-        </Style>
-
-        <Style Selector="controls|EntriesButton:pressed">
-            <Setter Property="Background" Value="#FF6B6A6A" />
-        </Style>
-
-    </Window.Styles>
-
     <!--
         Background color : #141414
         Primary color : #1a1a1a
@@ -58,13 +39,15 @@
         1 TextColor : White
         2 TextColor : #959caa
         3 TextColor : #353E47
+        
+        292929  hover color
     -->
 
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Border
@@ -77,14 +60,14 @@
             PointerPressed="TitleBarPointerPressed">
 
             <Grid Margin="20,0,0,0">
-                <!-- Auto, *, 60, 60, 60 -->
+                <!--  Auto, *, 60, 60, 60  -->
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
                 </Grid.ColumnDefinitions>
 
                 <!--  icon and title name  -->
@@ -99,8 +82,7 @@
                 <Button
                     Grid.Column="2"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    Background="Transparent"
+                    VerticalAlignment="Stretch"
                     Click="MinimizeButtonPressed">
 
                     <Image
@@ -116,7 +98,7 @@
                 <Button
                     Grid.Column="3"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Stretch"
                     Background="Transparent"
                     Click="MaximizeButtonPressed">
 
@@ -133,7 +115,7 @@
                 <Button
                     Grid.Column="4"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Stretch"
                     Background="Transparent"
                     Click="CloseButtonPressed">
 
@@ -153,8 +135,8 @@
         <Grid Grid.Row="1" Background="#FF141414">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="320"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="320" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Border
@@ -165,9 +147,9 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="200" />
                     </Grid.RowDefinitions>
 
                     <TextBlock
@@ -193,8 +175,8 @@
                             <Grid ColumnSpacing="20">
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Image
@@ -228,8 +210,8 @@
                             <Grid ColumnSpacing="20">
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Image
@@ -263,8 +245,8 @@
                             <Grid ColumnSpacing="20">
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Image
@@ -298,8 +280,8 @@
                             <Grid ColumnSpacing="20">
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Image
@@ -333,8 +315,8 @@
                             <Grid ColumnSpacing="20">
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Image
@@ -367,9 +349,9 @@
 
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="120"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="120" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
                             <TextBlock
@@ -388,16 +370,16 @@
                                 <Grid ColumnSpacing="10" RowSpacing="10">
 
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="10"/>
-                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="20" />
+                                        <RowDefinition Height="20" />
+                                        <RowDefinition Height="10" />
+                                        <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="40" />
                                     </Grid.ColumnDefinitions>
 
                                     <!--  Disk icon  -->
@@ -506,9 +488,9 @@
             <Grid Grid.Column="1">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <!--  Path and recent  -->
@@ -521,15 +503,15 @@
 
                     <Grid Margin="10,5,20,5" ColumnSpacing="0">
 
-                        <!--  Auto, Auto, Auto, Auto, Auto, * -->
+                        <!--  Auto, Auto, Auto, Auto, Auto, *  -->
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <!--  previous dir  -->
@@ -645,19 +627,19 @@
                         <!--  Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *, Auto, Auto  -->
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <!--  new button  -->
@@ -665,6 +647,7 @@
                             Grid.Column="0"
                             Width="120"
                             Height="40"
+                            Padding="10,0,10,0"
                             VerticalAlignment="Center"
                             Background="#155dfc"
                             CornerRadius="10">
@@ -717,6 +700,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Source="/Assets/props/folder-input.ico" />
+
 
                         </Button>
 
@@ -848,8 +832,8 @@
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Image
@@ -888,8 +872,8 @@
                             <Grid>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <ToggleButton
@@ -974,10 +958,10 @@
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                    <TextBlock
-                                        Padding="10,0,0,0"
-                                        Foreground="White"
-                                        Text="{Binding Name}" />
+                                <TextBlock
+                                    Padding="10,0,0,0"
+                                    Foreground="White"
+                                    Text="{Binding Name}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

@@ -35,11 +35,6 @@ namespace FileManager.Managers
                 KeyActionSet[e.Key]();
                 IsPressed.Add(e.Key);
             }
-
-            if (_KeyDown.Contains(Key.D) && _KeyDown.Contains(Key.LeftCtrl))
-            {
-                DynamicControlManager.ResetButtonSelection();
-            }
         }
 
         // I made a EnterKeyFunction becuase Enter key has multiple uses cases

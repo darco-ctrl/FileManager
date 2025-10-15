@@ -23,6 +23,7 @@ namespace FileManager.Views
 
         public MainWindow()
         {
+            AppState.SetWindow(this);
 
             InitializeComponent();
 
@@ -154,13 +155,6 @@ namespace FileManager.Views
             {
                 AppState.GetWindowViewModel().SetCurrentDir(selectedItem.HoldingPath);
             }
-        }
-
-        private void EntryClicked(Object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            ToggleButton? entryButton = sender as ToggleButton;
-            if (entryButton == null) { return; }
-            DynamicControlManager.SelectionManager(entryButton);
         }
 
 

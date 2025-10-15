@@ -41,8 +41,9 @@ namespace FileManager
                 {
                     DataContext = AppState.GetWindowViewModel()
                 };
-                AppState.SetWindow(mainWindow);
                 FileSystemManager.StartUpSetup();
+
+                Console.WriteLine("Main Window and MainWindowViewModel is not empty");
                 
                 mainWindow = null;
 
