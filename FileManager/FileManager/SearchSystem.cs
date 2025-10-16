@@ -75,8 +75,11 @@ namespace FileManager
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
 <<<<<<< Updated upstream:FileManager/FileManager/SearchSystem.cs
+<<<<<<< Updated upstream:FileManager/FileManager/SearchSystem.cs
                     if (!string.IsNullOrWhiteSpace(e.Data))
 =======
+=======
+>>>>>>> Stashed changes:FileManager/FileManager/Core/SearchSystem.cs
                     EntryItemViewModel entryItem = ControlsManager.CreateEntryItem(e.Data);
 
 

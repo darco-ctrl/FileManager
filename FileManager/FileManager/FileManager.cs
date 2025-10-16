@@ -15,6 +15,9 @@ using Avalonia.Input;
 =======
 using FileManager.Utils;
 using FileManager.Core;
+<<<<<<< Updated upstream:FileManager/FileManager/FileManager.cs
+>>>>>>> Stashed changes:FileManager/FileManager/Managers/FileSystemManager.cs
+=======
 >>>>>>> Stashed changes:FileManager/FileManager/Managers/FileSystemManager.cs
 
 namespace FileManager
