@@ -20,11 +20,161 @@ namespace FileManager.Views
         {
 
             InitializeComponent();
+            this.Position = new Avalonia.PixelPoint(0, 0);
 
             this.KeyUp += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyUp(e);
             this.KeyDown += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyDown(e);
         }
 
+<<<<<<< Updated upstream
+=======
+        #region Button Pressed
+
+        private void CloseButtonPressed(Object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void MinimizeButtonPressed(Object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeButtonPressed(Object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState != WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Maximized;
+            } else
+            {
+                this.WindowState = WindowState.Normal;
+            }
+
+        }
+
+        private void MoveButtonClicked(Object sender, RoutedEventArgs args)
+        {
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
+            {
+                ControlsManager.ClipBoardItem = selectedItem.HoldingPath;
+                ControlsManager.NoneMoveCopy = 1;
+            }
+
+        }
+
+        private void CopyButtonClicked(Object sender, RoutedEventArgs args)
+        {
+
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
+            {
+                ControlsManager.ClipBoardItem = selectedItem.HoldingPath;
+                ControlsManager.NoneMoveCopy = 2;
+            }
+
+            /*
+            if (ControlsManager.SelectedEntry == null) { return; }
+
+            if (ControlsManager.SelectedEntry.DataContext is EntryItemViewModel entryData)
+            {
+                ControlsManager.ClipBoardItem = entryData.HoldingPath;
+                ControlsManager.PasteFormMove = 2;
+
+
+
+                Console.WriteLine(ControlsManager.ClipBoardItem);
+            }*/
+        }
+
+        private void PasteButtonClicked(Object sender, RoutedEventArgs args)
+        {
+            if (ControlsManager.ClipBoardItem == null)
+            {
+                Console.WriteLine("Nothing to paste");
+                return;
+            }
+            else
+            {
+                Console.WriteLine($"------------------------------\nCopying Item . . .\n From : {ControlsManager.ClipBoardItem}\n To : {AppState.GetWindowViewModel().CurrentWorkingDir}");
+
+                if (ControlsManager.NoneMoveCopy == 2)
+                {
+                    FileOperation.CopyItem(ControlsManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
+                }
+                else if (ControlsManager.NoneMoveCopy == 1)
+                {
+                    FileOperation.MoveEntry(ControlsManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
+                }
+
+
+                ControlsManager.ClipBoardItem = null;
+            }
+        }
+
+        private void RenameSelectedEntry(Object sender, RoutedEventArgs args)
+        {
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
+            {
+                ControlsManager.RenameEntry = selectedItem.HoldingPath;
+                MenuManager.OpenGetNameWindow(FileOperation.OperationState.RENAME);
+            }
+        }
+
+        private void DeleteSelectedEntry(Object sender, RoutedEventArgs args)
+        {
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
+            {
+                Console.WriteLine($"Passed tests\n Holding path: {selectedItem.HoldingPath}");
+                FileOperation.DeleteEntry(selectedItem.HoldingPath);
+            }
+        }
+
+        private void HomeButtonClicked(Object sender, RoutedEventArgs e)
+        {
+            AppState.GetWindowViewModel().SetCurrentDir(FileOperation.GetUserLocation());
+        }
+
+        private void PreviousDirButtonClicked(Object sender, RoutedEventArgs e)
+        {
+            //Console.WriteLine("Trying to go forward");
+            string? dir = ControlsManager.GetPreviousDir();
+            if (dir != null)
+            {
+                AppState.GetWindowViewModel().SetCurrentDir(dir, false);
+
+                //Console.WriteLine("Moved to previous dir");
+            }
+
+            //Console.WriteLine("No previous dir");
+        }
+
+        private void ForwardDirButtonClicked(Object sender, RoutedEventArgs e)
+        {
+            //Console.WriteLine("Trying to go forward");
+            string? dir = ControlsManager.GetNextDir();
+            if (dir != null)
+            {
+                AppState.GetWindowViewModel().SetCurrentDir(dir, false);
+
+                //Console.WriteLine("Moved to next dir");
+            }
+
+            //Console.WriteLine("No next dir");
+        }
+
+        private void RefreshButtonClicked(Object sender, RoutedEventArgs e)
+        {
+            FileSystemManager.RefreshDir();
+        }
+
+        #endregion
+
+        #region Navigation Events
+
+>>>>>>> Stashed changes
         /*
          * What this do is when an Entry like file or folder is clicked it try to set it as current Dir
          * by try i mean it checks if given entry is file or folder if folder then set it if not dont set
@@ -90,8 +240,42 @@ namespace FileManager.Views
          */
         public void UpdatePathBlockText()
         {
+<<<<<<< Updated upstream
             if (AppState.IsSearching) { return; }
             PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
+=======
+            /*
+            if (sender is ContextMenu rightClickMenu)
+            {
+                List<MenuItem> Items = rightClickMenu.Items.Cast<MenuItem>().ToList();
+                Console.WriteLine($"Selected Entry = {ControlsManager.SelectedEntry}");
+                if (ControlsManager.SelectedEntry == null)
+                {
+                    Items[1].IsEnabled = false;
+                    Items[2].IsEnabled = false;
+                    Items[4].IsEnabled = false;
+                    Items[7].IsEnabled = false;
+                }
+                else
+                {
+                    Items[1].IsEnabled = true;
+                    Items[2].IsEnabled = true;
+                    Items[4].IsEnabled = true;
+                    Items[7].IsEnabled = true;
+                }
+
+                if (ControlsManager.ClipBoardItem == null)
+                {
+
+                    Items[3].IsEnabled = false;
+                }
+                else
+                {
+                    Items[3].IsEnabled = true;
+                }
+            }
+            */
+>>>>>>> Stashed changes
         }
 
         /*

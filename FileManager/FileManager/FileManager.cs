@@ -8,9 +8,14 @@ using System.Text;
 using System.Management;
 using System.Threading.Tasks;
 using Avalonia.Threading;
+<<<<<<< Updated upstream:FileManager/FileManager/FileManager.cs
 using FileManager.Views;
 using Avalonia.Controls;
 using Avalonia.Input;
+=======
+using FileManager.Utils;
+using FileManager.Core;
+>>>>>>> Stashed changes:FileManager/FileManager/Managers/FileSystemManager.cs
 
 namespace FileManager
 {
@@ -36,7 +41,7 @@ namespace FileManager
         public static void StartUpSetup()
         {
 
-            AppState.GetWindowViewModel().SetCurrentDir(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+            AppState.GetWindowViewModel().SetCurrentDir(FileOperation.GetUserLocation());
         }
 
         /*
@@ -54,7 +59,7 @@ namespace FileManager
             {   
                 if (!IsEntryInBlackList(entry)) { continue; }
 
-                EntryItemViewModel entryItem = DynamicControlManager.CreateEntryItem(entry);
+                EntryItemViewModel entryItem = ControlsManager.CreateEntryItem(entry);
                 AppState.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
                 //Console.WriteLine($"{entry}");
             }

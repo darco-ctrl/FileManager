@@ -202,4 +202,948 @@
 
 	</Grid>
 
+<<<<<<< Updated upstream
+=======
+    <!--
+        Background color : #141414
+        Primary color : #1a1a1a
+        Secondary Color : #1e1e1e
+        Accent color : #155dfc # Blue
+        PS border color : #2a2a2a
+
+        1 TextColor : White
+        2 TextColor : #959caa
+        3 TextColor : #353E47
+
+        292929  hover color
+    -->
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border
+            x:Name="TitleBar"
+            Grid.Row="0"
+            Height="40"
+            VerticalAlignment="Stretch"
+            BorderBrush="#2A2A2A"
+            BorderThickness="1,1,1,0"
+            PointerPressed="TitleBarPointerPressed">
+
+            <Grid Margin="20,0,0,0">
+                <!--  Auto, *, 60, 60, 60  -->
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                </Grid.ColumnDefinitions>
+
+                <!--  icon and title name  -->
+                <TextBlock
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    FontSize="15"
+                    Foreground="White"
+                    Text="File Manager" />
+
+                <!--  minimize  -->
+                <Button
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Click="MinimizeButtonPressed">
+
+                    <Image
+                        Width="16"
+                        Height="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="avares://FileManager/Assets/titlebar/minus_32.ico" />
+
+                </Button>
+
+                <!--  maximize  -->
+                <Button
+                    Grid.Column="3"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="Transparent"
+                    Click="MaximizeButtonPressed">
+
+                    <Image
+                        Width="16"
+                        Height="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="avares://FileManager/Assets/titlebar/square_32.ico" />
+
+                </Button>
+
+                <!--  close  -->
+                <Button
+                    Grid.Column="4"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="Transparent"
+                    Click="CloseButtonPressed">
+
+                    <Image
+                        Width="16"
+                        Height="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="avares://FileManager/Assets/titlebar/x_32.ico" />
+
+                </Button>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Background="#FF141414">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Column="0"
+                Background="#FF1A1A1A"
+                BorderBrush="#2A2A2A"
+                BorderThickness="1">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="200" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Margin="20,0,0,0"
+                        VerticalAlignment="Center"
+                        Foreground="#353E47"
+                        Text="QUICK ACCESS" />
+
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="15,0,15,0"
+                        Orientation="Vertical"
+                        Spacing="0">
+
+                        <!--  Recent  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://FileManager/Assets/props/clock.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Recent"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                        <!--  Downloads  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://FileManager/Assets/props/download.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Downloads"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                        <!--  Photos  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://FileManager/Assets/props/image.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Photos"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                        <!--  Videos  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://FileManager/Assets/props/video.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Videos"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                        <!--  Document  -->
+                        <Button
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            CornerRadius="15">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://FileManager/Assets/props/file-text.ico" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#959caa"
+                                    Text="Documents"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </Button>
+
+                    </StackPanel>
+
+                    <!--  Disc info  -->
+                    <Border
+                        Grid.Row="2"
+                        Padding="20,0,20,0"
+                        Background="#161616">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="120" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Foreground="#353E47"
+                                Text="STORAGE" />
+
+                            <Border
+                                Grid.Row="1"
+                                Padding="15"
+                                Background="#1e1e1e"
+                                CornerRadius="10">
+
+                                <Grid ColumnSpacing="10" RowSpacing="10">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20" />
+                                        <RowDefinition Height="20" />
+                                        <RowDefinition Height="10" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="40" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--  Disk icon  -->
+                                    <Border
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="0"
+                                        Width="40"
+                                        Height="40"
+                                        Background="#2a2a2a"
+                                        CornerRadius="6">
+
+                                        <Image
+                                            Width="24"
+                                            Height="24"
+                                            Source="avares://FileManager/Assets/props/hard-drive.ico" />
+
+                                    </Border>
+
+
+                                    <!--  Recycle Bin  -->
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="3"
+                                        Width="40"
+                                        Height="40"
+                                        Background="#2a2a2a"
+                                        CornerRadius="6">
+
+                                        <Image
+                                            Width="24"
+                                            Height="24"
+                                            Source="avares://FileManager/Assets/props/trash-2.ico" />
+
+                                    </Button>
+
+                                    <!--  Disk/Volume label  -->
+                                    <TextBlock
+                                        x:Name="DiskLabel"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Bottom"
+                                        FontSize="12"
+                                        Foreground="White"
+                                        Text="Local Disk (C:)" />
+
+                                    <!--  Total volume size  -->
+                                    <TextBlock
+                                        x:Name="TotalVolumeSizeTextBlock"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        FontSize="10"
+                                        Foreground="#353E47"
+                                        Text="256.0 GB Total" />
+
+                                    <!--  Storage progress bar  -->
+                                    <ProgressBar
+                                        x:Name="DiskStorageProgressbar"
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                        Height="10"
+                                        Background="#2a2a2a"
+                                        CornerRadius="10"
+                                        Foreground="#155dfc"
+                                        Maximum="100"
+                                        Minimum="0"
+                                        Value="20" />
+
+                                    <!--  Percentage in text  -->
+                                    <TextBlock
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="9"
+                                        Foreground="#353E47"
+                                        Text="68% Used" />
+
+                                    <!--  Free space  -->
+                                    <TextBlock
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        FontSize="9"
+                                        Foreground="#353E47"
+                                        Text="180 GB Free" />
+
+                                </Grid>
+
+                            </Border>
+
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+
+            </Border>
+
+            <Grid Grid.Column="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--  Path and recent  -->
+
+                <Border
+                    Grid.Row="0"
+                    Background="#1E1E1E"
+                    BorderBrush="#2A2A2A"
+                    BorderThickness="0,1,1,1">
+
+                    <Grid Margin="10,5,20,5" ColumnSpacing="0">
+
+                        <!--  Auto, Auto, Auto, Auto, Auto, *  -->
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  previous dir  -->
+                        <Button
+                            Grid.Column="0"
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Click="PreviousDirButtonClicked">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="avares://FileManager/Assets/props/chevron-left.ico" />
+
+                        </Button>
+
+                        <!--  forward dir  -->
+                        <Button
+                            Grid.Column="1"
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Click="ForwardDirButtonClicked">
+
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="avares://FileManager/Assets/props/chevron-right.ico" />
+
+                        </Button>
+
+                        <!--  jump back from current dir  -->
+                        <Button
+                            Grid.Column="2"
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/chevron-up.ico" />
+
+                        </Button>
+
+                        <!--  refresh current dir  -->
+                        <Button
+                            Grid.Column="3"
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Click="RefreshButtonClicked">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="avares://FileManager/Assets/props/rotate-cw.ico" />
+
+                        </Button>
+
+                        <Line
+                            Grid.Column="4"
+                            Margin="10,0,10,0"
+                            Stroke="#2a2a2a"
+                            StrokeThickness="1"
+                            StartPoint="0,5"
+                            EndPoint="0,35" />
+
+                        <!--  path block  -->
+                        <Border
+                            Grid.Column="5"
+                            Background="#2a2a2a"
+                            CornerRadius="6">
+
+                            <TextBox
+                                x:Name="PathTextBox"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                Foreground="White" />
+
+                        </Border>
+
+
+                    </Grid>
+
+                </Border>
+
+                <!--  Options and features  -->
+                <Border
+                    Grid.Row="1"
+                    Background="#1E1E1E"
+                    BorderBrush="#2A2A2A"
+                    BorderThickness="0,0,1,1">
+
+                    <Grid Margin="20,5,20,5" ColumnSpacing="10">
+
+                        <!--  Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *, Auto, Auto  -->
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  new button  -->
+                        <Button
+                            Grid.Column="0"
+                            Width="120"
+                            Height="40"
+                            Padding="10,0,10,0"
+                            VerticalAlignment="Center"
+                            Background="#155dfc"
+                            CornerRadius="10">
+
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://FileManager/Assets/props/plus.ico" />
+
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="New" />
+
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://FileManager/Assets/props/chevron-down.ico" />
+
+                            </StackPanel>
+
+                        </Button>
+
+                        <Line
+                            Grid.Column="1"
+                            Stroke="#2a2a2a"
+                            StartPoint="0,15"
+                            EndPoint="0,45" />
+
+                        <!--  move file/folder  -->
+                        <buttons:EntryModifierButton
+                            Grid.Column="2"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Click="MoveButtonClicked">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/folder-input.ico" />
+
+
+                        </buttons:EntryModifierButton>
+
+
+                        <!--  copy file/folder  -->
+                        <buttons:EntryModifierButton
+                            Grid.Column="3"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Click="CopyButtonClicked">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/copy.ico" />
+
+                        </buttons:EntryModifierButton>
+
+                        <!--  paste file/folder  -->
+                        <buttons:PasteButton
+                            Grid.Column="4"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Click="PasteButtonClicked">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/clipboard.ico" />
+
+                        </buttons:PasteButton>
+
+                        <!--  rename file/folder  -->
+                        <buttons:EntryModifierButton
+                            Grid.Column="6"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Click="RenameSelectedEntry">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/pencil-line.ico" />
+
+                        </buttons:EntryModifierButton>
+
+                        <!--  delete file/folder  -->
+                        <buttons:EntryModifierButton
+                            Grid.Column="5"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Click="DeleteSelectedEntry">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/trash-2.ico" />
+
+                        </buttons:EntryModifierButton>
+
+                        <Line
+                            Grid.Column="7"
+                            Stroke="#2a2a2a"
+                            StartPoint="0,15"
+                            EndPoint="0,45" />
+
+
+                        <!--  home  -->
+                        <Button
+                            Grid.Column="8"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Click="HomeButtonClicked">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/house.ico" />
+
+                        </Button>
+
+                        <!--  sort  -->
+                        <Button
+                            Grid.Column="9"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/arrow-down-up.ico" />
+
+                        </Button>
+
+                        <!--  search  -->
+                        <Border
+                            Grid.Column="11"
+                            Width="320"
+                            Height="40"
+                            Padding="10,0,10,0"
+                            Background="#2a2a2a"
+                            BorderBrush="#3a3a3a"
+                            BorderThickness="1"
+                            CornerRadius="6">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Grid.Column="0"
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://FileManager/Assets/props/search.ico" />
+
+                                <TextBox
+                                    x:Name="SearchTextBox"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0"
+                                    FontSize="20"
+                                    Foreground="White"
+                                    TextAlignment="Left"
+                                    Watermark="Search" />
+
+                            </Grid>
+
+                        </Border>
+
+                        <!--  view options  -->
+                        <Border
+                            Grid.Column="12"
+                            Width="70"
+                            Height="40"
+                            Background="#2a2a2a"
+                            CornerRadius="10">
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <ToggleButton
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="Transparent"
+                                    CornerRadius="10">
+
+                                    <Image
+                                        Width="24"
+                                        Height="24"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Source="avares://FileManager/Assets/props/grid-3x3.ico" />
+
+                                </ToggleButton>
+
+                                <ToggleButton
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="Transparent"
+                                    CornerRadius="10">
+
+                                    <Image
+                                        Width="24"
+                                        Height="24"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Source="avares://FileManager/Assets/props/list.ico" />
+
+                                </ToggleButton>
+
+                            </Grid>
+
+                        </Border>
+
+                    </Grid>
+
+
+
+                </Border>
+
+
+                <!--  MAIN File viewer  -->
+                <Border
+                    Grid.Row="2"
+                    BorderBrush="#2A2A2A"
+                    BorderThickness="0,0,1,1">
+
+                    <ListBox
+                        x:Name="MainEntryList"
+                        Grid.Row="1"
+                        Margin="5"
+                        Background="Transparent"
+                        DoubleTapped="OnEntryDoubleTapped"
+                        ItemsSource="{Binding CurrentLoadedEntires}"
+                        SelectionMode="Single">
+
+                        <!--  Context Menu  -->
+                        <ListBox.ContextMenu>
+                            <ContextMenu Opened="RightClickContextMenuOpened">
+
+                                <MenuItem
+                                    Click="NewFileMenuItemClicked"
+                                    Header="New File"
+                                    IsEnabled="True" />
+                                <MenuItem
+                                    Click="NewFolderMenuItemClicked"
+                                    Header="New Folder"
+                                    IsEnabled="True" />
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+
+                        <!--  Items Panel with virtualization  -->
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Padding="10,0,0,0"
+                                    Foreground="White"
+                                    Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+>>>>>>> Stashed changes
 </Window>

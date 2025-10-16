@@ -1,0 +1,45 @@
+﻿using Avalonia.Controls;
+using Avalonia.Media;
+using FileManager.Managers;
+using FileManager.Theme;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FileManager.Controls.Buttons
+{
+    public class PasteButton : Button
+    {
+        public PasteButton()
+        {
+
+
+            Background = Brushes.Transparent;
+
+            PointerEntered += (_, __) => Background = ThemeData.HoverBrush;
+            PointerExited += (_, __) => Background = Brushes.Transparent;
+
+            ControlsManager.OnClipBoardItemChanged += () =>
+            {
+                CheckForClipBoard();
+            };
+            CheckForClipBoard();
+        }
+
+        private void CheckForClipBoard()
+        {
+            if (string.IsNullOrWhiteSpace(ControlsManager.ClipBoardItem))
+            {
+                Opacity = 0.5;
+                IsEnabled = false;
+            }
+            else
+            {
+                Opacity = 1;
+                IsEnabled = true;
+            }
+        }
+    }
+}

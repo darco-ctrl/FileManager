@@ -11,7 +11,7 @@ namespace FileManager.ViewModels
         public ObservableCollection<DriveItemViewModel> SidePanelItems { get; } = FileManager.FetchThisPC();
         public ObservableCollection<EntryItemViewModel> CurrentLoadedEntires { get; set; } = new();
 
-        public string CurrentWorkingDir { get; set; } 
+        public string CurrentWorkingDir { get; set; }
 
         public MainWindowViewModel()
         {
@@ -22,13 +22,14 @@ namespace FileManager.ViewModels
         /*
          * this try to set current path if it did set bath it returns true if not it returns a false
          */
-        public bool SetCurrentDir(string? newPath)
+        public bool SetCurrentDir(string? newPath, bool addToRecent = true)
         {
             if (Directory.Exists(newPath))
             {
                 CurrentWorkingDir = newPath;
                 FileManager.updateDirItems();
                 AppState.GetWindow().UpdatePathBlockText();
+                if (addToRecent) ControlsManager.AddRecentDir(newPath);
                 return true;
             }
             return false;
