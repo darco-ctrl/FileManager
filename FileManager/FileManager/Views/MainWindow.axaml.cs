@@ -26,8 +26,6 @@ namespace FileManager.Views
             this.KeyDown += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyDown(e);
         }
 
-<<<<<<< Updated upstream
-=======
         #region Button Pressed
 
         private void CloseButtonPressed(Object sender, RoutedEventArgs e)
@@ -45,7 +43,8 @@ namespace FileManager.Views
             if (this.WindowState != WindowState.Maximized)
             {
                 this.WindowState = WindowState.Maximized;
-            } else
+            }
+            else
             {
                 this.WindowState = WindowState.Normal;
             }
@@ -174,7 +173,6 @@ namespace FileManager.Views
 
         #region Navigation Events
 
->>>>>>> Stashed changes
         /*
          * What this do is when an Entry like file or folder is clicked it try to set it as current Dir
          * by try i mean it checks if given entry is file or folder if folder then set it if not dont set
@@ -210,7 +208,7 @@ namespace FileManager.Views
         }
 
         /*
-         * i made this function isntead of using window.Focus if i had to do somethng when i focus in future i 
+         * i made this function isntead of using window.Focus if i had to do somethng when i focus in future i
          * can just add it here instead of going everywhere and changing it
          */
         public void FocusWindow()
@@ -223,7 +221,7 @@ namespace FileManager.Views
          * this is to regain focus back to window when pressed somewhere else like lets say if your changing
          * text in PathTextBox and clicked somewhere else inside the window if so window will automatically
          * foucs into itself and this is the function that does that
-         * 
+         *
          * PointerPressed is something from avalonia you can read its doc here > 'https://docs.avaloniaui.net/docs/concepts/input/pointer'
          * it explains it well
          */
@@ -235,15 +233,14 @@ namespace FileManager.Views
         /*
          * after CurrentWorkingDir is updated this is called to update PathTextBox i made it into a function becuase
          * i can add stuff what to do before or after it is upated like now i added if its searching if so dont update
-         * just return 
+         * just return
          * it helpfull cuz i dont have to add this if statement everywhere
          */
         public void UpdatePathBlockText()
         {
-<<<<<<< Updated upstream
             if (AppState.IsSearching) { return; }
             PathTextBox.Text = AppState.GetWindowViewModel().CurrentWorkingDir;
-=======
+
             /*
             if (sender is ContextMenu rightClickMenu)
             {
@@ -275,7 +272,7 @@ namespace FileManager.Views
                 }
             }
             */
->>>>>>> Stashed changes
+
         }
 
         /*
@@ -287,7 +284,8 @@ namespace FileManager.Views
             {
                 SearchSystem.RequestForSearching();
                 PathTextBox.Text = "";
-            } else if (AppState.CurrentState == AppState.States.SEARCHING)
+            }
+            else if (AppState.CurrentState == AppState.States.SEARCHING)
             {
                 UpdatePathBlockText();
                 FileManager.updateDirItems();
@@ -297,4 +295,6 @@ namespace FileManager.Views
 
         public InputManager GetInputManager() => IM;
     }
+
+    #endregion
 }
