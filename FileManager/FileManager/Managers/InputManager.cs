@@ -21,14 +21,14 @@ namespace FileManager.Managers
         {
             KeyActionSet.Add(Key.Back, FileSystemManager.GoBackOne); // Adding Backspace key so user can go back from a dir
             KeyActionSet.Add(Key.Enter, EnterKeyFunction); // Adding Enter key
-           
+
         }
 
         // When any KeyisDown its added to KeyDown and check if the Key Pressed is in 'KeyActionSet' if so
         // call the action connected to that
         public void OnKeyDown(KeyEventArgs e)
         {
-            _KeyDown.Add(e.Key); 
+            _KeyDown.Add(e.Key);
 
             if (KeyActionSet.ContainsKey(e.Key) && !IsPressed.Contains(e.Key))
             {
@@ -56,6 +56,14 @@ namespace FileManager.Managers
         // This removes key from _KeyDown
         public void OnKeyUp(KeyEventArgs e)
         {
+            if (e.Key == Key.Escape)
+            {
+                if (AppState.GetWindow().MainEntryList.SelectedItems != null)
+                {
+                    AppState.GetWindow().MainEntryList.SelectedItems?.Clear();
+                }
+            }
+
             _KeyDown.Remove(e.Key);
 
             if (IsPressed.Contains(e.Key))

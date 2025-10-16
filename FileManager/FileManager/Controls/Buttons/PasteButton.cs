@@ -31,10 +31,12 @@ namespace FileManager.Controls.Buttons
         {
             if (string.IsNullOrWhiteSpace(DynamicControlManager.ClipBoardItem))
             {
+                Opacity = 0.5;
                 IsEnabled = false;
             }
             else
             {
+                Opacity = 1;
                 IsEnabled = true;
             }
         }

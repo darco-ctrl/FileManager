@@ -2,7 +2,7 @@
     x:Class="FileManager.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:buttons="using:FileManager.Buttons"
+    xmlns:buttons="using:FileManager.Controls.Buttons"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FileManager"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -35,11 +35,11 @@
         Secondary Color : #1e1e1e
         Accent color : #155dfc # Blue
         PS border color : #2a2a2a
-        
+
         1 TextColor : White
         2 TextColor : #959caa
         3 TextColor : #353E47
-        
+
         292929  hover color
     -->
 
@@ -127,9 +127,7 @@
                         Source="avares://FileManager/Assets/titlebar/x_32.ico" />
 
                 </Button>
-
             </Grid>
-
         </Border>
 
         <Grid Grid.Row="1" Background="#FF141414">
@@ -686,7 +684,7 @@
                             EndPoint="0,45" />
 
                         <!--  move file/folder  -->
-                        <Button
+                        <buttons:EntryModifierButton
                             Grid.Column="2"
                             Width="32"
                             Height="32"
@@ -702,11 +700,11 @@
                                 Source="/Assets/props/folder-input.ico" />
 
 
-                        </Button>
+                        </buttons:EntryModifierButton>
 
 
                         <!--  copy file/folder  -->
-                        <Button
+                        <buttons:EntryModifierButton
                             Grid.Column="3"
                             Width="32"
                             Height="32"
@@ -721,10 +719,10 @@
                                 VerticalAlignment="Center"
                                 Source="/Assets/props/copy.ico" />
 
-                        </Button>
+                        </buttons:EntryModifierButton>
 
                         <!--  paste file/folder  -->
-                        <Button
+                        <buttons:PasteButton
                             Grid.Column="4"
                             Width="32"
                             Height="32"
@@ -739,10 +737,10 @@
                                 VerticalAlignment="Center"
                                 Source="/Assets/props/clipboard.ico" />
 
-                        </Button>
+                        </buttons:PasteButton>
 
                         <!--  rename file/folder  -->
-                        <Button
+                        <buttons:EntryModifierButton
                             Grid.Column="6"
                             Width="32"
                             Height="32"
@@ -757,10 +755,10 @@
                                 VerticalAlignment="Center"
                                 Source="/Assets/props/pencil-line.ico" />
 
-                        </Button>
+                        </buttons:EntryModifierButton>
 
                         <!--  delete file/folder  -->
-                        <Button
+                        <buttons:EntryModifierButton
                             Grid.Column="5"
                             Width="32"
                             Height="32"
@@ -775,7 +773,7 @@
                                 VerticalAlignment="Center"
                                 Source="/Assets/props/trash-2.ico" />
 
-                        </Button>
+                        </buttons:EntryModifierButton>
 
                         <Line
                             Grid.Column="7"

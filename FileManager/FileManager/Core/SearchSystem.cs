@@ -1,5 +1,4 @@
 ﻿using Avalonia.Threading;
-using DynamicData;
 using FileManager.Managers;
 using FileManager.Utils;
 using FileManager.ViewModels;
@@ -16,7 +15,7 @@ namespace FileManager.Core
     public static class SearchSystem
     {
         /*
-         * this makes PathTextBox eligible to recive input for for searching or what to search 
+         * this makes PathTextBox eligible to recive input for for searching or what to search
          * and set AppState to Searching
          */
         public static void RequestForSearching()
@@ -42,13 +41,13 @@ namespace FileManager.Core
 
                 await Task.Run(() => StartSearching(fileName));
 
-                
+
             }
         }
 
         /*
          * This starts the search in different thread and get live output from FD
-         */ 
+         */
         private static void StartSearching(string fileName)
         {
             StringBuilder fd_arg = new StringBuilder($"{fileName} {AppState.GetWindowViewModel().CurrentWorkingDir}");
@@ -56,7 +55,7 @@ namespace FileManager.Core
 
             Console.WriteLine($"Fd args: {fd_arg}");
 
-            
+
 
             Process process = new Process
             {
@@ -107,7 +106,7 @@ namespace FileManager.Core
                         Dispatcher.UIThread.InvokeAsync(() =>
                         {
                             AppState.GetWindowViewModel().CurrentLoadedEntires.AddRange(_tempEntries);
-                            _tempEntries.Clear(); 
+                            _tempEntries.Clear();
                         });
                     }
 

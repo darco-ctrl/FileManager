@@ -36,12 +36,15 @@ namespace FileManager.Controls.Buttons
 
         private void ManageIsEnabled()
         {
+            //Console.WriteLine("Managing IsEnabled");
             if (AppState.GetWindow().MainEntryList.SelectedItem == null)
             {
+                Opacity = 0.5;
                 IsEnabled = false;
             }
             else
             {
+                Opacity = 1;
                 IsEnabled = true;
             }
         }

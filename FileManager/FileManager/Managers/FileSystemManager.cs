@@ -15,7 +15,7 @@ namespace FileManager.Managers
     {
         /*
          * this is the function called at the starting inside App.axaml.cs
-         * and this is called to display and update UI on first 
+         * and this is called to display and update UI on first
          */
         public static void StartUpSetup()
         {
@@ -25,8 +25,8 @@ namespace FileManager.Managers
 
         /*
          * when ever CurrentDir inside MainWindowViewModel is changed this function is called
-         * to display new dir list of CurrentDir 
-         * 
+         * to display new dir list of CurrentDir
+         *
          * IF YOU NEED FURTHER EXPLANATION FOR THIS CHECK CONSOLE VERSION OF THIS
          */
         public static void RefreshDir()
@@ -37,22 +37,27 @@ namespace FileManager.Managers
             var entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir).ToArray();
 
             foreach (var entry in entries)
-            {   
+            {
                 if (!FileManagerHelper.IsEntryInBlackList(entry)) { continue; }
 
                 EntryItemViewModel entryItem = DynamicControlManager.CreateEntryItem(entry);
                 AppState.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
                 //Console.WriteLine($"{entry}");
             }
+
+            if (AppState.GetWindow().MainEntryList.SelectedItems != null)
+            {
+                AppState.GetWindow().MainEntryList.SelectedItems?.Clear();
+            }
         }
         /*
          * When pressed Backspace or asgined key for GoBackOne in 'InputManager.KeyActionSet'
          * this makes go back one step if user is in
          * C:\user\user_name
-         * when function is called on this path it goes into 
+         * when function is called on this path it goes into
          * C:\user
          * and set this as CurrentWorkingDir
-         * 
+         *
          */
         public static void GoBackOne()
         {
@@ -66,11 +71,11 @@ namespace FileManager.Managers
 
         /*
          * This is manual way to make PathTextBox TwoWay i didnt use avalonia
-         * Mode=TwoWay becuase the user input could be a preall path or not 
+         * Mode=TwoWay becuase the user input could be a preall path or not
          * so i made manual
-         * 
+         *
          * after PathTextBox enters TextChanging and Enter key is pressed tis Function is called
-         * this function checks if Dir exists (not path itself) if its file it wont work either 
+         * this function checks if Dir exists (not path itself) if its file it wont work either
          * it must be a Directory
          */
         public static void PathBoxTryingToSetNewPath(string? path)
@@ -86,7 +91,7 @@ namespace FileManager.Managers
         }
 
 
-        
+
         /*
          * this runs at the start of program
          * fetching all current drives inside pc
@@ -100,7 +105,7 @@ namespace FileManager.Managers
 
             // Gets all drives and saves in drives
             DriveInfo[] drives = DriveInfo.GetDrives();
-            
+
             foreach (var drive in drives)
             {
                 // Checks if drive is Ready or not dont complain me thats littrally the description says too -_-
@@ -118,7 +123,7 @@ namespace FileManager.Managers
             return drivesList; // well who knows what this line does :D ig you have to figure this out yourself
         }
 
-        // Idk why i named that i didnt get any better name so its that 
+        // Idk why i named that i didnt get any better name so its that
         // so this code checks if anything is added like any other device for example
         // your USB stick or something similar to it this is running in different thread
         public static void StartExternalDrivesWatcher(MainWindowViewModel mainWindowVM)
@@ -139,7 +144,7 @@ namespace FileManager.Managers
 
 
             // so this activates when a WMI event is occured
-            // if so we subscribe (or lambda) to it 
+            // if so we subscribe (or lambda) to it
             // where 'sender' is our 'watcher'
             // and e is the arguement which contains event data that we need
 
@@ -166,32 +171,32 @@ namespace FileManager.Managers
                 if (driveName != null)
                 {
                     /*
-                     * This is to change stuff in UI or update UI 
-                     * since Avalonia UI updates in UIthread 
-                     * we cant do in different thread which watcher is runnning so we doing this 
+                     * This is to change stuff in UI or update UI
+                     * since Avalonia UI updates in UIthread
+                     * we cant do in different thread which watcher is runnning so we doing this
                      * i will try to explain as i can
-                     * 
+                     *
                      * 'Dispatcher' its an class in 'Avalonia.Threading' which manages threading for the UI
                      * it just make sure all UI stuff update in 'UIThread'
-                     * 
+                     *
                      * 'UIThread' this is main Ui thread where all ui is updated in avalonia
-                     * 
+                     *
                      * 'InvokeAsync()' this schedule a code to run on 'UIThread' asynchronously
                      * here it does not block the thread it just queues it and run it later so its scheduling like i said
-                     * 
+                     *
                      * and Lambda experssion a mini Function i would say
                      * () => {}
                      * ^^
                      * parameters for the functions inside or code block inside '{}' so quick way to make a function without making a function?
                      * you can imagin as you want basically it just makes a mini function yes ofc you can make a function outside and call that but
                      * you would have to pass everything needed like 'eventType' and stuff
-                     * 
+                     *
                      * here we paremters empty as i know they are not empty most of the time when subscribed like
                      * += (sender, e) like we did above
                      *
                     Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        
+
 
                         if (eventType == 2) // if drive is added
                         {

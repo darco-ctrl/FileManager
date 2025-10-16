@@ -29,6 +29,7 @@ namespace FileManager.Views
 
             this.KeyUp += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyUp(e);
             this.KeyDown += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyDown(e);
+
         }
 
         #region Button Pressed
@@ -73,7 +74,7 @@ namespace FileManager.Views
             if (selectedItem != null)
             {
                 DynamicControlManager.ClipBoardItem = selectedItem.HoldingPath;
-                DynamicControlManager.NoneMoveCopy = 2; 
+                DynamicControlManager.NoneMoveCopy = 2;
             }
 
             /*
@@ -142,7 +143,7 @@ namespace FileManager.Views
 
         #endregion
 
-        #region Navigation Events 
+        #region Navigation Events
 
         /*
          * What this do is when an Entry like file or folder is clicked it try to set it as current Dir
@@ -161,7 +162,7 @@ namespace FileManager.Views
         /*
          * after CurrentWorkingDir is updated this is called to update PathTextBox i made it into a function becuase
          * i can add stuff what to do before or after it is upated like now i added if its searching if so dont update
-         * just return 
+         * just return
          * it helpfull cuz i dont have to add this if statement everywhere
          */
         public void UpdatePathBlockText()
@@ -194,7 +195,7 @@ namespace FileManager.Views
          * this is to regain focus back to window when pressed somewhere else like lets say if your changing
          * text in PathTextBox and clicked somewhere else inside the window if so window will automatically
          * foucs into itself and this is the function that does that
-         * 
+         *
          * PointerPressed is something from avalonia you can read its doc here > 'https://docs.avaloniaui.net/docs/concepts/input/pointer'
          * it explains it well
          */
@@ -259,7 +260,7 @@ namespace FileManager.Views
         #region Utility
 
         /*
-         * i made this function isntead of using window.Focus if i had to do somethng when i focus in future i 
+         * i made this function isntead of using window.Focus if i had to do somethng when i focus in future i
          * can just add it here instead of going everywhere and changing it
          */
         public void FocusWindow()
