@@ -21,15 +21,16 @@ namespace FileManager.Controls.Buttons
             PointerEntered += (_, __) => Background = ThemeData.HoverBrush;
             PointerExited += (_, __) => Background = Brushes.Transparent;
 
-            DynamicControlManager.OnClipBoardItemChanged += () =>
+            ControlsManager.OnClipBoardItemChanged += () =>
             {
                 CheckForClipBoard();
             };
+            CheckForClipBoard();
         }
 
         private void CheckForClipBoard()
         {
-            if (string.IsNullOrWhiteSpace(DynamicControlManager.ClipBoardItem))
+            if (string.IsNullOrWhiteSpace(ControlsManager.ClipBoardItem))
             {
                 Opacity = 0.5;
                 IsEnabled = false;

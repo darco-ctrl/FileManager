@@ -30,18 +30,18 @@ namespace FileManager.Managers
             {
                 _title = "Rename";
                 _waterMark = "New name";
-                
-                
-                
-                if (Directory.Exists(DynamicControlManager.RenameEntry))
+
+
+
+                if (Directory.Exists(ControlsManager.RenameEntry))
                 {
-                    _text = new DirectoryInfo(DynamicControlManager.RenameEntry).Name;
+                    _text = new DirectoryInfo(ControlsManager.RenameEntry).Name;
                 } else
                 {
-                    _text = $"{Path.GetFileName(DynamicControlManager.RenameEntry)}";
+                    _text = $"{Path.GetFileName(ControlsManager.RenameEntry)}";
                 }
             }
-            
+
             NemeReturnWindow.ShowWindow(FileOperation.CreatingDecider, _title, _waterMark, state, _text);
 
         }

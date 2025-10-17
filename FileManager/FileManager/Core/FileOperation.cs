@@ -1,4 +1,4 @@
-﻿using FileManager.Managers;
+﻿﻿using FileManager.Managers;
 using FileManager.Utils;
 using Microsoft.VisualBasic.FileIO;
 using System;
@@ -12,7 +12,7 @@ namespace FileManager.Core
     public static class FileOperation // File Operation
     {
 
-        public enum OperationState 
+        public enum OperationState
         {
             NONE,
             RENAME,
@@ -51,7 +51,7 @@ namespace FileManager.Core
                 _ = CopyDirector(src, destination);
 
             }
-            else if (File.Exists(src)) 
+            else if (File.Exists(src))
             {
                 Console.WriteLine("Path is detected as a File Excuting method");
                 _ = Copy(src, destination);
@@ -96,7 +96,7 @@ namespace FileManager.Core
 
         public static void MoveEntry(string src, string dest)
         {
-            if (Directory.Exists(src)) 
+            if (Directory.Exists(src))
             {
                 string _dest = Path.Combine(dest, GetFolderName(src));
                 Directory.Move(src, _dest);
@@ -133,10 +133,10 @@ namespace FileManager.Core
             } else if (state == OperationState.CREATE_FOLDER)
             {
                 CreateDir(Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, entry_name));
-            } else if (state == OperationState.RENAME && DynamicControlManager.RenameEntry != null)
+            } else if (state == OperationState.RENAME && ControlsManager.RenameEntry != null)
             {
-                MoveEntry(DynamicControlManager.RenameEntry, Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, entry_name));
-                DynamicControlManager.RenameEntry = null;
+                MoveEntry(ControlsManager.RenameEntry, Path.Combine(AppState.GetWindowViewModel().CurrentWorkingDir, entry_name));
+                ControlsManager.RenameEntry = null;
             }
         }
 
@@ -164,6 +164,11 @@ namespace FileManager.Core
             FileSystemManager.RefreshDir();
 
             Console.WriteLine("CreatedFile");
+        }
+
+        public static string GetUserLocation()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         }
 
         #endregion

@@ -40,7 +40,7 @@ namespace FileManager.Managers
             {
                 if (!FileManagerHelper.IsEntryInBlackList(entry)) { continue; }
 
-                EntryItemViewModel entryItem = DynamicControlManager.CreateEntryItem(entry);
+                EntryItemViewModel entryItem = ControlsManager.CreateEntryItem(entry);
                 AppState.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
                 //Console.WriteLine($"{entry}");
             }

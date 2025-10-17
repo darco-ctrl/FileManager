@@ -79,7 +79,7 @@ namespace FileManager.Core
 
                 if (!string.IsNullOrWhiteSpace(e.Data))
                 {
-                    EntryItemViewModel entryItem = DynamicControlManager.CreateEntryItem(e.Data);
+                    EntryItemViewModel entryItem = ControlsManager.CreateEntryItem(e.Data);
 
 
 

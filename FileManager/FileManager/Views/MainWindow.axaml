@@ -18,7 +18,7 @@
     ExtendClientAreaToDecorationsHint="True"
     Focusable="True"
     Icon="/Assets/avalonia-logo.ico"
-    PointerPressed="PointerPresed"
+    PointerPressed="WindowPointerPressed"
     mc:Ignorable="d">
 
     <Design.DataContext>
@@ -519,7 +519,8 @@
                             Height="32"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Background="Transparent">
+                            Background="Transparent"
+                            Click="PreviousDirButtonClicked">
 
                             <Image
                                 Width="24"
@@ -537,7 +538,8 @@
                             Height="32"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Background="Transparent">
+                            Background="Transparent"
+                            Click="ForwardDirButtonClicked">
 
 
                             <Image
@@ -574,7 +576,8 @@
                             Height="32"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Background="Transparent">
+                            Background="Transparent"
+                            Click="RefreshButtonClicked">
 
                             <Image
                                 Width="24"
@@ -788,7 +791,8 @@
                             Width="32"
                             Height="32"
                             VerticalAlignment="Center"
-                            Background="Transparent">
+                            Background="Transparent"
+                            Click="HomeButtonClicked">
 
                             <Image
                                 Width="24"
