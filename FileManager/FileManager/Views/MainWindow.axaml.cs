@@ -185,9 +185,10 @@ namespace FileManager.Views
          */
         private void OnEntryDoubleTapped(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if (sender is Button but && but.DataContext is EntryItemViewModel entry)
+            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
+            if (selectedItem != null)
             {
-                AppState.GetWindowViewModel().SetCurrentDir(entry.HoldingPath);
+                AppState.GetWindowViewModel().SetCurrentDir(selectedItem.HoldingPath);
             }
         }
 

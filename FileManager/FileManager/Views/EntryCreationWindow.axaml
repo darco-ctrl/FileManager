@@ -27,7 +27,7 @@ ExtendClientAreaTitleBarHeightHint="0"
 
 			<Border Grid.Row="0" Background="#FF555252">
 				<TextBlock
-					x:Name="Title"
+					x:Name="WindowTitleTextBlock"
 					Text="Create Entry"
 					Foreground="White"
 					FontSize="20"

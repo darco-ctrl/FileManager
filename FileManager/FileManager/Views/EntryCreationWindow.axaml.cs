@@ -9,10 +9,12 @@ using System;
 using System.IO;
 using System.Windows;
 
+
 namespace FileManager;
 
 public partial class EntryCreationWindow : Window
 {
+
     private Action<string, FileOperation.OperationState>? ReturnAction;
     private FileOperation.OperationState ReturnWith = FileOperation.OperationState.NONE;
 
@@ -36,7 +38,8 @@ public partial class EntryCreationWindow : Window
         if (string.IsNullOrWhiteSpace(entryName))
         {
             ShowError("Cannot be empty");
-        } else
+        }
+        else
         {
             //Console.WriteLine($"Passed null|empty test");
             //Console.WriteLine($"Testing if path already exists");
@@ -59,12 +62,12 @@ public partial class EntryCreationWindow : Window
 
     public void ShowWindow(Action<string, FileOperation.OperationState> action,
         string _title, string waterMark, FileOperation.OperationState return_with,
-        string text="")
+        string text = "")
     {
         ReturnAction = action;
         ReturnWith = return_with;
 
-        Title.Text = _title;
+        this.WindowTitleTextBlock.Text = _title;
         InputBox.Watermark = waterMark;
 
         InputBox.Text = text;
@@ -76,7 +79,8 @@ public partial class EntryCreationWindow : Window
             InputBox.CaretIndex = i;
             InputBox.SelectionStart = 0;
             InputBox.SelectionEnd = i;
-        } else
+        }
+        else
         {
             InputBox.CaretIndex = i;
             InputBox.SelectionStart = 0;

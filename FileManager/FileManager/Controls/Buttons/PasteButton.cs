@@ -15,7 +15,6 @@ namespace FileManager.Controls.Buttons
         public PasteButton()
         {
 
-
             Background = Brushes.Transparent;
 
             PointerEntered += (_, __) => Background = ThemeData.HoverBrush;
