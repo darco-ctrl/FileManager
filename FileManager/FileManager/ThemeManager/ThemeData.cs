@@ -29,7 +29,7 @@ namespace FileManager.ThemeManager
         public static IBrush AccentColor = new SolidColorBrush(Color.Parse("#155dfc"));
         public static IBrush DarkAccentColor = new SolidColorBrush(Color.Parse("#0041cd"));
         public static IBrush MainBorderBrush = new SolidColorBrush(Color.Parse("#2a2a2a"));
-        public static IBrush TextBrush_1 = new SolidColorBrush(Color.Parse("#ffffff"));
+        public static IBrush TextBrush_1 = new SolidColorBrush(Color.Parse("#d1d5db"));
         public static IBrush TextBrush_2 = new SolidColorBrush(Color.Parse("#959caa"));
         public static IBrush TextBrush_3 = new SolidColorBrush(Color.Parse("#353e47"));
         public static IBrush HoverBrush = new SolidColorBrush(Color.Parse("#292929"));

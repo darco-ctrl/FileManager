@@ -17,9 +17,22 @@ namespace FileManager.Controls.Buttons
 
 
             Background = Brushes.Transparent;
+            Opacity = 0.35;
 
-            PointerEntered += (_, __) => Background = ThemeData.HoverBrush;
-            PointerExited += (_, __) => Background = Brushes.Transparent;
+            PointerEntered += (_, __) => _PointerEveterEvent();
+            PointerExited += (_, __) => _PointerExitedEvent();
+        }
+
+        private void _PointerEveterEvent()
+        {
+            Background = ThemeData.HoverBrush;
+            Opacity = 1;
+        }
+
+        private void _PointerExitedEvent()
+        {
+            Background = Brushes.Transparent;
+            Opacity = 0.35;
         }
     }
 }
