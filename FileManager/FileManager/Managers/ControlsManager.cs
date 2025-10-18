@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls.Primitives;
+using FileManager.ThemeManager;
 using FileManager.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,8 @@ namespace FileManager.Managers
             EntryItemViewModel? entryItem = new EntryItemViewModel
             {
                 Name = Path.GetFileName(entry),
-                HoldingPath = entry
+                HoldingPath = entry,
+                //IconPath = SvgManager.GetSvgPath(entry)
             };
 
             return entryItem;

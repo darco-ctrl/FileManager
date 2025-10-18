@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media;
 using FileManager.Managers;
-using FileManager.Theme;
+using FileManager.ThemeManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;

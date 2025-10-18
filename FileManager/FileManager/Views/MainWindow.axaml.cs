@@ -170,6 +170,11 @@ namespace FileManager.Views
             //Console.WriteLine("No next dir");
         }
 
+        private void GoBackDirButtonClicked(Object sender, RoutedEventArgs e)
+        {
+            FileSystemManager.GoBackOne();
+        }
+
         private void RefreshButtonClicked(Object sender, RoutedEventArgs e)
         {
             FileSystemManager.RefreshDir();

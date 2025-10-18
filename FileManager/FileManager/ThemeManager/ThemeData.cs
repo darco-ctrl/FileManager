@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileManager.Theme
+namespace FileManager.ThemeManager
 {
     /*
      *      Background color : #141414
@@ -13,7 +13,7 @@ namespace FileManager.Theme
         Secondary Color : #1e1e1e
         Accent color : #155dfc # Blue
         PS border color : #2a2a2a
-        
+
         1 TextColor : White
         2 TextColor : #959caa
         3 TextColor : #353E47

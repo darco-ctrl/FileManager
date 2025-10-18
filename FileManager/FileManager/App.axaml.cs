@@ -4,6 +4,7 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using FileManager.Managers;
+using FileManager.ThemeManager;
 using FileManager.Utils;
 using FileManager.ViewModels;
 using FileManager.Views;
@@ -36,6 +37,8 @@ namespace FileManager
             {
                 Console.WriteLine("STARTING APP");
 
+                SvgManager.Init();
+
                 AppState.SetMainWindowViewModel(new MainWindowViewModel());
                 MainWindow? mainWindow = new MainWindow
                 {
@@ -44,10 +47,10 @@ namespace FileManager
                 FileSystemManager.StartUpSetup();
 
                 Console.WriteLine("Main Window and MainWindowViewModel is not empty");
-                
+
                 mainWindow = null;
 
-                // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
+                // Avoid duplicate validations from both Avalonia and the CommunityToolkit.
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
                 desktop.MainWindow = AppState.GetWindow();

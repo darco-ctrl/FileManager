@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using Avalonia.Input;
 using FileManager.Core;
 using FileManager.Utils;
+using FileManager.ViewModels;
+using Avalonia.VisualTree;
+using Avalonia;
+using Avalonia.Controls;
 
 namespace FileManager.Managers
 {
@@ -21,6 +25,7 @@ namespace FileManager.Managers
         {
             KeyActionSet.Add(Key.Back, FileSystemManager.GoBackOne); // Adding Backspace key so user can go back from a dir
             KeyActionSet.Add(Key.Enter, EnterKeyFunction); // Adding Enter key
+            KeyActionSet.Add(Key.H, HKeyFunction);
 
         }
 
@@ -34,6 +39,56 @@ namespace FileManager.Managers
             {
                 KeyActionSet[e.Key]();
                 IsPressed.Add(e.Key);
+            }
+        }
+
+    public static T? FindChild<T>(Visual parent) where T : class
+    {
+        foreach (var child in parent.GetVisualChildren())
+        {
+            if (child is T t)
+                return t;
+
+            if (child is Visual visualChild)
+            {
+                var result = FindChild<T>(visualChild);
+                if (result != null)
+                    return result;
+            }
+        }
+        return null;
+    }
+
+    public static IEnumerable<T> FindChildren<T>(Visual parent) where T : class
+    {
+        foreach (var child in parent.GetVisualChildren())
+        {
+            if (child is T t)
+                yield return t;
+
+            if (child is Visual visualChild)
+            {
+                foreach (var grandChild in FindChildren<T>(visualChild))
+                    yield return grandChild;
+            }
+        }
+    }
+
+        private void HKeyFunction()
+        {
+            Console.WriteLine("pritng image status");
+            EntryItemViewModel? selectedItem_entry = AppState.GetWindow().MainEntryList.SelectedItem as EntryItemViewModel;
+            ListBoxItem? selectedItem = AppState.GetWindow().MainEntryList.SelectedItem as ListBoxItem;
+            if (selectedItem != null)
+            {
+
+                Image? _image = FindChild<Image>(selectedItem);
+                if (_image == null) return;
+
+                Console.WriteLine($"Source : {_image.Source}");
+                if (selectedItem_entry == null) return;
+                Console.WriteLine($"Icon path : {selectedItem_entry.IconPath}");
+
             }
         }
 

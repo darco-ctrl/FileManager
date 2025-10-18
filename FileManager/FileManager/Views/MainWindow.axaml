@@ -1,5 +1,6 @@
 <Window
     x:Class="FileManager.Views.MainWindow"
+
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:buttons="using:FileManager.Controls.Buttons"
@@ -7,6 +8,7 @@
     xmlns:local="using:FileManager"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:FileManager.ViewModels"
+
     Title="FileManager"
     Width="1620"
     Height="920"
@@ -558,7 +560,8 @@
                             Height="32"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Background="Transparent">
+                            Background="Transparent"
+                            Click="GoBackDirButtonClicked">
 
                             <Image
                                 Width="24"
@@ -954,16 +957,33 @@
                         <!--  Items Panel with virtualization  -->
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <VirtualizingStackPanel />
+                                <VirtualizingStackPanel/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock
-                                    Padding="10,0,0,0"
-                                    Foreground="White"
-                                    Text="{Binding Name}" />
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image
+                                    Grid.Column="0"
+                                    Source="{Binding IconPath}"
+                                    Width="24"
+                                    Height="24"
+                                    />
+
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        Grid.Column="1"
+                                        Padding="10,0,0,0"
+                                        Foreground="White"
+                                        Text="{Binding Name}"/>
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
