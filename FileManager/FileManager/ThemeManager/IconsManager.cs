@@ -9,7 +9,7 @@ using System.IO;
 
 namespace FileManager.ThemeManager
 {
-    public static class SvgManager
+    public static class IconsManager
     {
 
         private static readonly HashSet<string> AudioExtensions = new()
@@ -27,7 +27,7 @@ namespace FileManager.ThemeManager
             ".png", "jpg", ".jpeg", ".bmp", ".gif", ".svg"
         };
 
-        private static StringBuilder EntriesIcon = new StringBuilder("Assets/EntriesIcons/");
+        private static StringBuilder EntriesIcon = new StringBuilder("avares://FileManager/Assets/EntriesIcons/");
 
         private enum EntryType : byte
         {
@@ -42,17 +42,17 @@ namespace FileManager.ThemeManager
 
         public static void Init()
         {
-            EntryIcons.Add(EntryType.FILE, new StringBuilder("file-text.svg"));
-            EntryIcons.Add(EntryType.FOLDER, new StringBuilder("folder.svg"));
-            EntryIcons.Add(EntryType.IMAGE, new StringBuilder("image.svg"));
-            EntryIcons.Add(EntryType.AUDIO , new StringBuilder("audio.svg"));
-            EntryIcons.Add(EntryType.VIDEO , new StringBuilder("video.svg"));
+            EntryIcons.Add(EntryType.FILE, new StringBuilder("file-text.png"));
+            EntryIcons.Add(EntryType.FOLDER, new StringBuilder("folder.png"));
+            EntryIcons.Add(EntryType.IMAGE, new StringBuilder("image.png"));
+            EntryIcons.Add(EntryType.AUDIO , new StringBuilder("audio.png"));
+            EntryIcons.Add(EntryType.VIDEO , new StringBuilder("video.png"));
         }
 
-        public static string GetSvgPath(string entry_path)
+        public static string GetIconPath(string entry_path)
         {
-            EntryType _entryType;
-            StringBuilder result = EntriesIcon;
+            EntryType _entryType = EntryType.FILE;
+            StringBuilder resultString = new StringBuilder(EntriesIcon.ToString());
 
             if (Directory.Exists(entry_path))
             {
@@ -63,8 +63,11 @@ namespace FileManager.ThemeManager
                 _entryType = GetFileType(entry_path);
             }
 
-            result.Append(EntryIcons[_entryType]);
-            return result.ToString();
+            resultString.Append(EntryIcons[_entryType]);
+
+            Console.WriteLine($"Result IconPath: {resultString.ToString()}");
+
+            return resultString.ToString();
         }
 
         private static EntryType GetFileType(string path)

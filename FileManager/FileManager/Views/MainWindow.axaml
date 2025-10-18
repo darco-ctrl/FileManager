@@ -971,10 +971,9 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Image
-                                    Grid.Column="0"
-                                    Source="{Binding IconPath}"
-                                    Width="24"
-                                    Height="24"
+                                        Source="{Binding Icon}"
+                                        Width="24"
+                                        Height="24"
                                     />
 
                                     <TextBlock

@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using Avalonia.Platform;
+using Avalonia;
 
 
 namespace FileManager.Views
@@ -20,6 +22,8 @@ namespace FileManager.Views
     public partial class MainWindow : Window
     {
         private InputManager IM { get; set; } = new();
+
+
 
         public MainWindow()
         {
@@ -32,6 +36,20 @@ namespace FileManager.Views
             this.KeyUp += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyUp(e);
             this.KeyDown += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyDown(e);
 
+            /*
+            try
+            {
+                var uri = new Uri("avares://FileManager/Assets/EntriesIcons/folder.svg");
+                using var stream = AssetLoader.Open(uri);
+                var svg = new Svg();
+                svg.Load(stream);
+                Console.WriteLine("SVG loaded successfully!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to load SVG: {ex.Message}");
+            }
+            */
         }
 
         #region Button Pressed

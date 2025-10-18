@@ -39,9 +39,9 @@ namespace FileManager.Managers
             EntryItemViewModel? entryItem = new EntryItemViewModel
             {
                 Name = Path.GetFileName(entry),
-                HoldingPath = entry,
-                //IconPath = SvgManager.GetSvgPath(entry)
+                HoldingPath = entry
             };
+            entryItem.LoadIcon();
 
             return entryItem;
         }

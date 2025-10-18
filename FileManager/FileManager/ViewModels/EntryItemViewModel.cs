@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using System;
+using System.IO;
 using FileManager.ThemeManager;
 
 namespace FileManager.ViewModels
@@ -11,7 +10,15 @@ namespace FileManager.ViewModels
     {
         public string Name { get; set; } = "";
         public string HoldingPath { get; set; } = "";
-        public string IconPath { get; set; } = "{SvgImage /Assets/EntriesIcons/files.svg}";
+        public Bitmap? Icon { get; set; }
         public string? Size { get; set; }
+
+        public void LoadIcon()
+        {
+            var uri = new Uri(IconsManager.GetIconPath(HoldingPath));
+            using var stream = AssetLoader.Open(uri);
+            Icon = new Bitmap(stream);
+        }
+
     }
 }
