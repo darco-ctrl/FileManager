@@ -92,7 +92,7 @@
                         Height="16"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Source="avares://FileManager/Assets/titlebar/minus_32.ico" />
+                        Source="avares://FileManager/Assets/titlebar/minus.png" />
 
                 </Button>
 
@@ -109,7 +109,7 @@
                         Height="16"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Source="avares://FileManager/Assets/titlebar/square_32.ico" />
+                        Source="avares://FileManager/Assets/titlebar/square.png" />
 
                 </Button>
 
@@ -126,7 +126,7 @@
                         Height="16"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Source="avares://FileManager/Assets/titlebar/x_32.ico" />
+                        Source="avares://FileManager/Assets/titlebar/x.png" />
 
                 </Button>
             </Grid>
@@ -184,7 +184,7 @@
                                     Height="24"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Source="avares://FileManager/Assets/props/clock.ico" />
+                                    Source="avares://FileManager/Assets/props/clock.png" />
 
                                 <TextBlock
                                     Grid.Column="1"
@@ -219,7 +219,7 @@
                                     Height="24"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Source="avares://FileManager/Assets/props/download.ico" />
+                                    Source="avares://FileManager/Assets/props/download.png" />
 
                                 <TextBlock
                                     Grid.Column="1"
@@ -254,7 +254,7 @@
                                     Height="24"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Source="avares://FileManager/Assets/props/image.ico" />
+                                    Source="avares://FileManager/Assets/EntriesIcons/image_gray.png" />
 
                                 <TextBlock
                                     Grid.Column="1"
@@ -289,7 +289,7 @@
                                     Height="24"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Source="avares://FileManager/Assets/props/video.ico" />
+                                    Source="avares://FileManager/Assets/EntriesIcons/video_gray.png" />
 
                                 <TextBlock
                                     Grid.Column="1"
@@ -324,7 +324,7 @@
                                     Height="24"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Source="avares://FileManager/Assets/props/file-text.ico" />
+                                    Source="avares://FileManager/Assets/EntriesIcons/file-text_gray.png" />
 
                                 <TextBlock
                                     Grid.Column="1"
@@ -395,7 +395,7 @@
                                         <Image
                                             Width="24"
                                             Height="24"
-                                            Source="avares://FileManager/Assets/props/hard-drive.ico" />
+                                            Source="avares://FileManager/Assets/props/hard-drive.png" />
 
                                     </Border>
 
@@ -413,7 +413,7 @@
                                         <Image
                                             Width="24"
                                             Height="24"
-                                            Source="avares://FileManager/Assets/props/trash-2.ico" />
+                                            Source="avares://FileManager/Assets/props/trash-2.png" />
 
                                     </Button>
 
@@ -529,7 +529,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="avares://FileManager/Assets/props/chevron-left.ico" />
+                                Source="avares://FileManager/Assets/props/chevron-left.png" />
 
                         </Button>
 
@@ -549,7 +549,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="avares://FileManager/Assets/props/chevron-right.ico" />
+                                Source="avares://FileManager/Assets/props/chevron-right.png" />
 
                         </Button>
 
@@ -568,7 +568,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="/Assets/props/chevron-up.ico" />
+                                Source="/Assets/props/chevron-up.png" />
 
                         </Button>
 
@@ -587,7 +587,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="avares://FileManager/Assets/props/rotate-cw.ico" />
+                                Source="avares://FileManager/Assets/props/rotate-cw.png" />
 
                         </Button>
 
@@ -647,7 +647,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--  new button  -->
-                        <Button
+                        <buttons:NewButton
                             Grid.Column="0"
                             Width="120"
                             Height="40"
@@ -656,6 +656,13 @@
                             Background="#155dfc"
                             CornerRadius="10">
 
+                            <DropDownButton.Flyout>
+                                <MenuFlyout>
+                                    <MenuItem CornerRadius="10" Width="120" Height="40" Header="New File"/>
+                                    <MenuItem CornerRadius="10" Width="120" Height="40" Header="New Folder"/>
+                                </MenuFlyout>
+                            </DropDownButton.Flyout>
+
                             <StackPanel Orientation="Horizontal" Spacing="10">
 
                                 <Image
@@ -663,7 +670,7 @@
                                     Height="20"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Source="avares://FileManager/Assets/props/plus.ico" />
+                                    Source="avares://FileManager/Assets/props/plus.png" />
 
                                 <TextBlock
                                     HorizontalAlignment="Center"
@@ -677,11 +684,11 @@
                                     Height="20"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Source="avares://FileManager/Assets/props/chevron-down.ico" />
+                                    Source="avares://FileManager/Assets/props/chevron-down.png" />
 
                             </StackPanel>
 
-                        </Button>
+                        </buttons:NewButton>
 
                         <Line
                             Grid.Column="1"
@@ -703,7 +710,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="/Assets/props/folder-input.ico" />
+                                Source="/Assets/props/folder-input.png" />
 
 
                         </buttons:EntryModifierButton>
@@ -723,7 +730,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="/Assets/props/copy.ico" />
+                                Source="/Assets/props/copy.png" />
 
                         </buttons:EntryModifierButton>
 
@@ -741,7 +748,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="/Assets/props/clipboard.ico" />
+                                Source="/Assets/props/clipboard.png" />
 
                         </buttons:PasteButton>
 
@@ -759,7 +766,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="/Assets/props/pencil-line.ico" />
+                                Source="/Assets/props/pencil-line.png" />
 
                         </buttons:EntryModifierButton>
 
@@ -777,7 +784,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="/Assets/props/trash-2.ico" />
+                                Source="/Assets/props/trash-2.png" />
 
                         </buttons:EntryModifierButton>
 
@@ -802,7 +809,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="/Assets/props/house.ico" />
+                                Source="/Assets/props/house.png" />
 
                         </Button>
 
@@ -820,7 +827,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="/Assets/props/arrow-down-up.ico" />
+                                Source="/Assets/props/arrow-up-down.png" />
 
                         </Button>
 
@@ -847,7 +854,7 @@
                                     Height="24"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Source="avares://FileManager/Assets/props/search.ico" />
+                                    Source="avares://FileManager/Assets/props/search.png" />
 
                                 <TextBox
                                     x:Name="SearchTextBox"
@@ -893,7 +900,7 @@
                                         Height="24"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Source="avares://FileManager/Assets/props/grid-3x3.ico" />
+                                        Source="avares://FileManager/Assets/props/grid-3x3.png" />
 
                                 </ToggleButton>
 
@@ -909,7 +916,7 @@
                                         Height="24"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Source="avares://FileManager/Assets/props/list.ico" />
+                                        Source="avares://FileManager/Assets/props/list.png" />
 
                                 </ToggleButton>
 

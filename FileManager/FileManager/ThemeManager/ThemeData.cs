@@ -26,7 +26,8 @@ namespace FileManager.ThemeManager
         public static IBrush BackgroundBrush = new SolidColorBrush(Color.Parse("#141414"));
         public static IBrush PrimaryColor = new SolidColorBrush(Color.Parse("#1a1a1a"));
         public static IBrush SecondayColor = new SolidColorBrush(Color.Parse("#1e1e1e"));
-        public static IBrush SelectionColor = new SolidColorBrush(Color.Parse("#155dfc"));
+        public static IBrush AccentColor = new SolidColorBrush(Color.Parse("#155dfc"));
+        public static IBrush DarkAccentColor = new SolidColorBrush(Color.Parse("#0041cd"));
         public static IBrush MainBorderBrush = new SolidColorBrush(Color.Parse("#2a2a2a"));
         public static IBrush TextBrush_1 = new SolidColorBrush(Color.Parse("#ffffff"));
         public static IBrush TextBrush_2 = new SolidColorBrush(Color.Parse("#959caa"));
