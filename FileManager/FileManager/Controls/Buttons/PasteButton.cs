@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Styling;
+using Avalonia.Animation;
 
 namespace FileManager.Controls.Buttons
 {
@@ -15,10 +17,35 @@ namespace FileManager.Controls.Buttons
         public PasteButton()
         {
 
-            Background = Brushes.Transparent;
+            Styles.Add(new Style(x => x.OfType<PasteButton>())
+            {
+                Setters =
+                {
+                    new Setter
+                    {
+                        Property = TransitionsProperty,
+                        Value = new Transitions
+                        {
+                            new BrushTransition
+                            {
+                                Property = BackgroundProperty,
+                                Duration = TimeSpan.FromMilliseconds(200)
+                            },
+                            new DoubleTransition
+                            {
+                                Property = OpacityProperty,
+                                Duration = TimeSpan.FromMilliseconds(200)
+                            }
+                        }
+                    }
+                }
+            });
+
+            Background = ThemeData.Transparent;
+            Opacity = 0.5;
 
             PointerEntered += (_, __) => Background = ThemeData.HoverBrush;
-            PointerExited += (_, __) => Background = Brushes.Transparent;
+            PointerExited += (_, __) => Background = ThemeData.Transparent;
 
             ControlsManager.OnClipBoardItemChanged += () =>
             {
@@ -31,7 +58,7 @@ namespace FileManager.Controls.Buttons
         {
             if (string.IsNullOrWhiteSpace(ControlsManager.ClipBoardItem))
             {
-                Opacity = 0.5;
+                Opacity = 0.2;
                 IsEnabled = false;
             }
             else

@@ -1,5 +1,8 @@
-﻿using Avalonia.Controls;
+using Avalonia.Animation;
+using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Media;
+using Avalonia.Styling;
 using FileManager.Managers;
 using FileManager.ThemeManager;
 using FileManager.Utils;
@@ -8,17 +11,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Avalonia.Styling;
-using Avalonia.Animation;
 
 namespace FileManager.Controls.Buttons
 {
-    public class EntryModifierButton : Button
+    public class AccentButton : ToggleButton
     {
-        public EntryModifierButton()
+        public AccentButton()
         {
 
-            Styles.Add(new Style(x => x.OfType<EntryModifierButton>())
+            Styles.Add(new Style(x => x.OfType<AccentButton>())
             {
                 Setters =
                 {
@@ -45,35 +46,44 @@ namespace FileManager.Controls.Buttons
             Background = ThemeData.Transparent;
             Opacity = 0.5;
 
-            PointerEntered += (_, __) => Background = ThemeData.HoverBrush;
-            PointerExited += (_, __) => Background = ThemeData.Transparent;
 
-            AppState.GetWindow().Opened += (_, __) =>
-            {
-                var listBox = AppState.GetWindow().MainEntryList;
-                if (listBox != null)
-                {
-                    AppState.GetWindow().MainEntryList.SelectionChanged += (_, __) => ManageIsEnabled();
-                    ManageIsEnabled();
-                }
-            };
-
-
+            PointerEntered += (_, __) => _PointerEveterEvent();
+            PointerExited += (_, __) => _PointerExitedEvent();
+            IsCheckedChanged += (_, __) => OnCheckedChanges();
         }
 
-        private void ManageIsEnabled()
+        private void OnCheckedChanges()
         {
-            //Console.WriteLine("Managing IsEnabled");
-            if (AppState.GetWindow().MainEntryList.SelectedItem == null)
+            Console.WriteLine("Check changed");
+            if (IsChecked == true)
             {
-                Opacity = 0.2;
-                IsEnabled = false;
-            }
-            else
-            {
+                Console.WriteLine("Check was true");
                 Opacity = 1;
-                IsEnabled = true;
+                Background = ThemeData.AccentColor;
+
+            } else
+            {
+                Console.WriteLine("Check was false");
+                Opacity = 0.5;
+                Background = ThemeData.Transparent;
+
             }
+        }
+
+        private void _PointerEveterEvent()
+        {
+            if (IsChecked == true) { return; }
+
+            Background = ThemeData.HoverBrush;
+            Opacity = 1;
+        }
+
+        private void _PointerExitedEvent()
+        {
+            if (IsChecked == true) { return; }
+
+            Background = ThemeData.Transparent;
+            Opacity = 0.5;
         }
     }
 }

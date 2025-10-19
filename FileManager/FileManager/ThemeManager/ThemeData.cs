@@ -23,12 +23,14 @@ namespace FileManager.ThemeManager
 
     public static class ThemeData
     {
+        public static IBrush Transparent = new SolidColorBrush(Color.FromArgb(0, 41, 41, 41));
         public static IBrush BackgroundBrush = new SolidColorBrush(Color.Parse("#141414"));
         public static IBrush PrimaryColor = new SolidColorBrush(Color.Parse("#1a1a1a"));
         public static IBrush SecondayColor = new SolidColorBrush(Color.Parse("#1e1e1e"));
         public static IBrush AccentColor = new SolidColorBrush(Color.Parse("#155dfc"));
         public static IBrush DarkAccentColor = new SolidColorBrush(Color.Parse("#0041cd"));
-        public static IBrush MainBorderBrush = new SolidColorBrush(Color.Parse("#2a2a2a"));
+        public static IBrush DarkBackground = new SolidColorBrush(Color.Parse("#2a2a2a"));
+        public static IBrush AccentWhite = new SolidColorBrush(Color.Parse("#e7e6e6"));
         public static IBrush TextBrush_1 = new SolidColorBrush(Color.Parse("#d1d5db"));
         public static IBrush TextBrush_2 = new SolidColorBrush(Color.Parse("#959caa"));
         public static IBrush TextBrush_3 = new SolidColorBrush(Color.Parse("#353e47"));

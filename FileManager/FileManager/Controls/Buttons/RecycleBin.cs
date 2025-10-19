@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Media;
 using FileManager.Managers;
 using FileManager.ThemeManager;
@@ -12,11 +12,10 @@ using Avalonia.Animation;
 
 namespace FileManager.Controls.Buttons
 {
-    public class NormalButton : Button
+    public class RecycleBin : Button
     {
-        public NormalButton()
+        public RecycleBin()
         {
-
             Styles.Add(new Style(x => x.OfType<NormalButton>())
             {
                 Setters =
@@ -41,13 +40,13 @@ namespace FileManager.Controls.Buttons
                 }
             });
 
-            CornerRadius = new Avalonia.CornerRadius(6);
-            Background = ThemeData.Transparent;
+            Background = ThemeData.DarkBackground;
             Opacity = 0.5;
 
             PointerEntered += (_, __) => _PointerEveterEvent();
             PointerExited += (_, __) => _PointerExitedEvent();
         }
+
 
         private void _PointerEveterEvent()
         {
@@ -57,7 +56,7 @@ namespace FileManager.Controls.Buttons
 
         private void _PointerExitedEvent()
         {
-            Background = ThemeData.Transparent;
+            Background = ThemeData.DarkBackground;
             Opacity = 0.5;
         }
     }
