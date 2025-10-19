@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media;
 using FileManager.Managers;
-using FileManager.ThemeManager;
+using FileManager.Theme;
 using FileManager.Utils;
 using System;
 using System.Collections.Generic;
@@ -42,12 +42,12 @@ namespace FileManager.Controls.Buttons
                 }
             });
 
-            Background = ThemeData.Transparent;
+            Background = ThemeManager.Current.Transparent;
             CornerRadius = new Avalonia.CornerRadius(6);
             Opacity = 0.5;
 
-            PointerEntered += (_, __) => Background = ThemeData.HoverBrush;
-            PointerExited += (_, __) => Background = ThemeData.Transparent;
+            PointerEntered += (_, __) => Background = ThemeManager.Current.HoverBrush;
+            PointerExited += (_, __) => Background = ThemeManager.Current.Transparent;
 
             AppState.GetWindow().Opened += (_, __) =>
             {

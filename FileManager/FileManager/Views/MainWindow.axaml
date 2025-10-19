@@ -9,7 +9,7 @@
     xmlns:local="using:FileManager"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:FileManager.ViewModels"
-    xmlns:theme="using:FileManager.ThemeManager"
+    xmlns:theme="using:FileManager.Theme"
 
     Title="FileManager"
     Width="1620"
@@ -79,7 +79,7 @@
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     FontSize="15"
-                    Foreground="{x:Static theme:ThemeData.TextBrush_1}"
+                    Foreground="{Binding TextBrush_1, Source={x:Static theme:ThemeManager.Current}}"
                     Text="File Manager" />
 
                 <!--  minimize  -->
@@ -190,7 +190,7 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     FontSize="18"
-                                    Foreground="{x:Static theme:ThemeData.AccentWhite}"
+                                    Foreground="{Binding AccentWhite, Source={x:Static theme:ThemeManager.Current}}"
                                     Text="Recent"
                                     TextAlignment="Center" />
 
@@ -224,7 +224,7 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     FontSize="18"
-                                    Foreground="{x:Static theme:ThemeData.AccentWhite}"
+                                    Foreground="{Binding AccentWhite, Source={x:Static theme:ThemeManager.Current}}"
                                     Text="Downloads"
                                     TextAlignment="Center" />
 
@@ -258,7 +258,7 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     FontSize="18"
-                                    Foreground="{x:Static theme:ThemeData.AccentWhite}"
+                                    Foreground="{Binding AccentWhite, Source={x:Static theme:ThemeManager.Current}}"
                                     Text="Photos"
                                     TextAlignment="Center" />
 
@@ -292,7 +292,7 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     FontSize="18"
-                                    Foreground="{x:Static theme:ThemeData.AccentWhite}"
+                                    Foreground="{Binding AccentWhite, Source={x:Static theme:ThemeManager.Current}}"
                                     Text="Videos"
                                     TextAlignment="Center" />
 
@@ -326,7 +326,7 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     FontSize="18"
-                                    Foreground="{x:Static theme:ThemeData.AccentWhite}"
+                                    Foreground="{Binding AccentWhite, Source={x:Static theme:ThemeManager.Current}}"
                                     Text="Documents"
                                     TextAlignment="Center" />
 
@@ -360,7 +360,7 @@
                                 Grid.Row="1"
                                 Padding="15"
                                 Background="#1e1e1e"
-                                CornerRadius="10">
+                                CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}">
 
                                 <Grid ColumnSpacing="10" RowSpacing="10">
 
@@ -418,7 +418,7 @@
                                         Grid.Column="1"
                                         VerticalAlignment="Bottom"
                                         FontSize="12"
-                                        Foreground="{x:Static theme:ThemeData.TextBrush_1}"
+                                        Foreground="{Binding TextBrush_1, Source={x:Static theme:ThemeManager.Current}}"
                                         Text="Local Disk (C:)" />
 
                                     <!--  Total volume size  -->
@@ -439,7 +439,7 @@
                                         Grid.ColumnSpan="3"
                                         Height="10"
                                         Background="#2a2a2a"
-                                        CornerRadius="10"
+                                        CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}"
                                         Foreground="#155dfc"
                                         Maximum="100"
                                         Minimum="0"
@@ -599,7 +599,7 @@
                                 x:Name="PathTextBox"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center"
-                                Foreground="{x:Static theme:ThemeData.TextBrush_1}" />
+                                Foreground="{Binding TextBrush_1, Source={x:Static theme:ThemeManager.Current}}" />
 
                         </Border>
 
@@ -643,12 +643,12 @@
                             Padding="10,0,10,0"
                             VerticalAlignment="Center"
                             Background="#155dfc"
-                            CornerRadius="10">
+                            CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}">
 
                             <DropDownButton.Flyout>
                                 <MenuFlyout>
                                     <MenuItem
-                                        CornerRadius="10"
+                                        CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}"
                                         Width="120"
                                         Height="40"
                                         Header="New Folder">
@@ -656,7 +656,7 @@
                                     </MenuItem>
 
                                     <MenuItem
-                                        CornerRadius="10"
+                                        CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}"
                                         Width="120"
                                         Height="40"
                                         Header="New File">
@@ -678,7 +678,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     FontSize="18"
-                                    Foreground="{x:Static theme:ThemeData.AccentWhite}"
+                                    Foreground="{Binding AccentWhite, Source={x:Static theme:ThemeManager.Current}}"
                                     Text="New" />
 
                                 <Image
@@ -857,11 +857,10 @@
                                     Grid.Column="1"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
-                                    BorderBrush="{x:Static theme:ThemeData.Transparent}"
-                                    Background="{x:Static theme:ThemeData.Transparent}"
-                                    BorderThickness="0"
+                                    BorderBrush="{Binding Transparent, Source={x:Static theme:ThemeManager.Current}}"
+                                    Background="{Binding Transparent, Source={x:Static theme:ThemeManager.Current}}"
                                     FontSize="20"
-                                    Foreground="{x:Static theme:ThemeData.AccentWhite}"
+                                    Foreground="{Binding AccentWhite, Source={x:Static theme:ThemeManager.Current}}"
                                     TextAlignment="Left"
                                     Watermark="Search">
                                 </TextBox>
@@ -876,7 +875,7 @@
                             Width="70"
                             Height="40"
                             Background="#2a2a2a"
-                            CornerRadius="10">
+                            CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}">
 
                             <Grid>
 
@@ -890,7 +889,7 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Background="Transparent"
-                                    CornerRadius="10">
+                                    CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}">
 
                                     <Image
                                         Width="24"
@@ -906,7 +905,7 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Background="Transparent"
-                                    CornerRadius="10">
+                                    CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}">
 
                                     <Image
                                         Width="24"
@@ -986,7 +985,7 @@
                                         VerticalAlignment="Center"
                                         Grid.Column="1"
                                         Padding="10,0,0,0"
-                                        Foreground="{x:Static theme:ThemeData.TextBrush_1}"
+                                        Foreground="{Binding TextBrush_1, Source={x:Static theme:ThemeManager.Current}}"
                                         Text="{Binding Name}"/>
                                 </Grid>
                             </DataTemplate>

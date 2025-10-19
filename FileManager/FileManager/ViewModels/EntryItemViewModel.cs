@@ -2,7 +2,7 @@
 using Avalonia.Platform;
 using System;
 using System.IO;
-using FileManager.ThemeManager;
+using FileManager.Theme;
 
 namespace FileManager.ViewModels
 {

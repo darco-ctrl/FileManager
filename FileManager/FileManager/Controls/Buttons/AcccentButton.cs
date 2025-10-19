@@ -4,7 +4,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Styling;
 using FileManager.Managers;
-using FileManager.ThemeManager;
+using FileManager.Theme;
 using FileManager.Utils;
 using System;
 using System.Collections.Generic;
@@ -43,7 +43,7 @@ namespace FileManager.Controls.Buttons
                 }
             });
 
-            Background = ThemeData.Transparent;
+            Background = ThemeManager.Current.Transparent;
             Opacity = 0.5;
 
 
@@ -59,13 +59,13 @@ namespace FileManager.Controls.Buttons
             {
                 Console.WriteLine("Check was true");
                 Opacity = 1;
-                Background = ThemeData.AccentColor;
+                Background = ThemeManager.Current.AccentColor;
 
             } else
             {
                 Console.WriteLine("Check was false");
                 Opacity = 0.5;
-                Background = ThemeData.Transparent;
+                Background = ThemeManager.Current.Transparent;
 
             }
         }
@@ -74,7 +74,7 @@ namespace FileManager.Controls.Buttons
         {
             if (IsChecked == true) { return; }
 
-            Background = ThemeData.HoverBrush;
+            Background = ThemeManager.Current.HoverBrush;
             Opacity = 1;
         }
 
@@ -82,7 +82,7 @@ namespace FileManager.Controls.Buttons
         {
             if (IsChecked == true) { return; }
 
-            Background = ThemeData.Transparent;
+            Background = ThemeManager.Current.Transparent;
             Opacity = 0.5;
         }
     }

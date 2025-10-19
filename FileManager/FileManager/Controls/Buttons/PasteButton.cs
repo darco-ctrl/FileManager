@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media;
 using FileManager.Managers;
-using FileManager.ThemeManager;
+using FileManager.Theme;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,11 +41,11 @@ namespace FileManager.Controls.Buttons
                 }
             });
 
-            Background = ThemeData.Transparent;
+            Background = ThemeManager.Current.Transparent;
             Opacity = 0.5;
 
-            PointerEntered += (_, __) => Background = ThemeData.HoverBrush;
-            PointerExited += (_, __) => Background = ThemeData.Transparent;
+            PointerEntered += (_, __) => Background = ThemeManager.Current.HoverBrush;
+            PointerExited += (_, __) => Background = ThemeManager.Current.Transparent;
 
             ControlsManager.OnClipBoardItemChanged += () =>
             {

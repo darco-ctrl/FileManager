@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Media;
 using FileManager.Managers;
-using FileManager.ThemeManager;
+using FileManager.Theme;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +40,7 @@ namespace FileManager.Controls.Buttons
                 }
             });
 
-            Background = ThemeData.DarkBackground;
+            Background = ThemeManager.Current.DarkBackground;
             Opacity = 0.5;
 
             PointerEntered += (_, __) => _PointerEveterEvent();
@@ -50,13 +50,13 @@ namespace FileManager.Controls.Buttons
 
         private void _PointerEveterEvent()
         {
-            Background = ThemeData.HoverBrush;
+            Background = ThemeManager.Current.HoverBrush;
             Opacity = 1;
         }
 
         private void _PointerExitedEvent()
         {
-            Background = ThemeData.DarkBackground;
+            Background = ThemeManager.Current.DarkBackground;
             Opacity = 0.5;
         }
     }

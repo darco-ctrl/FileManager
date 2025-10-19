@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Styling;
-using FileManager.ThemeManager;
+using FileManager.Theme;
 using System;
 
 
@@ -16,13 +16,13 @@ namespace FileManager.Controls.TextBoxs
 
             Background = Brushes.Gray;
             Foreground = Brushes.White;
-            BorderBrush = ThemeData.Transparent;
+            BorderBrush = ThemeManager.Current.Transparent;
 
         }
 
         private void Hovered()
         {
-            Background = ThemeData.Transparent;
+            Background = ThemeManager.Current.Transparent;
         }
     }
 }

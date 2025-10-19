@@ -1,7 +1,7 @@
 using System;
 using Avalonia;
 using Avalonia.Controls;
-using FileManager.ThemeManager;
+using FileManager.Theme;
 using Avalonia.Styling;
 using Avalonia.Animation;
 
@@ -30,10 +30,10 @@ namespace FileManager.Controls.Buttons
                 }
             });
 
-            Background = ThemeData.AccentColor;
+            Background = ThemeManager.Current.AccentColor;
 
-            PointerEntered += (_, __) => Background = ThemeData.DarkAccentColor;
-            PointerExited += (_, __) => Background = ThemeData.AccentColor;
+            PointerEntered += (_, __) => Background = ThemeManager.Current.DarkAccentColor;
+            PointerExited += (_, __) => Background = ThemeManager.Current.AccentColor;
 
         }
     }

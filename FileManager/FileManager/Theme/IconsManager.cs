@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace FileManager.ThemeManager
+namespace FileManager.Theme
 {
     public static class IconsManager
     {

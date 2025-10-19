@@ -4,7 +4,7 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using FileManager.Managers;
-using FileManager.ThemeManager;
+using FileManager.Theme;
 using FileManager.Utils;
 using FileManager.ViewModels;
 using FileManager.Views;

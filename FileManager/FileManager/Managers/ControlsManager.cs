@@ -1,5 +1,5 @@
 ﻿using Avalonia.Controls.Primitives;
-using FileManager.ThemeManager;
+using FileManager.Theme;
 using FileManager.ViewModels;
 using System;
 using System.Collections.Generic;
