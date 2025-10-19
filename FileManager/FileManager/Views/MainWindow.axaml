@@ -4,6 +4,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:buttons="using:FileManager.Controls.Buttons"
+    xmlns:textboxs="using:FileManager.Controls.TextBoxs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FileManager"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -82,7 +83,7 @@
                     Text="File Manager" />
 
                 <!--  minimize  -->
-                <Button
+                <buttons:NormalButton
                     Grid.Column="2"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
@@ -95,14 +96,13 @@
                         VerticalAlignment="Center"
                         Source="avares://FileManager/Assets/titlebar/minus.png" />
 
-                </Button>
+                </buttons:NormalButton>
 
                 <!--  maximize  -->
-                <Button
+                <buttons:NormalButton
                     Grid.Column="3"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    Background="Transparent"
                     Click="MaximizeButtonPressed">
 
                     <Image
@@ -112,14 +112,13 @@
                         VerticalAlignment="Center"
                         Source="avares://FileManager/Assets/titlebar/square.png" />
 
-                </Button>
+                </buttons:NormalButton>
 
                 <!--  close  -->
-                <Button
+                <buttons:NormalButton
                     Grid.Column="4"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    Background="Transparent"
                     Click="CloseButtonPressed">
 
                     <Image
@@ -129,7 +128,7 @@
                         VerticalAlignment="Center"
                         Source="avares://FileManager/Assets/titlebar/x.png" />
 
-                </Button>
+                </buttons:NormalButton>
             </Grid>
         </Border>
 
@@ -858,12 +857,14 @@
                                     Grid.Column="1"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
-                                    BorderBrush="Transparent"
+                                    BorderBrush="{x:Static theme:ThemeData.Transparent}"
+                                    Background="{x:Static theme:ThemeData.Transparent}"
                                     BorderThickness="0"
                                     FontSize="20"
-                                    Foreground="{x:Static theme:ThemeData.TextBrush_1}"
+                                    Foreground="{x:Static theme:ThemeData.AccentWhite}"
                                     TextAlignment="Left"
-                                    Watermark="Search" />
+                                    Watermark="Search">
+                                </TextBox>
 
                             </Grid>
 

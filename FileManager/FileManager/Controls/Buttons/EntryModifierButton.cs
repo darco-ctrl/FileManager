@@ -43,6 +43,7 @@ namespace FileManager.Controls.Buttons
             });
 
             Background = ThemeData.Transparent;
+            CornerRadius = new Avalonia.CornerRadius(6);
             Opacity = 0.5;
 
             PointerEntered += (_, __) => Background = ThemeData.HoverBrush;

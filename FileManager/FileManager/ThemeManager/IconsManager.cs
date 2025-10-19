@@ -65,7 +65,7 @@ namespace FileManager.ThemeManager
 
             resultString.Append(EntryIcons[_entryType]);
 
-            Console.WriteLine($"Result IconPath: {resultString.ToString()}");
+            //Console.WriteLine($"Result IconPath: {resultString.ToString()}");
 
             return resultString.ToString();
         }

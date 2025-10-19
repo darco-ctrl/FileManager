@@ -1,4 +1,5 @@
-﻿using Avalonia.Media;
+﻿using Avalonia;
+using Avalonia.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,5 +36,8 @@ namespace FileManager.ThemeManager
         public static IBrush TextBrush_2 = new SolidColorBrush(Color.Parse("#959caa"));
         public static IBrush TextBrush_3 = new SolidColorBrush(Color.Parse("#353e47"));
         public static IBrush HoverBrush = new SolidColorBrush(Color.Parse("#292929"));
+
+        public static CornerRadius PrimaryCornerRadius = new CornerRadius(10);
+        public static CornerRadius SecondaryConrerRadius = new CornerRadius(6);
     }
 }
