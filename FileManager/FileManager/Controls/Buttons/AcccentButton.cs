@@ -1,8 +1,11 @@
+using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Styling;
+using FileManager.Core;
+using FileManager.Data;
 using FileManager.Managers;
 using FileManager.Theme;
 using FileManager.Utils;
@@ -16,6 +19,15 @@ namespace FileManager.Controls.Buttons
 {
     public class AccentButton : ToggleButton
     {
+
+        public static readonly StyledProperty<byte?> PathProperty = AvaloniaProperty.Register<AccentButton, byte?>(nameof(PathIndex));
+
+        public byte? PathIndex
+        {
+            get => GetValue(PathProperty);
+            set => SetValue(PathProperty, value);
+        }
+
         public AccentButton()
         {
 
@@ -61,7 +73,16 @@ namespace FileManager.Controls.Buttons
                 Opacity = 1;
                 Background = ThemeManager.Current.AccentColor;
 
-            } else
+                if (ControlsManager.CurrentQuickAccessSeleection == this) return;
+                if (ControlsManager.CurrentQuickAccessSeleection != null) ControlsManager.CurrentQuickAccessSeleection.IsChecked = false;
+
+                ControlsManager.CurrentQuickAccessSeleection = this;
+
+                if (PathIndex == null) return;
+                AppState.GetWindowViewModel().SetCurrentDir(DataManager.Current.GetSpacialFolderWithInt(PathIndex.Value));
+
+            }
+            else
             {
                 Console.WriteLine("Check was false");
                 Opacity = 0.5;

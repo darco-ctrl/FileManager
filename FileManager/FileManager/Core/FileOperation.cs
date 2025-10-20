@@ -60,7 +60,7 @@ namespace FileManager.Core
                 Console.WriteLine("It says this file/folder doesnt exists\nidk how this is possible it shouldnt happen");
             }
 
-            //FileManager.RefreshDir();
+            FileSystemManager.RefreshDir();
         }
 
         private static async Task CopyDirector(string sourcePath, string dest)
@@ -164,11 +164,6 @@ namespace FileManager.Core
             FileSystemManager.RefreshDir();
 
             Console.WriteLine("CreatedFile");
-        }
-
-        public static string GetUserLocation()
-        {
-            return Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         }
 
         #endregion

@@ -15,6 +15,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Avalonia.Platform;
 using Avalonia;
+using FileManager.Data;
 
 
 namespace FileManager.Views
@@ -130,7 +131,7 @@ namespace FileManager.Views
                     FileOperation.MoveEntry(ControlsManager.ClipBoardItem, AppState.GetWindowViewModel().CurrentWorkingDir);
                 }
 
-
+                //FileSystemManager.RefreshDir();
                 ControlsManager.ClipBoardItem = null;
             }
         }
@@ -157,7 +158,7 @@ namespace FileManager.Views
 
                 private void HomeButtonClicked(Object sender, RoutedEventArgs e)
         {
-            AppState.GetWindowViewModel().SetCurrentDir(FileOperation.GetUserLocation());
+            AppState.GetWindowViewModel().SetCurrentDir(DataManager.Current.GetSpacialFolder(AppConfigData.SpecialFolderIndex.USER_PROFILE_PATH));
         }
 
         private void PreviousDirButtonClicked(Object sender, RoutedEventArgs e)
@@ -208,6 +209,8 @@ namespace FileManager.Views
          */
         private void OnEntryDoubleTapped(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
+            ControlsManager.SetQuickAccesToNull();
+
             EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
             if (selectedItem != null)
             {

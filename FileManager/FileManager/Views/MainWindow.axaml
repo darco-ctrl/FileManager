@@ -10,6 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:FileManager.ViewModels"
     xmlns:theme="using:FileManager.Theme"
+    xmlns:data="using:FileManager.Data"
 
     Title="FileManager"
     Width="1620"
@@ -169,7 +170,9 @@
                             Height="50"
                             Padding="20,0,20,0"
                             HorizontalAlignment="Stretch"
-                            CornerRadius="15">
+                            CornerRadius="15"
+                            PathIndex="1"
+                        >
 
                             <Grid ColumnSpacing="20">
 
@@ -203,7 +206,9 @@
                             Height="50"
                             Padding="20,0,20,0"
                             HorizontalAlignment="Stretch"
-                            CornerRadius="15">
+                            CornerRadius="15"
+                            PathIndex="3"
+                            >
 
                             <Grid ColumnSpacing="20">
 
@@ -237,7 +242,8 @@
                             Height="50"
                             Padding="20,0,20,0"
                             HorizontalAlignment="Stretch"
-                            CornerRadius="15">
+                            CornerRadius="15"
+                            PathIndex="3">
 
                             <Grid ColumnSpacing="20">
 
@@ -271,7 +277,8 @@
                             Height="50"
                             Padding="20,0,20,0"
                             HorizontalAlignment="Stretch"
-                            CornerRadius="15">
+                            CornerRadius="15"
+                            PathIndex="4">
 
                             <Grid ColumnSpacing="20">
 
@@ -300,12 +307,48 @@
 
                         </buttons:AccentButton>
 
+                        <!-- audio -->
+                        <buttons:AccentButton
+                            Height="50"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Stretch"
+                            CornerRadius="15"
+                            PathIndex="5">
+
+                            <Grid ColumnSpacing="20">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="avares://FileManager/Assets/EntriesIcons/audio_gray.png" />
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="{Binding AccentWhite, Source={x:Static theme:ThemeManager.Current}}"
+                                    Text="Musics"
+                                    TextAlignment="Center" />
+
+                            </Grid>
+
+                        </buttons:AccentButton>
+
                         <!--  Document  -->
                         <buttons:AccentButton
                             Height="50"
                             Padding="20,0,20,0"
                             HorizontalAlignment="Stretch"
-                            CornerRadius="15">
+                            CornerRadius="15"
+                            PathIndex="2">
 
                             <Grid ColumnSpacing="20">
 
@@ -440,7 +483,7 @@
                                         Height="10"
                                         Background="#2a2a2a"
                                         CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}"
-                                        Foreground="#155dfc"
+                                        Foreground="{Binding AccentColor, Source={x:Static theme:ThemeManager.Current}}"
                                         Maximum="100"
                                         Minimum="0"
                                         Value="20" />
@@ -642,7 +685,7 @@
                             Height="40"
                             Padding="10,0,10,0"
                             VerticalAlignment="Center"
-                            Background="#155dfc"
+                            Background="{Binding AccentColor, Source={x:Static theme:ThemeManager.Current}}"
                             CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}">
 
                             <DropDownButton.Flyout>
@@ -651,7 +694,8 @@
                                         CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}"
                                         Width="120"
                                         Height="40"
-                                        Header="New Folder">
+                                        Header="New Folder"
+                                        Click="NewFolderMenuItemClicked">
 
                                     </MenuItem>
 
@@ -659,7 +703,8 @@
                                         CornerRadius="{Binding PrimaryCornerRadius, Source={x:Static theme:ThemeManager.Current}}"
                                         Width="120"
                                         Height="40"
-                                        Header="New File">
+                                        Header="New File"
+                                        Click="NewFileMenuItemClicked">
 
                                     </MenuItem>
                                 </MenuFlyout>
@@ -806,7 +851,7 @@
                                 Height="24"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Source="/Assets/props/plus.png" />
+                                Source="/Assets/props/house.png" />
 
                         </buttons:NormalButton>
 

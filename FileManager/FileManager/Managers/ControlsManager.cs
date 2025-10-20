@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls.Primitives;
+using FileManager.Controls.Buttons;
 using FileManager.Theme;
 using FileManager.ViewModels;
 using System;
@@ -9,6 +10,9 @@ namespace FileManager.Managers
 {
     public static class ControlsManager
     {
+
+        public static AccentButton? CurrentQuickAccessSeleection = null;
+
         private static string? _stringValue;
         public static event Action? OnClipBoardItemChanged;
 
@@ -72,7 +76,7 @@ namespace FileManager.Managers
         {
             if (RecentDirs.Count > 10)
             {
-                 RecentDirs.RemoveAt(0);
+                RecentDirs.RemoveAt(0);
             }
             if (RecentDirs.Count == 0)
             {
@@ -85,6 +89,14 @@ namespace FileManager.Managers
                 RecentDirs.Add(dir);
                 RecentDirIndex = RecentDirs.Count - 1;
             }
+        }
+
+        public static void SetQuickAccesToNull()
+        {
+            if (CurrentQuickAccessSeleection == null) return;
+
+            CurrentQuickAccessSeleection.IsChecked = false;
+            CurrentQuickAccessSeleection = null;
         }
     }
 }

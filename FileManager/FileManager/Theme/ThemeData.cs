@@ -82,7 +82,7 @@ namespace FileManager.Theme
             }
         }
 
-        private IBrush _accentColor = new SolidColorBrush(Color.Parse("#155dfc"));
+        private IBrush _accentColor = new SolidColorBrush(Color.Parse("#155dfc")); //
         public IBrush AccentColor
         {
             get => _accentColor;
@@ -96,7 +96,7 @@ namespace FileManager.Theme
             }
         }
 
-        private IBrush _darkAccentColor = new SolidColorBrush(Color.Parse("#0041cd"));
+        private IBrush _darkAccentColor = new SolidColorBrush(Color.Parse("#0041cd")); //
         public IBrush DarkAccentColor
         {
             get => _darkAccentColor;
