@@ -855,23 +855,6 @@
 
                         </buttons:NormalButton>
 
-
-                        <!--  sort  -->
-                        <buttons:NormalButton
-                            Grid.Column="9"
-                            Width="32"
-                            Height="32"
-                            VerticalAlignment="Center">
-
-                            <Image
-                                Width="24"
-                                Height="24"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Source="/Assets/props/arrow-up-down.png" />
-
-                        </buttons:NormalButton>
-
                         <!--  search  -->
                         <Border
                             Grid.Column="11"

@@ -1,7 +1,10 @@
 ﻿﻿using FileManager.Managers;
 using FileManager.Utils;
+using FileManager.ViewModels;
 using Microsoft.VisualBasic.FileIO;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
