@@ -29,6 +29,9 @@ namespace FileManager.ViewModels
                 CurrentWorkingDir = newPath;
                 FileSystemManager.RefreshDir();
                 AppState.GetWindow().UpdatePathBlockText();
+
+                if (AddToRecent)  ControlsManager.AddToRecentDir(newPath);
+
                 return true;
             }
             return false;

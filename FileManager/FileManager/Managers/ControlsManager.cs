@@ -72,7 +72,7 @@ namespace FileManager.Managers
             return null;
         }
 
-        public static void AddRecentDir(string dir)
+        public static void AddToRecentDir(string dir)
         {
             if (RecentDirs.Count > 10)
             {
@@ -81,14 +81,15 @@ namespace FileManager.Managers
             if (RecentDirs.Count == 0)
             {
                 RecentDirs.Add(dir);
-                RecentDirIndex = 0;
+                RecentDirIndex = RecentDirs.Count - 1;
                 return;
             }
             if (RecentDirs[RecentDirs.Count - 1] != dir)
             {
                 RecentDirs.Add(dir);
-                RecentDirIndex = RecentDirs.Count - 1;
             }
+
+            RecentDirIndex = RecentDirs.Count - 1;
         }
 
         public static void SetQuickAccesToNull()
