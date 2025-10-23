@@ -1,4 +1,5 @@
 ﻿using FileManager.Core;
+using FileManager.Views;
 using System;
 using System.IO;
 
@@ -22,11 +23,13 @@ namespace FileManager.Managers
             {
                 _title = "Folder";
                 _waterMark = "Folder name";
-            } else if (state == FileOperation.OperationState.CREATE_FILE)
+            }
+            else if (state == FileOperation.OperationState.CREATE_FILE)
             {
                 _title = "File";
                 _waterMark = "File name";
-            } else if (state == FileOperation.OperationState.RENAME)
+            }
+            else if (state == FileOperation.OperationState.RENAME)
             {
                 _title = "Rename";
                 _waterMark = "New name";
@@ -36,7 +39,8 @@ namespace FileManager.Managers
                 if (Directory.Exists(ControlsManager.RenameEntry))
                 {
                     _text = new DirectoryInfo(ControlsManager.RenameEntry).Name;
-                } else
+                }
+                else
                 {
                     _text = $"{Path.GetFileName(ControlsManager.RenameEntry)}";
                 }
@@ -44,6 +48,12 @@ namespace FileManager.Managers
 
             NemeReturnWindow.ShowWindow(FileOperation.CreatingDecider, _title, _waterMark, state, _text);
 
+        }
+
+        public static void OpenSettingsWindow()
+        {
+            SettingsWindow settings = new SettingsWindow();
+            settings.Show();
         }
     }
 }

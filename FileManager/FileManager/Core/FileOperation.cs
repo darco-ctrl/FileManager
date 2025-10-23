@@ -1,4 +1,5 @@
-﻿﻿using FileManager.Managers;
+﻿﻿using FileManager.Data;
+using FileManager.Managers;
 using FileManager.Utils;
 using FileManager.ViewModels;
 using Microsoft.VisualBasic.FileIO;
@@ -168,7 +169,12 @@ namespace FileManager.Core
 
             Console.WriteLine("CreatedFile");
         }
-
+        
         #endregion
+
+        public static void OpenSelectedFile(DataManager.Applications app)
+        {
+
+        }
     }
 }

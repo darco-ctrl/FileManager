@@ -37,7 +37,7 @@ namespace FileManager
             {
                 Console.WriteLine("STARTING APP");
 
-                IconsManager.Init();
+                AppState.Initlize();
 
                 AppState.SetMainWindowViewModel(new MainWindowViewModel());
                 MainWindow? mainWindow = new MainWindow

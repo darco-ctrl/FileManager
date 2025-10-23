@@ -1,10 +1,12 @@
 ﻿using FileManager.ViewModels;
 using FileManager.Views;
+using FileManager.Theme;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FileManager.Input;
 
 namespace FileManager.Utils
 {
@@ -50,10 +52,17 @@ namespace FileManager.Utils
             if (windowViewmodel != null)
             {
                 return windowViewmodel;
-            } else
+            }
+            else
             {
                 throw new InvalidOperationException("'MainWindowViewModel' has not been set yet!!");
             }
+        }
+        
+        public static void Initlize()
+        {
+            IconsManager.Init();
+            InputManager.Init();
         }
     }
 }

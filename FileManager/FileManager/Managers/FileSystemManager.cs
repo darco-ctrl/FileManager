@@ -68,7 +68,6 @@ namespace FileManager.Managers
                 AppState.GetWindowViewModel().SetCurrentDir(parent);
             }
         }
-
         /*
          * This is manual way to make PathTextBox TwoWay i didnt use avalonia
          * Mode=TwoWay becuase the user input could be a preall path or not

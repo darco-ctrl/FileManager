@@ -79,7 +79,7 @@ namespace FileManager.Controls.Buttons
                 ControlsManager.CurrentQuickAccessSeleection = this;
 
                 if (PathIndex == null) return;
-                AppState.GetWindowViewModel().SetCurrentDir(DataManager.Current.GetSpacialFolderWithInt(PathIndex.Value));
+                AppState.GetWindowViewModel().SetCurrentDir(DataManager.Current.GetSpacialFolder(PathIndex.Value));
 
             }
             else

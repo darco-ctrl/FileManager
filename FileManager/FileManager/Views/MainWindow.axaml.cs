@@ -7,6 +7,7 @@ using FileManager.Core;
 using FileManager.Managers;
 using FileManager.Utils;
 using FileManager.ViewModels;
+using FileManager.Input;
 using HarfBuzzSharp;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,6 @@ namespace FileManager.Views
 {
     public partial class MainWindow : Window
     {
-        private InputManager IM { get; set; } = new();
-
-
-
         public MainWindow()
         {
             AppState.SetWindow(this);
@@ -34,8 +31,8 @@ namespace FileManager.Views
 
             Position = new Avalonia.PixelPoint(0, 0);
 
-            this.KeyUp += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyUp(e);
-            this.KeyDown += (Object? s, Avalonia.Input.KeyEventArgs e) => IM.OnKeyDown(e);
+            this.KeyUp += (Object? s, Avalonia.Input.KeyEventArgs e) => InputManager.OnKeyUp(e);
+            this.KeyDown += (Object? s, Avalonia.Input.KeyEventArgs e) => InputManager.OnKeyDown(e);
 
             /*
             try
@@ -199,6 +196,12 @@ namespace FileManager.Views
             FileSystemManager.RefreshDir();
         }
 
+        private void SettingsButtonClicked(Object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Creating settings window");
+            MenuManager.OpenSettingsWindow();
+        }
+
         #endregion
 
         #region Navigation Events
@@ -327,10 +330,6 @@ namespace FileManager.Views
         {
             Focus();
         }
-
-        public InputManager GetInputManager() => IM;
-
-
         #endregion
     }
 }

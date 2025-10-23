@@ -1,0 +1,95 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="FileManager.Views.SettingsWindow"
+        Width="400" Height="300"
+    	CanResize="False"
+		SystemDecorations="None"
+		Background="Transparent"
+        xmlns:buttons="using:FileManager.Controls.Buttons">
+	<!--
+ExtendClientAreaToDecorationsHint="True"
+ExtendClientAreaChromeHints="NoChrome"
+ExtendClientAreaTitleBarHeightHint="0"
+	-->
+
+	<Border
+	Background="#FF2D2D2D"
+	CornerRadius="10"
+	ClipToBounds="True"
+	>
+		<Grid>
+			<Grid.RowDefinitions>
+				60, 72, *
+			</Grid.RowDefinitions>
+
+			<Border Grid.Row="0" Background="#FF555252">
+				<TextBlock
+					x:Name="WindowTitleTextBlock"
+					Text="Create Entry"
+					Foreground="White"
+					FontSize="20"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"/>
+			</Border>
+
+			<TextBox
+				x:Name="InputBox"
+				Watermark="File name"
+				Foreground="White"
+				Grid.Row="1"
+				Background="#FF393939"
+				BorderBrush="#FFF89B9B"
+				BorderThickness="1.5"
+				CornerRadius="6"
+				VerticalAlignment="Center"
+				Height="33"
+				Width="420">
+
+			</TextBox>
+
+			<Grid
+				Grid.Row="2"
+				ColumnDefinitions="*,*">
+
+				<Button
+					Grid.Column="0"
+					Background="#FF393939"
+					BorderBrush="#FFF89B9B"
+					BorderThickness="1"
+					CornerRadius="6"
+					VerticalAlignment="Top"
+					HorizontalAlignment="Center"
+					Foreground="White"
+					Height="27"
+					Width="153"
+					
+					>
+					<TextBlock
+						Text="Create"
+						TextAlignment="Center"
+						FontSize="13"/>
+				</Button>
+
+				<Button
+					Grid.Column="1"
+					Background="#FF393939"
+					BorderBrush="#FFF89B9B"
+					BorderThickness="1"
+					CornerRadius="6"
+					VerticalAlignment="Top"
+					HorizontalAlignment="Center"
+					Foreground="White"
+					Height="27"
+					Width="153">
+					<TextBlock
+						Text="Cancel"
+						TextAlignment="Center"
+						FontSize="13"
+						/>
+				</Button>
+
+			</Grid>
+
+		</Grid>
+	</Border>
+</Window>

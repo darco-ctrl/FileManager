@@ -7,21 +7,23 @@ using FileManager.ViewModels;
 using Avalonia.VisualTree;
 using Avalonia;
 using Avalonia.Controls;
+using FileManager.Managers;
+using System.Linq;
 
-namespace FileManager.Managers
+namespace FileManager.Input
 {
-    public class InputManager
+    public static class InputManager
     {
         // KeyDown stores all current key pressed the key is removed from KeyDown when OnKeyUp function is triggered
-        private readonly HashSet<Key> _KeyDown = new();
-        private Dictionary<Key, Action> KeyActionSet = new(); // All keys and functions that tell what it should do
-        private readonly HashSet<Key> IsPressed = new(); // this is to prevent held action
+        private static readonly HashSet<Key> _KeyDown = new();
+        private static Dictionary<Key, Action> KeyActionSet = new(); // All keys and functions that tell what it should do
+        private static readonly HashSet<Key> IsPressed = new(); // this is to prevent held action
 
         // I made key's HashSet and Dictionary becuase its faster than checking each key with if statement
         // with this i can just check if KeyActionSet and get the value all in O(1)
 
         // INPUT MANAGE CONSTRUCTOR
-        public InputManager()
+        public static void Init()
         {
             KeyActionSet.Add(Key.Back, FileSystemManager.GoBackOne); // Adding Backspace key so user can go back from a dir
             KeyActionSet.Add(Key.Enter, EnterKeyFunction); // Adding Enter key
@@ -30,9 +32,10 @@ namespace FileManager.Managers
 
         // When any KeyisDown its added to KeyDown and check if the Key Pressed is in 'KeyActionSet' if so
         // call the action connected to that
-        public void OnKeyDown(KeyEventArgs e)
+        public static void OnKeyDown(KeyEventArgs e)
         {
             _KeyDown.Add(e.Key);
+
 
             if (KeyActionSet.ContainsKey(e.Key) && !IsPressed.Contains(e.Key))
             {
@@ -42,7 +45,7 @@ namespace FileManager.Managers
         }
 
         // I made a EnterKeyFunction becuase Enter key has multiple uses cases
-        private void EnterKeyFunction()
+        private static void EnterKeyFunction()
         {
             if (AppState.GetWindow().PathTextBox.IsFocused)
             {
@@ -58,7 +61,7 @@ namespace FileManager.Managers
         }
 
         // This removes key from _KeyDown
-        public void OnKeyUp(KeyEventArgs e)
+        public static void OnKeyUp(KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
@@ -76,6 +79,15 @@ namespace FileManager.Managers
             }
         }
 
-        public bool IsKeyDown(Key key) => _KeyDown.Contains(key); // check if a key is Down from anywhere
+        private static void CheckIfCanOpenFile()
+        {
+            if (AppState.GetWindow().MainEntryList.SelectedItem == null) return;
+
+            KeyAction _keyAction = new KeyAction(_KeyDown.ToArray());
+
+            
+        }
+
+        public static bool IsKeyDown(Key key) => _KeyDown.Contains(key); // check if a key is Down from anywhere
     }
 }

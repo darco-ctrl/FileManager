@@ -207,7 +207,7 @@
                             Padding="20,0,20,0"
                             HorizontalAlignment="Stretch"
                             CornerRadius="15"
-                            PathIndex="3"
+                            PathIndex="6"
                             >
 
                             <Grid ColumnSpacing="20">
@@ -672,8 +672,8 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
@@ -855,6 +855,24 @@
 
                         </buttons:NormalButton>
 
+
+                        <!--  Settings  -->
+                        <buttons:NormalButton
+                            Grid.Column="10"
+                            Width="32"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            Click="SettingsButtonClicked">
+
+                            <Image
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Source="/Assets/props/settings.png" />
+
+                        </buttons:NormalButton>
+
                         <!--  search  -->
                         <Border
                             Grid.Column="11"
@@ -892,7 +910,6 @@
                                     TextAlignment="Left"
                                     Watermark="Search">
                                 </TextBox>
-
                             </Grid>
 
                         </Border>
