@@ -4,13 +4,13 @@ using Avalonia.Input;
 using Avalonia;
 using Avalonia.Controls.Primitives;
 
-namespace FileManager.Input
+namespace FileManager.Input.Actions
 {
     public class KeyAction
     {
-        public Key[] ActionKey;
+        public HashSet<Key> ActionKey;
 
-        public KeyAction(Key[] keys)
+        public KeyAction(HashSet<Key> keys)
         {
             ActionKey = keys;                        
         }   

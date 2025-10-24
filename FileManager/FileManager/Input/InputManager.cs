@@ -9,6 +9,7 @@ using Avalonia;
 using Avalonia.Controls;
 using FileManager.Managers;
 using System.Linq;
+using FileManager.Input.Actions;
 
 namespace FileManager.Input
 {
@@ -44,13 +45,15 @@ namespace FileManager.Input
             }
         }
 
+
         // I made a EnterKeyFunction becuase Enter key has multiple uses cases
         private static void EnterKeyFunction()
         {
             if (AppState.GetWindow().PathTextBox.IsFocused)
             {
                 FileSystemManager.PathBoxTryingToSetNewPath(AppState.GetWindow().PathTextBox.Text);
-            } else if (AppState.GetWindow().SearchTextBox.IsFocused)
+            }
+            else if (AppState.GetWindow().SearchTextBox.IsFocused)
             {
                 if (!string.IsNullOrWhiteSpace(AppState.GetWindow().SearchTextBox.Text))
                 {
@@ -83,9 +86,9 @@ namespace FileManager.Input
         {
             if (AppState.GetWindow().MainEntryList.SelectedItem == null) return;
 
-            KeyAction _keyAction = new KeyAction(_KeyDown.ToArray());
+            //KeyAction _keyAction = new KeyAction(_KeyDown.ToArray());
 
-            
+
         }
 
         public static bool IsKeyDown(Key key) => _KeyDown.Contains(key); // check if a key is Down from anywhere
