@@ -6,9 +6,9 @@ namespace FileManager.Groups
 {    
     public class ExtGroup
     {
-        public HashSet<DataManager.FileTypes> Extensions = [];
+        public HashSet<string> Extensions = [];
 
-        public ExtGroup(HashSet<DataManager.FileTypes> _extensions)
+        public ExtGroup(HashSet<string> _extensions)
         {
             Extensions = _extensions;   
         }

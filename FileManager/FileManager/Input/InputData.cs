@@ -25,13 +25,29 @@ namespace FileManager.Input
         private void CreateExtGroup()
         {
             string _name = "text docs";
+            ExtGroup _extensionGroup = new ExtGroup(new HashSet<string>
+            {
+                ".txt",
+                ".cs",
+                ".py"
+            });
 
-               
+            ExtGroups.Add(_name, _extensionGroup);
+
+            _name = "photo";
+            _extensionGroup = new ExtGroup(new HashSet<string>
+            {
+                ".png",
+                ".jpg"
+            });
+
+            ExtGroups.Add(_name, _extensionGroup);
+
         }
         
         public void CreateDefaultKeySet()
         {
-            
+                        
         }
     }
 }

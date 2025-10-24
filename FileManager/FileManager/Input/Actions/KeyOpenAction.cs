@@ -13,12 +13,12 @@ namespace FileManager.Input.Actions
     public class KeyOpenAction
     {
 
-        private ExtGroup _extGroup;
+        private string extGroupKey;
         private DataManager.Applications _app;
-
-        public KeyOpenAction(ExtGroup ext_group, DataManager.Applications app)
+// LEFT HERE
+        public KeyOpenAction(string ext, DataManager.Applications app)
         {
-            _extGroup = ext_group;
+            extGroupKey = ext;
             _app = app;
         }
 
