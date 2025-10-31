@@ -16,14 +16,6 @@ namespace FileManager.Data
             MP4
         }
 
-        public enum Applications : byte
-        {
-            VISUAL_STUDIO_CODE,
-            IMAGE_OPENER,
-            MEDIA_PLAYER,
-            NOTEPAD
-        }
-
         public static Dictionary<string, FileTypes> FileTypesTable = new Dictionary<string, FileTypes>();
     
         public static void Init()

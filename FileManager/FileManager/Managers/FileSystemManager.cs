@@ -32,9 +32,22 @@ namespace FileManager.Managers
         public static void RefreshDir()
         {
 
-            Console.WriteLine("Clearing and refresing current dir");
+            //////Console.WriteLine("Clearing and refresing current dir");
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
-            var entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir).ToArray();
+
+            string[] entries; 
+
+            try
+            {
+                entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir).ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                //////Console.WriteLine($"RefreshDir existed with error: {ex}");
+                return;
+            }
+
 
             foreach (var entry in entries)
             {
@@ -42,7 +55,7 @@ namespace FileManager.Managers
 
                 EntryItemViewModel entryItem = ControlsManager.CreateEntryItem(entry);
                 AppState.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
-                //Console.WriteLine($"{entry}");
+                ////////Console.WriteLine($"{entry}");
             }
 
             if (AppState.GetWindow().MainEntryList.SelectedItems != null)
@@ -89,7 +102,16 @@ namespace FileManager.Managers
             AppState.GetWindow().FocusWindow();
         }
 
+        public static string? GetSelectedItemPath() 
+        {
+            EntryItemViewModel? selectedItem = AppState.GetWindow().MainEntryList.SelectedItem as EntryItemViewModel;
 
+            if (selectedItem != null)
+            {
+                return selectedItem.HoldingPath;                
+            }
+            return null;
+        }
 
         /*
          * this runs at the start of program
@@ -98,7 +120,7 @@ namespace FileManager.Managers
          *
         public static ObservableCollection<DriveItemViewModel> FetchThisPC()
         {
-            Console.WriteLine("--------  Recived to make  ------------");
+            //////Console.WriteLine("--------  Recived to make  ------------");
             // Drives to return into 'SidePanelItems' in 'MainWindowViewModel.cs'
             ObservableCollection<DriveItemViewModel> drivesList = new();
 

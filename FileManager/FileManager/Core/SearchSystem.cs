@@ -53,7 +53,7 @@ namespace FileManager.Core
             StringBuilder fd_arg = new StringBuilder($"{fileName} {AppState.GetWindowViewModel().CurrentWorkingDir}");
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
 
-            Console.WriteLine($"Fd args: {fd_arg}");
+            //Console.WriteLine($"Fd args: {fd_arg}");
 
 
 
@@ -110,7 +110,7 @@ namespace FileManager.Core
                         });
                     }
 
-                    Console.WriteLine($"Found: {e.Data}");
+                    //Console.WriteLine($"Found: {e.Data}");
 
                 }
             };

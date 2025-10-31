@@ -13,7 +13,7 @@ namespace FileManager.Managers
         {
             EntryCreationWindow NemeReturnWindow = new EntryCreationWindow();
 
-            Console.WriteLine("MenuManager Requested to create entry");
+            //Console.WriteLine("MenuManager Requested to create entry");
 
             string _title = "";
             string _waterMark = "";

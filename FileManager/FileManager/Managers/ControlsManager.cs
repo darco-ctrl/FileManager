@@ -52,7 +52,7 @@ namespace FileManager.Managers
 
         public static string? GetNextDir()
         {
-            Console.WriteLine($"RecentDirIndex: {RecentDirIndex}, RecentDirs.Count: {RecentDirs.Count}");
+            //Console.WriteLine($"RecentDirIndex: {RecentDirIndex}, RecentDirs.Count: {RecentDirs.Count}");
             if (RecentDirIndex < RecentDirs.Count - 1)
             {
                 RecentDirIndex++;
@@ -63,7 +63,7 @@ namespace FileManager.Managers
 
         public static string? GetPreviousDir()
         {
-            Console.WriteLine($"RecentDirIndex: {RecentDirIndex}, RecentDirs.Count: {RecentDirs.Count}");
+            //Console.WriteLine($"RecentDirIndex: {RecentDirIndex}, RecentDirs.Count: {RecentDirs.Count}");
             if (RecentDirIndex > 0)
             {
                 RecentDirIndex--;

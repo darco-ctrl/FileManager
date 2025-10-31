@@ -6,7 +6,7 @@ using Avalonia.Input;
 using FileManager.Core;
 using DatMan = FileManager.Data.DataManager;
 using FileManager.Input.Actions;
-using FileManager.Groups;
+
 
 namespace FileManager.Input
 {
@@ -15,39 +15,20 @@ namespace FileManager.Input
 
         public Dictionary<KeyAction, KeyOpenAction> ActionSet = new();
 
-        public Dictionary<string, ExtGroup> ExtGroups = [];
-
         public InputData()
         {
             CreateDefaultKeySet();
         }
-
-        private void CreateExtGroup()
-        {
-            string _name = "text docs";
-            ExtGroup _extensionGroup = new ExtGroup(new HashSet<string>
-            {
-                ".txt",
-                ".cs",
-                ".py"
-            });
-
-            ExtGroups.Add(_name, _extensionGroup);
-
-            _name = "photo";
-            _extensionGroup = new ExtGroup(new HashSet<string>
-            {
-                ".png",
-                ".jpg"
-            });
-
-            ExtGroups.Add(_name, _extensionGroup);
-
-        }
         
         public void CreateDefaultKeySet()
         {
-                        
+            KeyAction _keyAction = new KeyAction(new HashSet<Key>
+            {
+                Key.LeftCtrl,
+                Key.V
+            });
+
+            KeyOpenAction _keyOpenAction = new KeyOpenAction(DatMan.Current.AppsPath["vs"]);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace FileManager.Core
                 }
                 else
                 {
-                    Console.WriteLine("It says this file/folder doesnt exists\nidk how this is possible it shouldnt happen");
+                    //Console.WriteLine("It says this file/folder doesnt exists\nidk how this is possible it shouldnt happen");
                 }
             });
 
@@ -47,21 +47,21 @@ namespace FileManager.Core
 
         public static void CopyItem(string src, string destination)
         {
-            Console.WriteLine("Reviced Request to copy");
+            //Console.WriteLine("Reviced Request to copy");
             if (Directory.Exists(src))
             {
-                Console.WriteLine("Path is detected as a Directory Excuting method");
+                //Console.WriteLine("Path is detected as a Directory Excuting method");
 
                 _ = CopyDirector(src, destination);
 
             }
             else if (File.Exists(src))
             {
-                Console.WriteLine("Path is detected as a File Excuting method");
+                //Console.WriteLine("Path is detected as a File Excuting method");
                 _ = Copy(src, destination);
             } else
             {
-                Console.WriteLine("It says this file/folder doesnt exists\nidk how this is possible it shouldnt happen");
+                //Console.WriteLine("It says this file/folder doesnt exists\nidk how this is possible it shouldnt happen");
             }
 
             FileSystemManager.RefreshDir();
@@ -69,29 +69,43 @@ namespace FileManager.Core
 
         private static async Task CopyDirector(string sourcePath, string dest)
         {
-            Console.WriteLine($"Source Path : {sourcePath}");
+            //Console.WriteLine($"Source Path : {sourcePath}");
 
             await Task.Run(() =>
             {
-                Console.WriteLine("Creating Folder");
+                //Console.WriteLine("Creating Folder");
                 string _folderName = GetFolderName(sourcePath);
                 string targetPath = Path.Combine(dest, _folderName);
 
-                Console.WriteLine($"Target Path : {targetPath}");
+                //Console.WriteLine($"Target Path : {targetPath}");
 
                 FileOperation.CreateDir(targetPath);
 
                 //Now Create all of the directories
                 foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", System.IO.SearchOption.AllDirectories))
                 {
-                    Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
-                }
+                    try
+                    {
+                        Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+                    } catch (Exception ex)
+                    {
+                        //Console.WriteLine($"Copying dir existed with error: {ex}");
+                        return;
+                    }
+               }
 
                 //Copy all the files & Replaces any files with the same name
                 foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", System.IO.SearchOption.AllDirectories))
                 {
-                    File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
-                }
+                    try
+                    {
+                        File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+                    } catch (Exception ex)
+                    {
+                        //Console.WriteLine($"Copying file existed at replacing files with error: {ex}");   
+                        return; 
+                    }
+               }
             });
 
 
@@ -102,11 +116,24 @@ namespace FileManager.Core
         {
             if (Directory.Exists(src))
             {
-                string _dest = Path.Combine(dest, GetFolderName(src));
-                Directory.Move(src, _dest);
-
+                try
+                {
+                    string _dest = Path.Combine(dest, GetFolderName(src));
+                    Directory.Move(src, _dest);   
+                } catch (Exception ex)
+                {
+                    //Console.WriteLine($"Moving dir existed with error: {ex}.");
+                    return;
+                }
             } else if (File.Exists(src)) {
-                File.Move(src, dest);
+                try
+                {
+                    File.Move(src, dest);
+                } catch (Exception ex)
+                {
+                    //Console.WriteLine($"moving file existed with error: {ex}");
+                    return;    
+                }
             }
 
             FileSystemManager.RefreshDir();
@@ -162,19 +189,14 @@ namespace FileManager.Core
         public static void CreateDir(string dest)
         {
 
-            Console.WriteLine($"Creating {dest}");
+            //Console.WriteLine($"Creating {dest}");
 
             Directory.CreateDirectory(dest);
             FileSystemManager.RefreshDir();
 
-            Console.WriteLine("CreatedFile");
+            //Console.WriteLine("CreatedFile");
         }
         
         #endregion
-
-        public static void OpenSelectedFile(DataManager.Applications app)
-        {
-
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace FileManager.Controls.TextBoxs
     {
         public NormalTextBox()
         {
-            Console.WriteLine($"Constructed name : {Watermark}");
+            //Console.WriteLine($"Constructed name : {Watermark}");
 
             Background = Brushes.Gray;
             Foreground = Brushes.White;

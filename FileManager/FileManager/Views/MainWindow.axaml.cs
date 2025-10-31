@@ -17,6 +17,7 @@ using System.Security.Cryptography.X509Certificates;
 using Avalonia.Platform;
 using Avalonia;
 using FileManager.Data;
+using Microsoft.VisualBasic;
 
 
 namespace FileManager.Views
@@ -76,10 +77,11 @@ namespace FileManager.Views
 
         private void MoveMenuItemClicked(Object sender, RoutedEventArgs args)
         {
-            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
-            if (selectedItem != null)
+
+            string? path = FileSystemManager.GetSelectedItemPath();
+            if (path != null)
             {
-                ControlsManager.ClipBoardItem = selectedItem.HoldingPath;
+                ControlsManager.ClipBoardItem = path;
                 ControlsManager.NoneMoveCopy = 1;
             }
         }
@@ -87,10 +89,10 @@ namespace FileManager.Views
         private void CopyMenuItemClicked(Object sender, RoutedEventArgs args)
         {
 
-            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
-            if (selectedItem != null)
+            string? path = FileSystemManager.GetSelectedItemPath();
+            if (path != null)
             {
-                ControlsManager.ClipBoardItem = selectedItem.HoldingPath;
+                ControlsManager.ClipBoardItem = path;
                 ControlsManager.NoneMoveCopy = 2;
             }
 
@@ -135,27 +137,30 @@ namespace FileManager.Views
 
         private void RenameSelectedEntry(Object sender, RoutedEventArgs args)
         {
-            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
-            if (selectedItem != null)
+
+            string? path = FileSystemManager.GetSelectedItemPath();            
+            if (path != null)
             {
-                ControlsManager.RenameEntry = selectedItem.HoldingPath;
+                ControlsManager.RenameEntry = path;
                 MenuManager.OpenGetNameWindow(FileOperation.OperationState.RENAME);
             }
         }
 
         private void DeleteSelectedEntry(Object sender, RoutedEventArgs args)
         {
-            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
-            if (selectedItem != null)
+
+            string? path = FileSystemManager.GetSelectedItemPath();
+
+            if (path != null)
             {
-                Console.WriteLine($"Passed tests\n Holding path: {selectedItem.HoldingPath}");
-                FileOperation.DeleteEntry(selectedItem.HoldingPath);
+                Console.WriteLine($"Passed tests\n Holding path: {path}");
+                FileOperation.DeleteEntry(path);
             }
         }
 
-                private void HomeButtonClicked(Object sender, RoutedEventArgs e)
+        private void HomeButtonClicked(Object sender, RoutedEventArgs e)
         {
-            AppState.GetWindowViewModel().SetCurrentDir(DataManager.Current.GetSpacialFolder(AppConfigData.SpecialFolderIndex.USER_PROFILE_PATH));
+            AppState.GetWindowViewModel().SetCurrentDir(DataManager.Current.GetSpacialFolder(0));
         }
 
         private void PreviousDirButtonClicked(Object sender, RoutedEventArgs e)
@@ -214,10 +219,11 @@ namespace FileManager.Views
         {
             ControlsManager.SetQuickAccesToNull();
 
-            EntryItemViewModel? selectedItem = MainEntryList.SelectedItem as EntryItemViewModel;
-            if (selectedItem != null)
+            string? path = FileSystemManager.GetSelectedItemPath();
+
+            if (path != null)
             {
-                AppState.GetWindowViewModel().SetCurrentDir(selectedItem.HoldingPath);
+                AppState.GetWindowViewModel().SetCurrentDir(path);
             }
         }
 
