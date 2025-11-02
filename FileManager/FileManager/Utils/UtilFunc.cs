@@ -10,9 +10,21 @@ namespace FileManager.Utils
 {
     public static class UtilFunc
     {
-        public static void AddRange<T>(this ObservableCollection<T> list, IEnumerable<T> items)
+        public static void AddRange<T>(this ObservableCollection<T> list, IEnumerable<T> items, bool reverse = false)
         {
-            foreach (var item in items)
+            T[] arr = items.ToArray();
+            
+            if (reverse)
+            {
+                for (uint i = (uint)arr.Length; i > 0; i--)
+                {
+                    list.Add(arr[i]);
+                }
+
+                return;
+            }
+
+            foreach (var item in arr)
             {
                 list.Add(item);
             }

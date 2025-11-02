@@ -1,4 +1,5 @@
 ﻿using Avalonia.Media;
+using FileManager.Data;
 using FileManager.Managers;
 using FileManager.Utils;
 using System;
@@ -24,11 +25,13 @@ namespace FileManager.ViewModels
          */
         public bool SetCurrentDir(string? newPath, bool AddToRecent = true)
         {
-            if (Directory.Exists(newPath))
+            if (CurrentWorkingDir == newPath || string.IsNullOrWhiteSpace(newPath)) return false;
+            if (Directory.Exists(newPath) || DataManager.SpecialPathCode.Contains(newPath))
             {
                 CurrentWorkingDir = newPath;
                 FileSystemManager.RefreshDir();
                 AppState.GetWindow().UpdatePathBlockText();
+                DataManager.Current.AddToRecent(CurrentWorkingDir);
 
                 if (AddToRecent)  ControlsManager.AddToRecentDir(newPath);
 

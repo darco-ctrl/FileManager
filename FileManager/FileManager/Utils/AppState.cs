@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FileManager.Input;
+using FileManager.Data;
 
 namespace FileManager.Utils
 {
@@ -63,6 +64,8 @@ namespace FileManager.Utils
         {
             IconsManager.Init();
             InputManager.Init();
+            DataManager.Init();
+            DataBase.Init();
         }
     }
 }

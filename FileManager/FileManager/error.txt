@@ -1,0 +1,13 @@
+STARTING APP
+Clearing and refresing current dir
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'max_recet' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at FileManager.Data.AppConfigData.AddToRecent(String _path) in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Data\AppConfigData.cs:line 57
+   at FileManager.ViewModels.MainWindowViewModel.SetCurrentDir(String newPath, Boolean AddToRecent) in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\ViewModels\MainWindowViewModel.cs:line 34
+   at FileManager.Managers.FileSystemManager.StartUpSetup() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Managers\FileSystemManager.cs:line 24
+   at FileManager.App.OnFrameworkInitializationCompleted() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\App.axaml.cs:line 47
+   at Avalonia.AppBuilder.SetupUnsafe()
+   at Avalonia.AppBuilder.Setup()
+   at Avalonia.AppBuilder.SetupWithLifetime(IApplicationLifetime lifetime)
+   at Avalonia.ClassicDesktopStyleApplicationLifetimeExtensions.StartWithClassicDesktopLifetime(AppBuilder builder, String[] args, Action`1 lifetimeBuilder)
+   at FileManager.Program.Main(String[] args) in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Program.cs:line 12

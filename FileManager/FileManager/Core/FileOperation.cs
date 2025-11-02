@@ -74,7 +74,7 @@ namespace FileManager.Core
             await Task.Run(() =>
             {
                 //Console.WriteLine("Creating Folder");
-                string _folderName = GetFolderName(sourcePath);
+                string _folderName = GetItemName(sourcePath);
                 string targetPath = Path.Combine(dest, _folderName);
 
                 //Console.WriteLine($"Target Path : {targetPath}");
@@ -114,24 +114,27 @@ namespace FileManager.Core
 
         public static void MoveEntry(string src, string dest)
         {
+            string _dest = Path.Combine(dest, GetItemName(src));
+
+            Console.WriteLine($"Moving entry \nFrom: {src}\nTo: {dest}");
+            
             if (Directory.Exists(src))
             {
                 try
                 {
-                    string _dest = Path.Combine(dest, GetFolderName(src));
                     Directory.Move(src, _dest);   
                 } catch (Exception ex)
                 {
-                    //Console.WriteLine($"Moving dir existed with error: {ex}.");
+                    Console.WriteLine($"Moving dir existed with error: {ex}.");
                     return;
                 }
             } else if (File.Exists(src)) {
                 try
                 {
-                    File.Move(src, dest);
+                    File.Move(src, _dest);
                 } catch (Exception ex)
                 {
-                    //Console.WriteLine($"moving file existed with error: {ex}");
+                    Console.WriteLine($"moving file existed with error: {ex}");
                     return;    
                 }
             }
@@ -139,11 +142,20 @@ namespace FileManager.Core
             FileSystemManager.RefreshDir();
         }
 
-        public static string GetFolderName(string path)
+        public static string GetItemName(string path)
         {
-            DirectoryInfo FolderInfo = new DirectoryInfo(path);
-            return FolderInfo.Name;
-        }
+            if (Directory.Exists(path))
+            {
+                DirectoryInfo FolderInfo = new DirectoryInfo(path);
+                return FolderInfo.Name;
+            }
+            else if (File.Exists(path))
+            {
+                return Path.GetFileName(path);
+            }
+
+            throw new FileNotFoundException("Source Item not found: " + path);
+       }
 
         private static async Task Copy(string src, string destinationFolder)
         {

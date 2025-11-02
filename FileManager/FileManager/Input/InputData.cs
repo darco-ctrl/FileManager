@@ -28,7 +28,7 @@ namespace FileManager.Input
                 Key.V
             });
 
-            KeyOpenAction _keyOpenAction = new KeyOpenAction(DatMan.Current.AppsPath["vs"]);
+            KeyOpenAction _keyOpenAction = new KeyOpenAction(DataBase.AppsPath["vs"]);
         }
     }
 }

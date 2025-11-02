@@ -58,13 +58,12 @@ namespace FileManager.Controls.Buttons
                     ManageIsEnabled();
                 }
             };
-
-
         }
 
         private void ManageIsEnabled()
         {
-            //Console.WriteLine("Managing IsEnabled");
+            Console.WriteLine("Managing IsEnabled");
+            
             if (AppState.GetWindow().MainEntryList.SelectedItem == null)
             {
                 Opacity = 0.2;

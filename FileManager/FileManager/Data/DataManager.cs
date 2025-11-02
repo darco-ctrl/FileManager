@@ -17,12 +17,17 @@ namespace FileManager.Data
         }
 
         public static Dictionary<string, FileTypes> FileTypesTable = new Dictionary<string, FileTypes>();
+
+        public static HashSet<string> SpecialPathCode = new(); 
     
         public static void Init()
         {
             FileTypesTable.Add(".txt", FileTypes.TXT);
             FileTypesTable.Add(".cs", FileTypes.CS);
-            FileTypesTable.Add(".mp4", FileTypes.MP4);      
+            FileTypesTable.Add(".mp4", FileTypes.MP4);
+
+            SpecialPathCode.Add("%recent");
+            SpecialPathCode.Add("%recycleBin");
         }
 
     }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Management;
 using Avalonia.Threading;
 using FileManager.Utils;
+using FileManager.Data;
 
 
 namespace FileManager.Managers
@@ -31,32 +32,52 @@ namespace FileManager.Managers
          */
         public static void RefreshDir()
         {
+            bool reverseAddRange = false;
+            List<EntryItemViewModel> items = new();
 
-            //////Console.WriteLine("Clearing and refresing current dir");
+            Console.WriteLine("Clearing and refresing current dir");
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
 
-            string[] entries; 
-
-            try
+            if (AppState.GetWindowViewModel().CurrentWorkingDir == "%recent")
             {
-                entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir).ToArray();
+                foreach (string _path in DataBase.Recents)
+                {
+                    items.Add(ControlsManager.CreateEntryItem(_path));
+                }
+                reverseAddRange = true;
 
-            }
-            catch (Exception ex)
+            } else
             {
-                //////Console.WriteLine($"RefreshDir existed with error: {ex}");
-                return;
+                string[] entries; 
+
+                try
+                {
+                    entries = Directory.EnumerateFileSystemEntries(AppState.GetWindowViewModel().CurrentWorkingDir).ToArray();
+
+                    AppState.GetWindow().MainEntryList.SelectedItem = null;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"RefreshDir existed with error: {ex}");
+                    return;
+                }
+
+
+                foreach (var entry in entries)
+                {
+                    if (!FileManagerHelper.IsEntryInBlackList(entry)) { continue; }
+
+                    EntryItemViewModel entryItem = ControlsManager.CreateEntryItem(entry);
+                    items.Add(entryItem);
+                    ////////Console.WriteLine($"{entry}");
+                }
             }
+           
 
-
-            foreach (var entry in entries)
+            Dispatcher.UIThread.InvokeAsync(() =>
             {
-                if (!FileManagerHelper.IsEntryInBlackList(entry)) { continue; }
-
-                EntryItemViewModel entryItem = ControlsManager.CreateEntryItem(entry);
-                AppState.GetWindowViewModel().CurrentLoadedEntires.Add(entryItem);
-                ////////Console.WriteLine($"{entry}");
-            }
+                AppState.GetWindowViewModel().CurrentLoadedEntires.AddRange(items, reverseAddRange);
+            });
 
             if (AppState.GetWindow().MainEntryList.SelectedItems != null)
             {
