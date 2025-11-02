@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Controls;
 using FileManager.Core;
 using FileManager.Utils;
 using System;
@@ -42,25 +43,38 @@ namespace FileManager.Data
 
         public void AddToRecent(string _path)
         {
+            //Console.WriteLine("Requested to Add to recent");
             if (!Directory.Exists(_path)) return;
 
+
             sbyte _pathIndex = (sbyte)DataBase.Recents.IndexOf(_path);
-            if (_pathIndex != -1 && _pathIndex < DataBase.Recents.Count - 1)
-            {
+            Console.WriteLine($"_pathIndex: {_pathIndex}");
+
+            if (_pathIndex != -1 && _pathIndex != DataBase.Recents.Count - 1)
+            {   
+                //string itemToRemove = DataBase.Recents[_pathIndex];
+
                 DataBase.Recents.RemoveAt(_pathIndex);
                 DataBase.Recents.Add(_path);
+
+               // Console.WriteLine($"Succesfully added by path_index \n removed: {itemToRemove}\n added: {_path}");
 
                 return;
             }
 
-
             if (DataBase.Recents.Count < DataBase.Data["max_recent"])
             {
                 DataBase.Recents.Add(_path);
+               // Console.WriteLine($"added without removing\n added: {_path}");
+
             } else
             {
+                //string itemToRemove = DataBase.Recents[0];
+
                 DataBase.Recents.RemoveAt(0);
                 DataBase.Recents.Add(_path);
+
+                //Console.WriteLine($"added by overload\n removing: {itemToRemove}\n added: {_path}");
             }
         }
     }

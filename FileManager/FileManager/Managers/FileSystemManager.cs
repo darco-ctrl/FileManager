@@ -35,17 +35,20 @@ namespace FileManager.Managers
             bool reverseAddRange = false;
             List<EntryItemViewModel> items = new();
 
-            Console.WriteLine("Clearing and refresing current dir");
+            //Console.WriteLine("Clearing and refresing current dir");
             AppState.GetWindowViewModel().CurrentLoadedEntires.Clear();
 
             if (AppState.GetWindowViewModel().CurrentWorkingDir == "%recent")
             {
+                //Console.WriteLine("\n-------------------\n");
+                //Console.WriteLine("found %recent as path\n");
                 foreach (string _path in DataBase.Recents)
                 {
+                    //Console.WriteLine($"path: {_path}");
                     items.Add(ControlsManager.CreateEntryItem(_path));
                 }
                 reverseAddRange = true;
-
+                //Console.WriteLine("\n--------------------\n");
             } else
             {
                 string[] entries; 

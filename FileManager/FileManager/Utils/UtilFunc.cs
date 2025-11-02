@@ -13,13 +13,21 @@ namespace FileManager.Utils
         public static void AddRange<T>(this ObservableCollection<T> list, IEnumerable<T> items, bool reverse = false)
         {
             T[] arr = items.ToArray();
-            
+
+            //Console.WriteLine("\n-------------------------\n");
+            //Console.WriteLine("AddRange Called\n");
+
             if (reverse)
             {
-                for (uint i = (uint)arr.Length; i > 0; i--)
+                //Console.WriteLine("Mode: reverse");
+               // Console.WriteLine($"arrLenght: {arr.Length}\n");
+                for (int i = arr.Length-1; i > 0; i--)
                 {
+                    //Console.WriteLine($"{i}: {arr[i]}");
                     list.Add(arr[i]);
                 }
+
+                //Console.WriteLine("\n----------- finished process ---------\n");
 
                 return;
             }
