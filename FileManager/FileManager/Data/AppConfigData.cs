@@ -46,7 +46,6 @@ namespace FileManager.Data
             //Console.WriteLine("Requested to Add to recent");
             if (!Directory.Exists(_path)) return;
 
-
             sbyte _pathIndex = (sbyte)DataBase.Recents.IndexOf(_path);
             Console.WriteLine($"_pathIndex: {_pathIndex}");
 

@@ -1,11 +1,14 @@
 STARTING APP
-Clearing and refresing current dir
-Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'max_recet' was not present in the dictionary.
+Unhandled exception. System.TypeInitializationException: The type initializer for 'FileManager.Input.InputManager' threw an exception.
+ ---> System.Collections.Generic.KeyNotFoundException: The given key 'vs' was not present in the dictionary.
    at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at FileManager.Data.AppConfigData.AddToRecent(String _path) in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Data\AppConfigData.cs:line 57
-   at FileManager.ViewModels.MainWindowViewModel.SetCurrentDir(String newPath, Boolean AddToRecent) in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\ViewModels\MainWindowViewModel.cs:line 34
-   at FileManager.Managers.FileSystemManager.StartUpSetup() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Managers\FileSystemManager.cs:line 24
-   at FileManager.App.OnFrameworkInitializationCompleted() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\App.axaml.cs:line 47
+   at FileManager.Input.InputData.CreateDefaultKeySet() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputData.cs:line 31
+   at FileManager.Input.InputData..ctor() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputData.cs:line 20
+   at FileManager.Input.InputManager..cctor() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 19
+   --- End of inner exception stack trace ---
+   at FileManager.Input.InputManager.Init() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 32
+   at FileManager.Utils.AppState.Initlize() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Utils\AppState.cs:line 66
+   at FileManager.App.OnFrameworkInitializationCompleted() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\App.axaml.cs:line 40
    at Avalonia.AppBuilder.SetupUnsafe()
    at Avalonia.AppBuilder.Setup()
    at Avalonia.AppBuilder.SetupWithLifetime(IApplicationLifetime lifetime)

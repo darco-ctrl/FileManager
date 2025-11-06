@@ -14,22 +14,16 @@ namespace FileManager.Input.Actions
 {
     public class KeyOpenAction
     {
-        private string _appPath;
+        public Dictionary<int, string> KeyMap = new();
 
-        public KeyOpenAction(string app_path)
+        public KeyOpenAction(Dictionary<int, string> _keyMap)
         {
-            _appPath = app_path;
+            KeyMap = _keyMap;
         }
 
-        public void Trigger()
+        public void TryTrigger(int _keyID)
         {
-            string? appPath = FileSystemManager.GetSelectedItemPath();
-            if (appPath == null) return;
 
-            ProcessStartInfo process = new ProcessStartInfo();
-            process.Arguments = AppState.GetWindowViewModel().CurrentWorkingDir;
-            process.FileName = appPath;
-            Process.Start(process);
         }   
     }
 }

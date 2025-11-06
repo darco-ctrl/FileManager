@@ -62,10 +62,10 @@ namespace FileManager.Utils
         
         public static void Initlize()
         {
-            IconsManager.Init();
-            InputManager.Init();
             DataManager.Init();
             DataBase.Init();
+            InputManager.Init();
+            IconsManager.Init();
         }
     }
 }

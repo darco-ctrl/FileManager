@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using Avalonia.Collections;
 using Avalonia.Input;
 using Tmds.DBus.Protocol;
@@ -70,6 +72,25 @@ namespace FileManager.Utils
             {
                 _dict.Add(keyList[i], valueList[i]);
             }
+        }
+
+        public static int GetIntID<Enum>(this IEnumerable<Enum> _enumerable, byte _maxCount)
+        {
+            int result = -1;
+            Enum[] _enums = _enumerable.ToArray<Enum>();
+            if (_enums.Length > _maxCount && _enums.Length > 0) return result;
+
+            Array.Sort(_enums);
+
+            StringBuilder stringBulder = new();
+            for (byte i = 0; i < _maxCount - 1; i++)
+            {
+                stringBulder.Append(Convert.ToInt32(_enums[i]).ToString());
+            }
+
+            _ = int.TryParse(stringBulder.ToString(), out result);
+
+            return result;
         }
     }
 }

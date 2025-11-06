@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FileManager.Core
 {
-    internal class Dubbug
+    public static class Dubbug
     {
+    
     }
 }

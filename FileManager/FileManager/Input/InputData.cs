@@ -6,6 +6,8 @@ using Avalonia.Input;
 using FileManager.Core;
 using DatMan = FileManager.Data.DataManager;
 using FileManager.Input.Actions;
+using System.Collections.Specialized;
+using FileManager.Utils;
 
 
 namespace FileManager.Input
@@ -13,22 +15,31 @@ namespace FileManager.Input
     public class InputData
     {
 
-        public Dictionary<KeyAction, KeyOpenAction> ActionSet = new();
+        
+        public Dictionary<string, KeyOpenAction> FileTypeIDSet = new();
 
         public InputData()
         {
             CreateDefaultKeySet();
+            
         }
         
-        public void CreateDefaultKeySet()
+        private void CreateDefaultKeySet()
         {
-            KeyAction _keyAction = new KeyAction(new HashSet<Key>
+            HashSet<Key> _keys = new HashSet<Key>
             {
                 Key.LeftCtrl,
                 Key.V
-            });
+            };
 
-            KeyOpenAction _keyOpenAction = new KeyOpenAction(DataBase.AppsPath["vs"]);
+            Dictionary<int, string> _keyMap = new();
+            _keyMap.Add(_keys.GetIntID(4), @"C:\Users\nihal\AppData\Local\Programs\Microsoft VS Code\Code.exe");
+
+            KeyOpenAction _keyOpenAction = new KeyOpenAction(_keyMap);
+
+            InputManager.PrintKeys(_keys);
+
+            FileTypeIDSet.Add(".txt", _keyOpenAction);
         }
     }
 }
