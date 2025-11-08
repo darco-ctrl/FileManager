@@ -81,10 +81,11 @@ namespace FileManager.Utils
             if (_enums.Length > _maxCount && _enums.Length > 0) return result;
 
             Array.Sort(_enums);
-
+            Console.WriteLine($"Count of _enums {_enums.Length}");
             StringBuilder stringBulder = new();
-            for (byte i = 0; i < _maxCount - 1; i++)
+            for (byte i = 0; i < _enums.Length; i++)
             {
+                Console.WriteLine($"Current Index = {i}");
                 stringBulder.Append(Convert.ToInt32(_enums[i]).ToString());
             }
 

@@ -15,8 +15,7 @@ namespace FileManager.Input
     public class InputData
     {
 
-        
-        public Dictionary<string, KeyOpenAction> FileTypeIDSet = new();
+        public List<KeyOpenAction> KeyOpenActions = new();
 
         public InputData()
         {
@@ -32,14 +31,12 @@ namespace FileManager.Input
                 Key.V
             };
 
-            Dictionary<int, string> _keyMap = new();
-            _keyMap.Add(_keys.GetIntID(4), @"C:\Users\nihal\AppData\Local\Programs\Microsoft VS Code\Code.exe");
+            KeyOpenAction _keyOpenAction = new KeyOpenAction();
 
-            KeyOpenAction _keyOpenAction = new KeyOpenAction(_keyMap);
+            _keyOpenAction.FileTypes.Add(".txt");
+            _keyOpenAction.KeyToAppMap.Add(_keys.GetIntID(4), @"C:\Users\nihal\AppData\Local\Programs\Microsoft VS Code\Code.exe");
 
-            InputManager.PrintKeys(_keys);
-
-            FileTypeIDSet.Add(".txt", _keyOpenAction);
+            KeyOpenActions.Add(_keyOpenAction);
         }
     }
 }

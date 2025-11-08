@@ -12,6 +12,7 @@ using System.Linq;
 using FileManager.Input.Actions;
 using System.Transactions;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace FileManager.Input
 {
@@ -42,7 +43,7 @@ namespace FileManager.Input
             if (_KeyDown.Contains(e.Key)) return;
             _KeyDown.Add(e.Key);
 
-            CheckForAction();
+            _ = CheckForAction();
 
             if (KeyActionSet.ContainsKey(e.Key) && !IsPressed.Contains(e.Key))
             {
@@ -51,18 +52,24 @@ namespace FileManager.Input
             }
         }
 
-        private static void CheckForAction()
+        private static async Task CheckForAction()
         {
-            ListBox _listBox = AppState.GetWindow().MainEntryList;
-            if (_listBox.SelectedItem == null) return;
+            Console.WriteLine("Checking for actions");
+            string? selectedPath = FileSystemManager.GetSelectedItemPath();
+            if (selectedPath == null) return;
 
-            EntryItemViewModel? _entryItem = _listBox.SelectedItem as EntryItemViewModel;
-            if (_entryItem == null) return;
+            Console.WriteLine($"Current Selected path: {selectedPath}");
+            string _extension = Path.GetExtension(selectedPath);
 
-            string _extension = Path.GetExtension(_entryItem.HoldingPath);
-
-            KeyOpenAction _keyOpenAction = Current.FileTypeIDSet[_extension];
-            _keyOpenAction.TryTrigger(GetKeyDownID());
+            foreach (KeyOpenAction action in Current.KeyOpenActions)
+            {
+                if (action.FileTypes.Contains(_extension))
+                {
+                    Console.WriteLine("found < ------");
+                    action.TryTrigger(GetKeyDownID());
+                    break;
+                }
+            }
         }
         
         public static int GetKeyDownID()

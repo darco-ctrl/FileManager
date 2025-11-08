@@ -1,16 +1,56 @@
 STARTING APP
-Unhandled exception. System.TypeInitializationException: The type initializer for 'FileManager.Input.InputManager' threw an exception.
- ---> System.Collections.Generic.KeyNotFoundException: The given key 'vs' was not present in the dictionary.
+Count of _enums 2
+Current Index = 0
+Current Index = 1
+
+Printing Key
+
+ - LeftCtrl
+ - V
+
+Finsihed printing
+
+_pathIndex: -1
+Main Window and MainWindowViewModel is not empty
+Managing IsEnabled
+Managing IsEnabled
+Managing IsEnabled
+Managing IsEnabled
+Check changed
+Check was true
+_pathIndex: -1
+Managing IsEnabled
+Managing IsEnabled
+Managing IsEnabled
+Managing IsEnabled
+Check changed
+Check was false
+_pathIndex: -1
+Managing IsEnabled
+Managing IsEnabled
+Managing IsEnabled
+Managing IsEnabled
+Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key '.md' was not present in the dictionary.
    at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at FileManager.Input.InputData.CreateDefaultKeySet() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputData.cs:line 31
-   at FileManager.Input.InputData..ctor() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputData.cs:line 20
-   at FileManager.Input.InputManager..cctor() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 19
-   --- End of inner exception stack trace ---
-   at FileManager.Input.InputManager.Init() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 32
-   at FileManager.Utils.AppState.Initlize() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Utils\AppState.cs:line 66
-   at FileManager.App.OnFrameworkInitializationCompleted() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\App.axaml.cs:line 40
-   at Avalonia.AppBuilder.SetupUnsafe()
-   at Avalonia.AppBuilder.Setup()
-   at Avalonia.AppBuilder.SetupWithLifetime(IApplicationLifetime lifetime)
+   at FileManager.Input.InputManager.CheckForAction() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 64
+   at FileManager.Input.InputManager.OnKeyDown(KeyEventArgs e) in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 45
+   at FileManager.Views.MainWindow.<>c.<.ctor>b__0_1(Object s, KeyEventArgs e) in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Views\MainWindow.axaml.cs:line 36
+   at Avalonia.Interactivity.Interactive.<AddHandler>g__InvokeAdapter|8_0[TEventArgs](Delegate baseHandler, Object sender, RoutedEventArgs args)
+   at Avalonia.Interactivity.EventRoute.RaiseEventImpl(RoutedEventArgs e)
+   at Avalonia.Interactivity.EventRoute.RaiseEvent(Interactive source, RoutedEventArgs e)
+   at Avalonia.Interactivity.Interactive.RaiseEvent(RoutedEventArgs e)
+   at Avalonia.Input.KeyboardDevice.ProcessRawEvent(RawInputEventArgs e)
+   at Avalonia.Controls.TopLevel.<>c.<HandleInput>b__150_0(Object state)
+   at Avalonia.Threading.Dispatcher.Send(SendOrPostCallback action, Object arg, Nullable`1 priority)
+   at Avalonia.Controls.TopLevel.HandleInput(RawInputEventArgs e)
+   at Avalonia.Win32.WindowImpl.AppWndProc(IntPtr hWnd, UInt32 msg, IntPtr wParam, IntPtr lParam)
+   at Avalonia.Win32.WindowImpl.WndProcMessageHandler(IntPtr hWnd, UInt32 msg, IntPtr wParam, IntPtr lParam)
+   at Avalonia.Win32.Interop.UnmanagedMethods.DispatchMessage(MSG& lpmsg)
+   at Avalonia.Win32.Win32DispatcherImpl.RunLoop(CancellationToken cancellationToken)
+   at Avalonia.Threading.DispatcherFrame.Run(IControlledDispatcherImpl impl)
+   at Avalonia.Threading.Dispatcher.PushFrame(DispatcherFrame frame)
+   at Avalonia.Threading.Dispatcher.MainLoop(CancellationToken cancellationToken)
+   at Avalonia.Controls.ApplicationLifetimes.ClassicDesktopStyleApplicationLifetime.StartCore(String[] args)
+   at Avalonia.Controls.ApplicationLifetimes.ClassicDesktopStyleApplicationLifetime.Start(String[] args)
    at Avalonia.ClassicDesktopStyleApplicationLifetimeExtensions.StartWithClassicDesktopLifetime(AppBuilder builder, String[] args, Action`1 lifetimeBuilder)
    at FileManager.Program.Main(String[] args) in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Program.cs:line 12
