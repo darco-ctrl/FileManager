@@ -3,6 +3,16 @@
 Am trying to make a fast FileManager using `C#` and [`fd`](https://github.com/sharkdp/fd) i have made a protype in Console using `C#` and added some features now am working on UI
 of it
 
+## LATEST UI
+![UI](screenshots/0.png)
+
+## NEW ->
+- Overhall in buttons
+- added side panel functionallity
+- added open a app according to a keybind you set which binds to an file type 
+- smooth UI animation
+- added icons
+
 ## Features - APP ([`AVALONIA`](https://avaloniaui.net/))
 - Can move back using backspace
 - Can search and incridible speed thanks to [**fd**](https://github.com/sharkdp/fd)
@@ -15,19 +25,7 @@ of it
 - Refresh
 - Recent section
 - Home button
-
-## LATEST UI
-<img width="1919" height="1023" alt="Screenshot 2025-10-17 103124" src="https://github.com/user-attachments/assets/52682e4e-396d-4c9a-a29c-2228c777afbe" />
-
-## Latest Bug Fixes
-- Crashing while searching
-
-## Features - CONSOLE
-current it has decent amount of features as a console project
-- can move forward or backward in dir
-- can make files or directory/folder
-- can delete folders or files
-- can search using [**fd**](https://github.com/sharkdp/fd) and its arguements
+- Open a app according to a keybind you set which binds to an file type 
 
 ## Tools Used
 

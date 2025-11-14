@@ -60,8 +60,10 @@ namespace FileManager.Input
             if (_entryItem == null) return;
 
             string _extension = Path.GetExtension(_entryItem.HoldingPath);
+            int index = GetIndexOfKeyAction(_extension);
+            if (index == -1) return;
 
-            KeyOpenAction _keyOpenAction = Current.FileTypeIDSet[_extension];
+            KeyOpenAction _keyOpenAction = Current.KeyOpenActions[index];
             _keyOpenAction.TryTrigger(GetKeyDownID());
         }
         
@@ -124,6 +126,22 @@ namespace FileManager.Input
             //KeyAction _keyAction = new KeyAction(_KeyDown.ToArray());
 
 
+        }
+
+        public static int GetIndexOfKeyAction(string ext)
+        {
+            for (int i = 0; i < Current.FileTypes.Length; i++)
+            {
+                if (Current.FileTypes[i] == ext)
+                {
+                    if (i < Current.KeyOpenActions.Length)
+                    {
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
         }
 
         public static bool IsKeyDown(Key key) => _KeyDown.Contains(key); // check if a key is Down from anywhere

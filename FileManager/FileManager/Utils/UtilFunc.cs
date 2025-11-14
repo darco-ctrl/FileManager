@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Avalonia.Collections;
 using Avalonia.Input;
@@ -78,12 +79,12 @@ namespace FileManager.Utils
         {
             int result = -1;
             Enum[] _enums = _enumerable.ToArray<Enum>();
-            if (_enums.Length > _maxCount && _enums.Length > 0) return result;
+            if (_enums.Length > _maxCount && _enums.Length < 0) return result;
 
             Array.Sort(_enums);
 
             StringBuilder stringBulder = new();
-            for (byte i = 0; i < _maxCount - 1; i++)
+            for (byte i = 0; i < _enums.Length; i++)
             {
                 stringBulder.Append(Convert.ToInt32(_enums[i]).ToString());
             }

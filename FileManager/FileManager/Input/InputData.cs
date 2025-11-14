@@ -14,14 +14,12 @@ namespace FileManager.Input
 {
     public class InputData
     {
-
-        
-        public Dictionary<string, KeyOpenAction> FileTypeIDSet = new();
-
+        public KeyOpenAction[] KeyOpenActions = [];
+        public string[] FileTypes = [];
+ 
         public InputData()
         {
-            CreateDefaultKeySet();
-            
+            CreateDefaultKeySet();           
         }
         
         private void CreateDefaultKeySet()
@@ -38,8 +36,8 @@ namespace FileManager.Input
             KeyOpenAction _keyOpenAction = new KeyOpenAction(_keyMap);
 
             InputManager.PrintKeys(_keys);
-
-            FileTypeIDSet.Add(".txt", _keyOpenAction);
+            FileTypes = [".txt"];
+            KeyOpenActions = [_keyOpenAction];
         }
     }
 }
