@@ -1,13 +1,13 @@
 STARTING APP
 Unhandled exception. System.TypeInitializationException: The type initializer for 'FileManager.Input.InputManager' threw an exception.
- ---> System.Collections.Generic.KeyNotFoundException: The given key 'vs' was not present in the dictionary.
-   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-   at FileManager.Input.InputData.CreateDefaultKeySet() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputData.cs:line 31
-   at FileManager.Input.InputData..ctor() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputData.cs:line 20
-   at FileManager.Input.InputManager..cctor() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 19
+ ---> System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at FileManager.Utils.UtilFunc.GetIntID[Enum](IEnumerable`1 _enumerable, Byte _maxCount) in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Utils\UtilFunc.cs:line 88
+   at FileManager.Input.InputData.CreateDefaultKeySet() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputData.cs:line 34
+   at FileManager.Input.InputData..ctor() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputData.cs:line 21
+   at FileManager.Input.InputManager..cctor() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 20
    --- End of inner exception stack trace ---
-   at FileManager.Input.InputManager.Init() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 32
-   at FileManager.Utils.AppState.Initlize() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Utils\AppState.cs:line 66
+   at FileManager.Input.InputManager.Init() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Input\InputManager.cs:line 33
+   at FileManager.Utils.AppState.Initlize() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\Utils\AppState.cs:line 67
    at FileManager.App.OnFrameworkInitializationCompleted() in C:\Users\nihal\Documents\MyDocs\Projects\CSharp\FileManager\FileManager\FileManager\App.axaml.cs:line 40
    at Avalonia.AppBuilder.SetupUnsafe()
    at Avalonia.AppBuilder.Setup()
