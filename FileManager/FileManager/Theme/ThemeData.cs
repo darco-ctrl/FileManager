@@ -40,6 +40,7 @@ namespace FileManager.Theme
             }
         }
 
+        //  used for main background
         private IBrush _backgroundBrush = new SolidColorBrush(Color.Parse("#141414"));
         public IBrush BackgroundBrush
         {
@@ -54,6 +55,7 @@ namespace FileManager.Theme
             }
         }
 
+        // light background used for titlebar side bar and more
         private IBrush _primaryColor = new SolidColorBrush(Color.Parse("#1a1a1a"));
         public IBrush PrimaryColor
         {
@@ -110,16 +112,17 @@ namespace FileManager.Theme
             }
         }
 
-        private IBrush _darkBackground = new SolidColorBrush(Color.Parse("#2a2a2a"));
-        public IBrush DarkBackground
+        //Primary outline
+        private IBrush _primaryBorderBrush = new SolidColorBrush(Color.Parse("#2a2a2a"));
+        public IBrush PrimaryBorderBrush
         {
-            get => _darkBackground;
+            get => _primaryBorderBrush;
             set
             {
-                if (_darkBackground != value)
+                if (_primaryBorderBrush != value)
                 {
-                    _darkBackground = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DarkBackground)));
+                    _primaryBorderBrush = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PrimaryBorderBrush)));
                 }
             }
         }

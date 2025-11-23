@@ -215,7 +215,7 @@ namespace FileManager.Views
          * What this do is when an Entry like file or folder is clicked it try to set it as current Dir
          * by try i mean it checks if given entry is file or folder if folder then set it if not dont set
          */
-        private void OnEntryDoubleTapped(Object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void OnEntryDoubleTapped(Object? sender, Avalonia.Input.TappedEventArgs e)
         {
             ControlsManager.SetQuickAccesToNull();
 

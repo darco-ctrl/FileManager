@@ -22,7 +22,9 @@ ExtendClientAreaTitleBarHeightHint="0"
 	>
 		<Grid>
 			<Grid.RowDefinitions>
-				60, 72, *
+				<RowDefinition Height="60"/>
+				<RowDefinition Height="72"/>
+				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
 			<Border Grid.Row="0" Background="#FF555252">

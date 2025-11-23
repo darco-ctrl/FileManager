@@ -60,7 +60,7 @@
             Grid.Row="0"
             Height="40"
             VerticalAlignment="Stretch"
-            BorderBrush="#2A2A2A"
+            BorderBrush="{Binding PrimaryBorderBrush, Source={x:Static theme:ThemeManager.Current}}"
             BorderThickness="1,1,1,0"
             PointerPressed="TitleBarPointerPressed">
 

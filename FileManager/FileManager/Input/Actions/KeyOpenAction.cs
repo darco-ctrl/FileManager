@@ -31,6 +31,7 @@ namespace FileManager.Input.Actions
                 psi.UseShellExecute = true;
 
                 Process.Start(psi);
+                
             }
         }   
     }

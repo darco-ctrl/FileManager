@@ -40,7 +40,7 @@ namespace FileManager.Controls.Buttons
                 }
             });
 
-            Background = ThemeManager.Current.DarkBackground;
+            Background = ThemeManager.Current.PrimaryBorderBrush;
             Opacity = 0.5;
 
             PointerEntered += (_, __) => _PointerEveterEvent();
@@ -56,7 +56,7 @@ namespace FileManager.Controls.Buttons
 
         private void _PointerExitedEvent()
         {
-            Background = ThemeManager.Current.DarkBackground;
+            Background = ThemeManager.Current.PrimaryBorderBrush;
             Opacity = 0.5;
         }
     }

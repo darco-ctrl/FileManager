@@ -5,6 +5,9 @@
     	CanResize="False"
 		SystemDecorations="None"
 		Background="Transparent"
+
+		xmlns:theme="using:FileManager.Theme"
+
         xmlns:buttons="using:FileManager.Controls.Buttons">
 	<!--
 ExtendClientAreaToDecorationsHint="True"
@@ -13,83 +16,62 @@ ExtendClientAreaTitleBarHeightHint="0"
 	-->
 
 	<Border
-	Background="#FF2D2D2D"
+	Background="{Binding BackgroundBrush, Source={x:Static theme:ThemeManager.Current}}"
+	BorderBrush="{Binding PrimaryBorderBrush, Source={x:Static theme:ThemeManager.Current}}"
+	BorderThickness="1"
 	CornerRadius="10"
 	ClipToBounds="True"
 	>
+
 		<Grid>
 			<Grid.RowDefinitions>
-				60, 72, *
+				<RowDefinition Height="40"/> <!-- Title bar -->
+				<RowDefinition Height="*"/> <!-- For rest of stuff -->
 			</Grid.RowDefinitions>
 
-			<Border Grid.Row="0" Background="#FF555252">
-				<TextBlock
-					x:Name="WindowTitleTextBlock"
-					Text="Create Entry"
-					Foreground="White"
-					FontSize="20"
+			<Border
+				Grid.Row="0"
+				Background="{Binding PrimaryColor, Source={x:Static theme:ThemeManager.Current}}"
+				BorderBrush="{Binding PrimaryBorderBrush, Source={x:Static theme:ThemeManager.Current}}"
+				BorderThickness="0,0,0,1"
+				>
+
+				<TextBlock 
+					TextAlignment="Center"
+					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
-					VerticalAlignment="Center"/>
+					Text="Settings"
+					Foreground="{Binding TextBrush_1, Source={x:Static theme:ThemeManager.Current}}"
+					>
+					
+				</TextBlock>
+				
 			</Border>
 
-			<TextBox
-				x:Name="InputBox"
-				Watermark="File name"
-				Foreground="White"
-				Grid.Row="1"
-				Background="#FF393939"
-				BorderBrush="#FFF89B9B"
-				BorderThickness="1.5"
-				CornerRadius="6"
-				VerticalAlignment="Center"
-				Height="33"
-				Width="420">
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="100"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
 
-			</TextBox>
+				<Border 
+					Background="{Binding PrimaryColor, Source={x:Static theme:ThemeManager.Current}}"
+					BorderBrush="{Binding PrimaryBorderBrush, Source={x:Static theme:ThemeManager.Current}}"
+					BorderThickness="0,0,1,0">
 
-			<Grid
-				Grid.Row="2"
-				ColumnDefinitions="*,*">
+					<StackPanel 
+						Orientation="Vertical">
 
-				<Button
-					Grid.Column="0"
-					Background="#FF393939"
-					BorderBrush="#FFF89B9B"
-					BorderThickness="1"
-					CornerRadius="6"
-					VerticalAlignment="Top"
-					HorizontalAlignment="Center"
-					Foreground="White"
-					Height="27"
-					Width="153"
-					
-					>
-					<TextBlock
-						Text="Create"
-						TextAlignment="Center"
-						FontSize="13"/>
-				</Button>
+						<Border>
+							
+						</Border>
+						
+					</StackPanel>
 
-				<Button
-					Grid.Column="1"
-					Background="#FF393939"
-					BorderBrush="#FFF89B9B"
-					BorderThickness="1"
-					CornerRadius="6"
-					VerticalAlignment="Top"
-					HorizontalAlignment="Center"
-					Foreground="White"
-					Height="27"
-					Width="153">
-					<TextBlock
-						Text="Cancel"
-						TextAlignment="Center"
-						FontSize="13"
-						/>
-				</Button>
-
+				</Border>
 			</Grid>
 
 		</Grid>
+
 	</Border>
 </Window>
