@@ -47,7 +47,6 @@ namespace FileManager.Data
             if (!Directory.Exists(_path)) return;
 
             sbyte _pathIndex = (sbyte)DataBase.Recents.IndexOf(_path);
-            Console.WriteLine($"_pathIndex: {_pathIndex}");
 
             if (_pathIndex != -1 && _pathIndex != DataBase.Recents.Count - 1)
             {   

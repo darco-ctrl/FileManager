@@ -51,8 +51,10 @@ namespace FileManager.Input
             }
         }
 
+        // main fucntion of making open application according to a key action
         private static void CheckForAction()
         {
+            
             ListBox _listBox = AppState.GetWindow().MainEntryList;
             if (_listBox.SelectedItem == null) return;
 
@@ -63,8 +65,10 @@ namespace FileManager.Input
             int index = GetIndexOfKeyAction(_extension);
             if (index == -1) return;
 
+            Console.WriteLine($"ext: {_extension}, \ntrying to open");
+
             KeyOpenAction _keyOpenAction = Current.KeyOpenActions[index];
-            _keyOpenAction.TryTrigger(GetKeyDownID());
+            _keyOpenAction.TryTrigger(GetKeyDownID(), _entryItem.HoldingPath);
         }
         
         public static int GetKeyDownID()
@@ -124,7 +128,6 @@ namespace FileManager.Input
             if (AppState.GetWindow().MainEntryList.SelectedItem == null) return;
 
             //KeyAction _keyAction = new KeyAction(_KeyDown.ToArray());
-
 
         }
 

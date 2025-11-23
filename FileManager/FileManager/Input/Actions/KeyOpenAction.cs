@@ -14,16 +14,24 @@ namespace FileManager.Input.Actions
 {
     public class KeyOpenAction
     {
-        public Dictionary<int, string> KeyMap = new();
+        private Dictionary<int, string> KeyMap = new();
 
         public KeyOpenAction(Dictionary<int, string> _keyMap)
         {
             KeyMap = _keyMap;
         }
 
-        public void TryTrigger(int _keyID)
+        public void TryTrigger(int _keyID, string arg)
         {
+            if (KeyMap.TryGetValue(_keyID, out string? app))
+            {
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.Arguments = arg;
+                psi.FileName = app;
+                psi.UseShellExecute = true;
 
+                Process.Start(psi);
+            }
         }   
     }
 }
