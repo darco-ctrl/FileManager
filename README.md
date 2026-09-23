@@ -1,6 +1,6 @@
 
-https://github.com/user-attachments/assets/3744b521-50ae-4159-942c-6312d9642fba
-﻿# FileManager
+
+# FileManager
 
 Am trying to make a fast FileManager using `C#` and [`fd`](https://github.com/sharkdp/fd) i have made a protype in Console using `C#` and added some features now am working on UI
 of it
