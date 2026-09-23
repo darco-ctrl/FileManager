@@ -1,10 +1,14 @@
+
+https://github.com/user-attachments/assets/3744b521-50ae-4159-942c-6312d9642fba
 ﻿# FileManager
 
 Am trying to make a fast FileManager using `C#` and [`fd`](https://github.com/sharkdp/fd) i have made a protype in Console using `C#` and added some features now am working on UI
 of it
 
 ## 📽 VIDEO
-<video src="screenshots/filemanager_showcase.mp4" controls></video>
+https://github.com/user-attachments/assets/8674a8e1-9b7f-49a0-ba07-26b6ae67b5f8
+
+
 
 ## 🌟 Features
 - Can move back using backspace
